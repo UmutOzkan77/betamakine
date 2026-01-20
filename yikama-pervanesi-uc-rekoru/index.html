@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <title>Yıkama Pervanesi Uç Rekoru — Beta Makine</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html" class="logo-link">
+                        <img src="../logo.png" alt="Beta Makine" class="logo-image">
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Ana Sayfa</a></li>
+                        <li class="nav-item"><a href="../products.html" class="nav-link active">Ürünler</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">Hakkımızda</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">İletişim</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Menü">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="container product-detail">
+        <div class="product-detail-grid">
+            <div class="product-detail-left">
+                <div class="product-detail-image">
+                    <img src="uçrekoru2.png" alt="Yıkama Pervanesi Uç Rekoru" id="mainImage">
+                </div>
+                <div class="product-thumbnails">
+                    <img src="uçrekoru2.png" alt="Görünüm 1" class="thumbnail active" onclick="changeImage(this)">
+                </div>
+            </div>
+            <div class="product-detail-content">
+                <h1 class="product-title">Yıkama Pervanesi Uç Rekoru</h1>
+
+                <div class="product-description">
+                    <h2>Basınç Altında Kesintisiz Dönüş Teknolojisi</h2>
+                    <p>"Yıkama sistemlerinin uç noktalarında mükemmel performans sağlayan Yıkama Pervanesi Uç Rekoru,
+                        yüksek basınçlı su akışı altında dahi takılmadan dönebilen özel bir teknolojiye sahiptir.
+                        Operatörün hareket kabiliyetini kısıtlamayan bu döner mekanizma, hortum gerilmelerini ve mekanik
+                        aşınmaları minimize eder. Farklı kurulum ihtiyaçlarına cevap verebilmek adına 1/4" ve 1/2" ölçü
+                        seçenekleri ile sunulan uç rekorlarımız, profesyonel istasyonlarda sızdırmazlık ve akış
+                        verimliliğini garanti altına alır."</p>
+
+                    <h3>Öne Çıkan Özellikler:</h3>
+                    <ul class="product-features">
+                        <li><strong>Ölçü Seçenekleri:</strong> İhtiyaca uygun standart 1/4" veya 1/2" varyant imkanı.
+                        </li>
+                        <li><strong>Dönüş Teknolojisi:</strong> En yüksek su basıncı altında bile 360 derece akıcı
+                            dönüş.</li>
+                        <li><strong>Sızdırmazlık:</strong> Yüksek devirli çevrimlerde su kaybını önleyen dayanıklı conta
+                            yapısı.</li>
+                        <li><strong>Uzun Ömür:</strong> Korozyona karşı dirençli materyal ile zorlu şartlarda yüksek
+                            dayanım</li>
+                    </ul>
+                </div>
+
+                <a href="../contact.html" class="contact-button">BİZİMLE İLETİŞİME GEÇİN</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = thumbnail.src;
+
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+        }
+    </script>
+    <footer class="footer" id="iletisim">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">Hızlı Linkler</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html" class="footer-link">Ana Sayfa</a></li>
+                        <li><a href="../products.html" class="footer-link">Ürünler</a></li>
+                        <li><a href="../about.html" class="footer-link">Hakkımızda</a></li>
+                        <li><a href="../contact.html" class="footer-link">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">İletişim Bilgileri</h3>
+                    <ul class="footer-contact">
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Şener Çubukçu BE_TA Makine<br>Fethiye Mahallesi Doğru Sokak NO:9<br>Nilüfer /
+                                Bursa</span>
+                        </li>
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <span>0536 461 5330</span>
+                        </li>
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>09:00 - 18:00<br>Pazar Günü Kapalı</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Beta Makine. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
