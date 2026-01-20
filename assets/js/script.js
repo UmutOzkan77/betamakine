@@ -10,26 +10,26 @@ class HeroSlider {
         this.nextBtn = document.querySelector('.slider-btn.next');
         this.currentSlide = 0;
         this.slideInterval = null;
-        
+
         this.init();
     }
-    
+
     init() {
         // Auto-slide every 5 seconds
         this.startAutoSlide();
-        
+
         // Previous button
         this.prevBtn.addEventListener('click', () => {
             this.changeSlide(this.currentSlide - 1);
             this.resetAutoSlide();
         });
-        
+
         // Next button
         this.nextBtn.addEventListener('click', () => {
             this.changeSlide(this.currentSlide + 1);
             this.resetAutoSlide();
         });
-        
+
         // Indicator clicks
         this.indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
@@ -38,26 +38,26 @@ class HeroSlider {
             });
         });
     }
-    
+
     changeSlide(index) {
         // Remove active class from current slide and indicator
         this.slides[this.currentSlide].classList.remove('active');
         this.indicators[this.currentSlide].classList.remove('active');
-        
+
         // Calculate new slide index (loop around)
         this.currentSlide = (index + this.slides.length) % this.slides.length;
-        
+
         // Add active class to new slide and indicator
         this.slides[this.currentSlide].classList.add('active');
         this.indicators[this.currentSlide].classList.add('active');
     }
-    
+
     startAutoSlide() {
         this.slideInterval = setInterval(() => {
             this.changeSlide(this.currentSlide + 1);
         }, 5000);
     }
-    
+
     resetAutoSlide() {
         clearInterval(this.slideInterval);
         this.startAutoSlide();
@@ -72,10 +72,10 @@ class HeaderScroll {
     constructor() {
         this.header = document.getElementById('header');
         this.scrollThreshold = 50;
-        
+
         this.init();
     }
-    
+
     init() {
         window.addEventListener('scroll', () => {
             if (window.scrollY > this.scrollThreshold) {
@@ -96,10 +96,10 @@ class MobileMenu {
         this.toggle = document.querySelector('.mobile-menu-toggle');
         this.nav = document.querySelector('.nav');
         this.navLinks = document.querySelectorAll('.nav-link');
-        
+
         this.init();
     }
-    
+
     init() {
         // Toggle menu on button click
         this.toggle.addEventListener('click', () => {
@@ -107,7 +107,7 @@ class MobileMenu {
             this.nav.classList.toggle('active');
             document.body.style.overflow = this.nav.classList.contains('active') ? 'hidden' : '';
         });
-        
+
         // Close menu when clicking on a link
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -129,24 +129,24 @@ class SmoothScroll {
         this.scrollIndicator = document.querySelector('.scroll-indicator');
         this.init();
     }
-    
+
     init() {
         this.links.forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
-                
+
                 // Skip if it's just "#"
                 if (href === '#') {
                     e.preventDefault();
                     return;
                 }
-                
+
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
                     const headerHeight = document.getElementById('header').offsetHeight;
                     const targetPosition = target.offsetTop - headerHeight;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -154,7 +154,7 @@ class SmoothScroll {
                 }
             });
         });
-        
+
         // Scroll indicator click
         if (this.scrollIndicator) {
             this.scrollIndicator.addEventListener('click', () => {
@@ -162,7 +162,7 @@ class SmoothScroll {
                 if (productsSection) {
                     const headerHeight = document.getElementById('header').offsetHeight;
                     const targetPosition = productsSection.offsetTop - headerHeight;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -181,24 +181,24 @@ class ActiveNavTracker {
     constructor() {
         this.sections = document.querySelectorAll('section[id]');
         this.navLinks = document.querySelectorAll('.nav-link');
-        
+
         this.init();
     }
-    
+
     init() {
         window.addEventListener('scroll', () => {
             let current = '';
             const scrollPosition = window.scrollY + 100;
-            
+
             this.sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                
+
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                     current = section.getAttribute('id');
                 }
             });
-            
+
             this.navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -220,17 +220,17 @@ class ScrollReveal {
             threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         this.init();
     }
-    
+
     init() {
         // Add initial hidden state to all elements
         this.elements.forEach((element, index) => {
             element.classList.add('scroll-reveal');
             element.style.transitionDelay = `${index * 0.1}s`;
         });
-        
+
         // Create Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -241,7 +241,7 @@ class ScrollReveal {
                 }
             });
         }, this.observerOptions);
-        
+
         // Observe all elements
         this.elements.forEach(element => {
             observer.observe(element);
@@ -257,10 +257,10 @@ class CounterAnimation {
     constructor() {
         this.counters = document.querySelectorAll('.stat-number');
         this.animated = false;
-        
+
         this.init();
     }
-    
+
     init() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -270,10 +270,10 @@ class CounterAnimation {
                 }
             });
         }, { threshold: 0.5 });
-        
+
         this.counters.forEach(counter => observer.observe(counter));
     }
-    
+
     animateCounters() {
         this.counters.forEach(counter => {
             const target = counter.textContent;
@@ -282,7 +282,7 @@ class CounterAnimation {
             const duration = 2000;
             const increment = number / (duration / 16);
             let current = 0;
-            
+
             const updateCounter = () => {
                 current += increment;
                 if (current < number) {
@@ -292,7 +292,7 @@ class CounterAnimation {
                     counter.textContent = target;
                 }
             };
-            
+
             counter.textContent = '0' + suffix;
             updateCounter();
         });
@@ -308,12 +308,12 @@ class ParallaxEffect {
         this.hero = document.querySelector('.hero');
         this.init();
     }
-    
+
     init() {
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const heroHeight = this.hero.offsetHeight;
-            
+
             if (scrolled <= heroHeight) {
                 const parallaxSpeed = 0.5;
                 this.hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
@@ -331,7 +331,7 @@ class ProductCardEffects {
         this.cards = document.querySelectorAll('.product-card');
         this.init();
     }
-    
+
     init() {
         this.cards.forEach(card => {
             card.addEventListener('mouseenter', (e) => {
@@ -342,7 +342,7 @@ class ProductCardEffects {
                     }
                 });
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 this.cards.forEach(otherCard => {
                     otherCard.style.opacity = '1';
@@ -358,38 +358,36 @@ class ProductCardEffects {
 // ===================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
-    new HeroSlider();
-    new HeaderScroll();
-    new MobileMenu();
-    new SmoothScroll();
-    new ActiveNavTracker();
-    new ScrollReveal();
-    new CounterAnimation();
-    new ParallaxEffect();
-    new ProductCardEffects();
-    
+    // Initialize all components with safe guards
+    try { new HeroSlider(); } catch (e) { console.debug('HeroSlider not active on this page'); }
+    try { new HeaderScroll(); } catch (e) { console.debug('HeaderScroll not active on this page'); }
+    try { new MobileMenu(); } catch (e) { console.error('MobileMenu failed:', e); }
+    try { new SmoothScroll(); } catch (e) { console.debug('SmoothScroll not active on this page'); }
+    try { new ActiveNavTracker(); } catch (e) { console.debug('ActiveNavTracker not active on this page'); }
+    try { new ScrollReveal(); } catch (e) { console.debug('ScrollReveal not active on this page'); }
+    try { new CounterAnimation(); } catch (e) { console.debug('CounterAnimation not active on this page'); }
+    try { new ParallaxEffect(); } catch (e) { console.debug('ParallaxEffect not active on this page'); }
+    try { new ProductCardEffects(); } catch (e) { console.debug('ProductCardEffects not active on this page'); }
+
     // Log initialization
     console.log('🚀 Beta Makine - Website Initialized');
-    console.log('✨ Scroll Animations Active');
-    console.log('🎯 All Interactive Features Loaded');
 });
 
 // ===================================
 // TYPEWRITER EFFECT FOR CONTACT PAGE
 // ===================================
 
-window.onload = function() {
+window.onload = function () {
     const h1Element = document.querySelector('#typewriter-hero h1');
     const pElement = document.querySelector('#typewriter-hero p');
     const cursor = document.getElementById('cursor');
-    
+
     // Sadece contact sayfasındaysa çalıştır
     if (!h1Element || !cursor) return;
-    
+
     const targetText = "HAKKIMIZDA";
     let currentIndex = 0;
-    
+
     function typeWriter() {
         if (currentIndex < targetText.length) {
             // Harfi cursor'dan önce ekle
@@ -401,7 +399,7 @@ window.onload = function() {
         } else {
             // Yazma bitti, cursor'u kaldır
             cursor.style.display = 'none';
-            
+
             // Alt metni göster (fade-in)
             setTimeout(() => {
                 if (pElement) {
@@ -410,7 +408,7 @@ window.onload = function() {
             }, 300);
         }
     }
-    
+
     // Başlat
     typeWriter();
 };
@@ -425,7 +423,7 @@ const animateCounter = (element) => {
     const duration = 2000; // 2 saniye
     const increment = target / (duration / 16); // 60 FPS için
     let current = 0;
-    
+
     const updateCounter = () => {
         current += increment;
         if (current < target) {
@@ -435,14 +433,14 @@ const animateCounter = (element) => {
             element.textContent = '+' + target.toLocaleString('tr-TR');
         }
     };
-    
+
     updateCounter();
 };
 
 // Intersection Observer ile sayaç başlatma
 const observeCounter = () => {
     const counterElements = document.querySelectorAll('.stat-number[data-target]');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
@@ -451,7 +449,7 @@ const observeCounter = () => {
             }
         });
     }, { threshold: 0.5 });
-    
+
     counterElements.forEach(counter => observer.observe(counter));
 };
 
