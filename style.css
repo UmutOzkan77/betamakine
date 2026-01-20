@@ -1925,6 +1925,8 @@ ul, ol {
         backdrop-filter: blur(10px);
         transition: left var(--transition-base);
         padding: var(--spacing-lg) 0;
+        justify-content: center;
+        margin-right: 0;
     }
     
     .nav.active {
