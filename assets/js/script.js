@@ -6,8 +6,6 @@ class HeroSlider {
     constructor() {
         this.slides = document.querySelectorAll('.hero-slide');
         this.indicators = document.querySelectorAll('.indicator');
-        this.prevBtn = document.querySelector('.slider-btn.prev');
-        this.nextBtn = document.querySelector('.slider-btn.next');
         this.currentSlide = 0;
         this.slideInterval = null;
 
@@ -17,18 +15,6 @@ class HeroSlider {
     init() {
         // Auto-slide every 5 seconds
         this.startAutoSlide();
-
-        // Previous button
-        this.prevBtn.addEventListener('click', () => {
-            this.changeSlide(this.currentSlide - 1);
-            this.resetAutoSlide();
-        });
-
-        // Next button
-        this.nextBtn.addEventListener('click', () => {
-            this.changeSlide(this.currentSlide + 1);
-            this.resetAutoSlide();
-        });
 
         // Indicator clicks
         this.indicators.forEach((indicator, index) => {
