@@ -16,51 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .blog-list {
-            padding: 4rem 0;
-        }
 
-        .blog-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .blog-content {
-            padding: 1.5rem;
-        }
-
-        .blog-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #111827;
-        }
-
-        .blog-excerpt {
-            color: #6b7280;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .read-more {
-            color: #2563eb;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .read-more:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
@@ -69,7 +25,7 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="../index.html" class="logo-link">
-                        <img src="../assets/images/logo.png" alt="Beta Makine" class="logo-image">
+                        <img src="../assets/images/logo.webp" alt="Beta Makine" class="logo-image">
                     </a>
                 </div>
                 <nav class="nav">
@@ -87,14 +43,13 @@
     <main class="blog-list">
         <div class="container">
             <h1 class="section-title">Beta Makine Blog</h1>
-            <p class="section-subtitle" style="margin-bottom: 3rem;">Sektörel bilgiler, ipuçları ve teknik rehberler.
+            <p class="section-subtitle">Sektörel bilgiler, ipuçları ve teknik rehberler.
             </p>
 
             <div class="blog-grid">
                 <article class="blog-card">
                     <div class="blog-content">
-                        <h2 class="blog-title"><a href="oto-yikama-pervanesi-nedir/"
-                                style="text-decoration:none; color:inherit;">Oto Yıkama Pervanesi Nedir? Nasıl
+                        <h2 class="blog-title"><a href="oto-yikama-pervanesi-nedir/">Oto Yıkama Pervanesi Nedir? Nasıl
                                 Çalışır?</a></h2>
                         <p class="blog-excerpt">Oto yıkama işletmelerinde verimliliği artıran ve hortum karmaşasını
                             önleyen oto yıkama pervanelerinin çalışma prensibi ve avantajları.</p>
@@ -108,8 +63,57 @@
 
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">Hızlı Linkler</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html" class="footer-link">Ana Sayfa</a></li>
+                        <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="index.html" class="footer-link">Blog</a></li>
+                        <li><a href="../about/" class="footer-link">Hakkımızda</a></li>
+                        <li><a href="../contact/" class="footer-link">İletişim</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">İletişim Bilgileri</h3>
+                    <ul class="footer-contact">
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Şener Çubukçu BE_TA Makine<br>Fethiye Mahallesi Doğru Sokak NO:9<br>Nilüfer /
+                                Bursa</span>
+                        </li>
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <span>0536 461 5330</span>
+                        </li>
+                        <li class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>09:00 - 18:00<br>Pazar Günü Kapalı</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="footer-bottom">
-                <p class="copyright">&copy; 2026 Beta Makine. Tüm hakları saklıdır.</p>
+                <p class="copyright">
+                    &copy; 2026 Beta Makine. Tüm hakları saklıdır. |
+                    <a href="#" class="footer-link-inline">Gizlilik Politikası</a> |
+                    <a href="#" class="footer-link-inline">Kullanım Koşulları</a>
+                </p>
             </div>
         </div>
     </footer>
