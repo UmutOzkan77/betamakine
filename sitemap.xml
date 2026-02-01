@@ -1,57 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Ana Sayfa -->
   <url>
     <loc>https://betamakine.com/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Ürünler Ana Sayfa -->
+  <url>
+    <loc>https://betamakine.com/urunler/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Ürün Sayfaları -->
   <url>
     <loc>https://betamakine.com/urunler/tir-yikama-pervanesi/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://betamakine.com/urunler/yikama-pervanesi-uc-rekoru/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog -->
   <url>
-    <loc>https://betamakine.com/about/</loc>
-    <lastmod>2026-01-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://betamakine.com/blog/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://betamakine.com/contact/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <loc>https://betamakine.com/blog/oto-yikama-pervanesi-nedir/</loc>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Hakkımızda -->
+  <url>
+    <loc>https://betamakine.com/about/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- İletişim -->
+  <url>
+    <loc>https://betamakine.com/contact/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
