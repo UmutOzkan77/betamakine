@@ -54,11 +54,37 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog -->
+  <!-- Blog Ana Sayfa -->
   <url>
     <loc>https://betamakine.com/blog/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Yazıları -->
+  <url>
+    <loc>https://betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://betamakine.com/blog/oto-yikama-pervanesi-bakimi/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
