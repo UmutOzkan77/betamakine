@@ -135,6 +135,21 @@
       gtag('js', new Date());
       gtag('config', 'AW-17920513521');
     </script>
+    <!-- Event snippet for Fiyat teklifi isteyin conversion -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17920513521/LaKgCKSyovEbEPGrleFC',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
 </head>
 
 <body>
