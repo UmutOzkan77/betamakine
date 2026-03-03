@@ -8,6 +8,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Oto Yıkama Pervanesi Landing -->
+  <url>
+    <loc>https://betamakine.com/oto-yikama-pervanesi/</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- Ürünler Ana Sayfa -->
   <url>
     <loc>https://betamakine.com/urunler/</loc>
