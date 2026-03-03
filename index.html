@@ -41,6 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="assets/images/1.kapak.webp" type="image/webp" fetchpriority="high">
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -257,13 +258,13 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-slider">
-            <div class="hero-slide active" style="background-image: url('assets/images/1.kapak.webp');">
+            <div class="hero-slide active" data-bg="assets/images/1.kapak.webp" style="background-image: url('assets/images/1.kapak.webp');">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-slide" style="background-image: url('assets/images/2.kapak.webp');">
+            <div class="hero-slide" data-bg="assets/images/2.kapak.webp">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-slide" style="background-image: url('assets/images/3.kapak.webp');">
+            <div class="hero-slide" data-bg="assets/images/3.kapak.webp">
                 <div class="hero-overlay"></div>
             </div>
         </div>
@@ -489,6 +490,73 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="home-faq" id="sss">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Sık Sorulan Sorular</h2>
+                <p class="section-subtitle">Model seçimi, montaj ve fiyatlandırma hakkında en çok sorulan sorulara tek
+                    sayfada hızlıca ulaşın.</p>
+            </div>
+
+            <div class="faq-grid">
+                <details class="faq-item" open>
+                    <summary>Oto yıkama pervanesi nedir?</summary>
+                    <p>Oto yıkama pervanesi, yüksek basınçlı hortumun tavandan sarkıtılarak 360 derece dönebilmesini
+                        sağlayan mekanik sistemdir. Operatör hareketini kolaylaştırır ve ekipman ömrünü uzatır.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Oto yıkama pervanesi ne işe yarar?</summary>
+                    <p>Hortumun yere sürtünerek aşınmasını önler, araca çarpma riskini azaltır, daha güvenli ve düzenli
+                        bir çalışma alanı oluşturur.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Fiyatlar nasıl belirleniyor?</summary>
+                    <p>Fiyatlar modele, kol uzunluğuna, döner rekor tipine ve kullanım yoğunluğuna göre değişir. Tekli,
+                        çiftli ve tır modelleri farklı fiyat aralıklarındadır.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>En iyi oto yıkama pervanesi markası hangisi?</summary>
+                    <p>Uzun ömür, servis desteği, yedek parça erişimi ve üretim kalitesi birlikte değerlendirilmelidir.
+                        Beta Makine bu kriterlerde uzmanlaşmış, yerli üretim odaklı bir markadır.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Boom pervane nedir?</summary>
+                    <p>Boom pervane, yaylanmalı kol yapısı sayesinde hortumun tavandan düzenli şekilde sarkmasını ve
+                        360 derece dönebilmesini sağlayan sistemdir. Self servis istasyonlarda en yaygın çözümlerden
+                        biridir.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Tekli ve çiftli boom pervane arasındaki fark nedir?</summary>
+                    <p>Tekli boom bir hortum taşır ve standart kabinler için idealdir. Çiftli boom ise genellikle köpük
+                        ve su hatlarını birlikte taşır, yüksek kapasiteli istasyonlarda daha verimlidir.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Tır yıkama pervanesi ile binek araç pervanesi farklı mı?</summary>
+                    <p>Evet. Tır yıkama pervaneleri daha büyük araç ölçülerine göre tasarlanır. Açılır kapanır veya
+                        teleskopik yapılarla yüksek araçlarda daha rahat kullanım sağlar.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Montaj sürecinde teknik destek veriyor musunuz?</summary>
+                    <p>Evet. Tavan sabitleme, bağlantı ekipmanları ve doğru konumlandırma için satış sonrası teknik
+                        destek ve yönlendirme sağlıyoruz.</p>
+                </details>
+            </div>
+
+            <div class="faq-cta">
+                <p class="faq-cta-text">İstasyonunuza en uygun modeli birlikte netleştirelim.</p>
+                <a href="contact/" class="about-button">Teknik Destek Alın</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" id="iletisim">
         <div class="container">
@@ -497,7 +565,7 @@
                 <div class="footer-column">
                     <h3 class="footer-title">Hızlı Linkler</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html" class="footer-link">Ana Sayfa</a></li>
+                        <li><a href="./" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="urunler/" class="footer-link">Ürünler</a></li>
                         <li><a href="about/" class="footer-link">Hakkımızda</a></li>
                         <li><a href="contact/" class="footer-link">İletişim</a></li>

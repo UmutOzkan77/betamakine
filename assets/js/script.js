@@ -13,29 +13,48 @@ class HeroSlider {
     }
 
     init() {
+        if (!this.slides.length) return;
+
+        // Ensure first visible hero image is loaded immediately.
+        this.ensureSlideBackground(this.currentSlide);
+        this.preloadSlideBackground((this.currentSlide + 1) % this.slides.length);
+
         // Auto-slide every 5 seconds
-        this.startAutoSlide();
+        if (this.slides.length > 1) {
+            this.startAutoSlide();
+        }
 
         // Indicator clicks
         this.indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
                 this.changeSlide(index);
-                this.resetAutoSlide();
+                if (this.slides.length > 1) {
+                    this.resetAutoSlide();
+                }
             });
         });
     }
 
     changeSlide(index) {
+        if (!this.slides.length) return;
+
         // Remove active class from current slide and indicator
         this.slides[this.currentSlide].classList.remove('active');
-        this.indicators[this.currentSlide].classList.remove('active');
+        if (this.indicators[this.currentSlide]) {
+            this.indicators[this.currentSlide].classList.remove('active');
+        }
 
         // Calculate new slide index (loop around)
         this.currentSlide = (index + this.slides.length) % this.slides.length;
 
+        this.ensureSlideBackground(this.currentSlide);
+        this.preloadSlideBackground((this.currentSlide + 1) % this.slides.length);
+
         // Add active class to new slide and indicator
         this.slides[this.currentSlide].classList.add('active');
-        this.indicators[this.currentSlide].classList.add('active');
+        if (this.indicators[this.currentSlide]) {
+            this.indicators[this.currentSlide].classList.add('active');
+        }
     }
 
     startAutoSlide() {
@@ -47,6 +66,28 @@ class HeroSlider {
     resetAutoSlide() {
         clearInterval(this.slideInterval);
         this.startAutoSlide();
+    }
+
+    ensureSlideBackground(index) {
+        const slide = this.slides[index];
+        if (!slide) return;
+
+        const bg = slide.dataset.bg;
+        if (bg && !slide.style.backgroundImage) {
+            slide.style.backgroundImage = `url('${bg}')`;
+        }
+    }
+
+    preloadSlideBackground(index) {
+        const slide = this.slides[index];
+        if (!slide) return;
+
+        const bg = slide.dataset.bg;
+        if (!bg || slide.dataset.prefetched === 'true') return;
+
+        const preloader = new Image();
+        preloader.src = bg;
+        slide.dataset.prefetched = 'true';
     }
 }
 
@@ -201,7 +242,11 @@ class ActiveNavTracker {
 
 class ScrollReveal {
     constructor() {
-        this.elements = document.querySelectorAll('.product-card, .about-wrapper, .section-header, .stat-item');
+        this.elements = [];
+        this.revealGroups = [
+            { selector: '.section-header, .about-wrapper, .stat-item, .faq-item', step: 0.06, maxDelay: 0.24 },
+            { selector: '.product-card', step: 0.08, maxDelay: 0.4 }
+        ];
         this.observerOptions = {
             threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
@@ -211,19 +256,25 @@ class ScrollReveal {
     }
 
     init() {
-        // Add initial hidden state to all elements
-        this.elements.forEach((element, index) => {
-            element.classList.add('scroll-reveal');
-            element.style.transitionDelay = `${index * 0.1}s`;
+        // Add initial hidden state with per-group staggering
+        this.revealGroups.forEach(group => {
+            const groupElements = document.querySelectorAll(group.selector);
+            groupElements.forEach((element, index) => {
+                const delay = Math.min(index * group.step, group.maxDelay);
+                element.classList.add('scroll-reveal');
+                element.style.transitionDelay = `${delay.toFixed(2)}s`;
+                this.elements.push(element);
+            });
         });
+
+        if (!this.elements.length) return;
 
         // Create Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('scroll-reveal-active');
-                    // Optional: Stop observing after animation
-                    // observer.unobserve(entry.target);
+                    observer.unobserve(entry.target);
                 }
             });
         }, this.observerOptions);

@@ -30,6 +30,299 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .model-advisor {
+            margin-top: 2rem;
+            padding: 1.75rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 32, 74, 0.12);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(231, 240, 249, 0.9));
+            box-shadow: 0 10px 30px rgba(0, 32, 74, 0.08);
+            text-align: center;
+        }
+
+        .advisor-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .decision-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.25rem;
+        }
+
+        .decision-pill {
+            border: 1px solid rgba(0, 32, 74, 0.22);
+            background: #fff;
+            color: #102A43;
+            padding: 0.65rem 1rem;
+            border-radius: 999px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .decision-pill:hover {
+            border-color: var(--color-accent);
+            color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        .decision-pill.active {
+            background: linear-gradient(135deg, var(--color-primary), #00386f);
+            border-color: var(--color-primary);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 32, 74, 0.28);
+        }
+
+        .compare-cards {
+            margin-top: 1.5rem;
+        }
+
+        .compare-card {
+            transition: all 0.3s ease;
+        }
+
+        .compare-card.is-muted {
+            opacity: 0.45;
+            filter: grayscale(0.2);
+            transform: none;
+        }
+
+        .compare-card.is-focused {
+            border-color: rgba(0, 187, 240, 0.6);
+            box-shadow:
+                0 18px 35px rgba(0, 32, 74, 0.14),
+                0 0 0 2px rgba(0, 187, 240, 0.35);
+        }
+
+        .model-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-bottom: 0.75rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            color: #0b2d52;
+            background: rgba(0, 187, 240, 0.16);
+        }
+
+        .model-points {
+            list-style: none;
+            margin: 0 0 1rem;
+            padding: 0;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .model-points li {
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: #334E68;
+        }
+
+        .compare-lab {
+            margin-top: 2.5rem;
+            padding: 1.75rem;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(0, 32, 74, 0.12);
+            box-shadow: 0 10px 28px rgba(0, 32, 74, 0.07);
+        }
+
+        .compare-table-wrap {
+            margin-top: 1rem;
+            border-radius: 12px;
+            overflow: auto;
+            border: 1px solid rgba(0, 32, 74, 0.12);
+            background: #f7fbff;
+        }
+
+        .compare-table {
+            width: 100%;
+            min-width: 980px;
+            border-collapse: collapse;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 32, 74, 0.1);
+            color: #102A43;
+            vertical-align: top;
+        }
+
+        .compare-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: #e6f2ff;
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            color: var(--color-primary);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .compare-table .row-title {
+            position: sticky;
+            left: 0;
+            z-index: 3;
+            min-width: 220px;
+            background: #eef5fc;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #243B53;
+        }
+
+        .compare-table [data-model-col].is-active-col {
+            background: rgba(0, 187, 240, 0.12);
+        }
+
+        .purchase-guide-panel {
+            margin-top: 2.5rem;
+            padding: 2rem 1.5rem;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #eaf3fb 0%, #d4e4f3 100%);
+            border: 1px solid rgba(0, 32, 74, 0.14);
+            box-shadow: 0 12px 28px rgba(0, 32, 74, 0.08);
+        }
+
+        .guide-check-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0 1.25rem;
+        }
+
+        .guide-check-item {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 32, 74, 0.09);
+            border-radius: 12px;
+            padding: 0.9rem;
+        }
+
+        .guide-check-item h3 {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            color: #0f2f56;
+        }
+
+        .guide-check-item p {
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #334E68;
+        }
+
+        .guide-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .guide-actions .hero-button {
+            margin: 0;
+        }
+
+        .compare-secondary-button {
+            display: inline-block;
+            padding: 0.95rem 1.25rem;
+            border-radius: 8px;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.85);
+            transition: all 0.25s ease;
+        }
+
+        .compare-secondary-button:hover {
+            background: var(--color-primary);
+            color: #fff;
+            box-shadow: 0 8px 22px rgba(0, 32, 74, 0.2);
+        }
+
+        .compare-faq {
+            margin-top: 2.25rem;
+        }
+
+        .faq-stack {
+            margin-top: 1rem;
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .faq-stack details {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(0, 32, 74, 0.12);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+        }
+
+        .faq-stack summary {
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: #0f2f56;
+            list-style: none;
+        }
+
+        .faq-stack summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-stack p {
+            margin: 0.7rem 0 0;
+            color: #334E68;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .guide-check-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .model-advisor,
+            .compare-lab,
+            .purchase-guide-panel {
+                padding: 1.15rem;
+            }
+
+            .decision-pills {
+                justify-content: flex-start;
+            }
+
+            .decision-pill {
+                width: 100%;
+                text-align: center;
+            }
+
+            .compare-table .row-title {
+                min-width: 170px;
+            }
+        }
+    </style>
 
     <script type="application/ld+json">
     {
@@ -117,6 +410,11 @@
                         <li class="nav-item"><a href="../contact/" class="nav-link">İletişim</a></li>
                     </ul>
                 </nav>
+                <button class="mobile-menu-toggle" aria-label="Menü">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
@@ -125,49 +423,174 @@
         <div class="container">
             <div class="section-header" style="margin-top: 48px;">
                 <h1 class="section-title">Oto Yıkama Pervanesi Modelleri</h1>
-                <p class="section-subtitle">İşletmenize uygun oto yıkama pervanesi modelini teknik ihtiyaca göre seçin: boom tekli Z, boom çiftli veya tır yıkama pervanesi.</p>
+                <p class="section-subtitle">Bu sayfa sadece "ürün listesi" değil, doğru modeli seçmeniz için karar ekranıdır. Kullanım senaryonuzu seçin, modeller arası farkları yan yana görün.</p>
             </div>
 
-            <div class="products-grid">
-                <article class="product-card">
+            <section class="model-advisor" aria-labelledby="model-advisor-title">
+                <h2 id="model-advisor-title" class="section-title advisor-title">2 Adımda Doğru Model Seçimi</h2>
+                <p class="section-subtitle">Aşağıdaki senaryolardan birini seçerek kartları ve karşılaştırma tablosunu odaklayın.</p>
+                <div class="decision-pills" role="tablist" aria-label="Kullanım senaryosu seçimi">
+                    <button type="button" class="decision-pill active" data-recommend="tekli">Tek Kabin, Tek Hat</button>
+                    <button type="button" class="decision-pill" data-recommend="ciftli">Yoğun Trafik, Köpük + Su</button>
+                    <button type="button" class="decision-pill" data-recommend="tir">Ağır Vasıta Hattı</button>
+                    <button type="button" class="decision-pill" data-recommend="all">Tüm Modelleri Göster</button>
+                </div>
+            </section>
+
+            <div class="products-grid compare-cards">
+                <article class="product-card compare-card is-focused" data-model="tekli">
                     <div class="product-image">
-                        <img src="../urunler/tekli-z-oto-yikama-pervanesi/tekliz.webp" alt="Oto Yıkama Pervanesi Boom Tekli Z" loading="lazy" decoding="async">
+                        <img src="../urunler/tekli-z-oto-yikama-pervanesi/tekliz.webp" alt="Boom Tekli Z oto yıkama pervanesi" loading="lazy" decoding="async">
                     </div>
                     <div class="product-content">
+                        <span class="model-chip">En Uygun: Tek Kabin İşletmeler</span>
                         <h2 class="product-title">Boom Tekli Z Oto Yıkama Pervanesi</h2>
-                        <p class="product-description">Tek hortumlu self servis kabinler için ideal model. 154 cm Z kol yapısı ve 360° dönüş ile operatör ergonomisini artırır.</p>
+                        <p class="product-description">Tek hortumlu self servis kabinler için dengeli ve ekonomik çözüm. Kurulumu kolaydır, günlük operasyonu hızlandırır.</p>
+                        <ul class="model-points">
+                            <li>154 cm Z kol yapısı ile rahat erişim</li>
+                            <li>360 derece dönüş ile hortum dolanmasını azaltır</li>
+                            <li>Düşük ilk yatırımla hızlı devreye alma</li>
+                        </ul>
                         <a href="../urunler/tekli-z-oto-yikama-pervanesi/" class="product-button">Modeli İncele</a>
                     </div>
                 </article>
 
-                <article class="product-card">
+                <article class="product-card compare-card is-muted" data-model="ciftli">
                     <div class="product-image">
-                        <img src="../urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/ciftlijet.webp" alt="Oto Yıkama Pervanesi Boom Çiftli" loading="lazy" decoding="async">
+                        <img src="../urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/ciftlijet.webp" alt="Boom çiftli oto yıkama pervanesi" loading="lazy" decoding="async">
                     </div>
                     <div class="product-content">
+                        <span class="model-chip">En Uygun: Köpük + Su İstasyonları</span>
                         <h2 class="product-title">Boom Çiftli Oto Yıkama Pervanesi</h2>
-                        <p class="product-description">Jet köpük + su hatlarını tek pergelde birleştirir. Yoğun trafikli istasyonlarda işlem süresini kısaltmak için önerilir.</p>
+                        <p class="product-description">İki farklı hattı tek pergelle yönetir. Yoğun kabinlerde müşteri başına geçen süreyi kısaltarak kapasiteyi artırır.</p>
+                        <ul class="model-points">
+                            <li>Aynı noktada iki hortum hattı (köpük + su)</li>
+                            <li>4 keçeli sızdırmaz döner rekor yapısı</li>
+                            <li>Yüksek trafikli noktalarda operasyon avantajı</li>
+                        </ul>
                         <a href="../urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/" class="product-button">Modeli İncele</a>
                     </div>
                 </article>
 
-                <article class="product-card">
+                <article class="product-card compare-card is-muted" data-model="tir">
                     <div class="product-image">
-                        <img src="../urunler/tir-yikama-pervanesi/tiryikama1.webp" alt="Tır Yıkama Pervanesi" loading="lazy" decoding="async">
+                        <img src="../urunler/tir-yikama-pervanesi/tiryikama1.webp" alt="Tır yıkama pervanesi modeli" loading="lazy" decoding="async">
                     </div>
                     <div class="product-content">
+                        <span class="model-chip">En Uygun: Tır / Kamyon Hatları</span>
                         <h2 class="product-title">Tır Yıkama Pervanesi</h2>
-                        <p class="product-description">Yüksek araçlar için geniş erişim ve güvenli hortum yönetimi sağlar. Tır, kamyon ve otobüs yıkama noktaları için uygundur.</p>
+                        <p class="product-description">Yüksek araçlarda güvenli hortum yönetimi için geliştirildi. Ağır vasıta yıkama alanlarında erişimi ve kontrolü artırır.</p>
+                        <ul class="model-points">
+                            <li>Geniş erişim açısı ile yüksek gövde temizliği</li>
+                            <li>Dayanıklı gövde ile uzun süreli kullanım</li>
+                            <li>Tır, kamyon ve otobüs hatlarına uygun yapı</li>
+                        </ul>
                         <a href="../urunler/tir-yikama-pervanesi/" class="product-button">Modeli İncele</a>
                     </div>
                 </article>
             </div>
 
-            <section class="about" style="padding-top: 48px;">
-                <h2 class="section-title" style="font-size: 2rem;">Oto Yıkama Pervanesi Satın Alma Rehberi</h2>
-                <p class="about-description">Google'da "oto yıkama pervanesi" aramasında kullanıcılar çoğunlukla ürün karşılaştırması, teknik uygunluk ve fiyat bilgisi arar. Bu nedenle seçim yaparken sadece fiyat değil, döner rekor kalitesi, montaj tipi, yedek parça erişimi ve satış sonrası teknik destek birlikte değerlendirilmelidir.</p>
-                <p class="about-description">Kurulum bilgilerinizi paylaştığınızda ekibimiz size doğru model, uygun bağlantı ekipmanı ve tahmini teslim süresiyle birlikte net teklif sunar.</p>
-                <a href="../contact/" class="hero-button">Hızlı Teklif Alın</a>
+            <section class="compare-lab" id="model-karsilastirma">
+                <h2 class="section-title" style="font-size: 2rem;">Yan Yana Teknik Karşılaştırma</h2>
+                <p class="section-subtitle">Apple tarzında net karşılaştırma: aynı kriterde üç modeli bir arada görerek farkı saniyeler içinde anlayın.</p>
+                <div class="compare-table-wrap">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th class="row-title">Kriter</th>
+                                <th data-model-col="tekli">Boom Tekli Z</th>
+                                <th data-model-col="ciftli">Boom Çiftli</th>
+                                <th data-model-col="tir">Tır Yıkama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="row-title">İdeal İşletme</th>
+                                <td data-model-col="tekli">Tek kabinli self servis noktalar</td>
+                                <td data-model-col="ciftli">Yüksek trafik, iki fonksiyonlu kabinler</td>
+                                <td data-model-col="tir">Ağır vasıta yıkama alanları</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Hortum Hattı</th>
+                                <td data-model-col="tekli">1 hat</td>
+                                <td data-model-col="ciftli">2 hat (köpük + su)</td>
+                                <td data-model-col="tir">1 hat (ağır vasıta odaklı)</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Dönüş Mekanizması</th>
+                                <td data-model-col="tekli">360 derece</td>
+                                <td data-model-col="ciftli">360 derece + yüksek sızdırmazlık</td>
+                                <td data-model-col="tir">360 derece + yüksek erişim</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Kapasite Avantajı</th>
+                                <td data-model-col="tekli">Standart operasyon hızı</td>
+                                <td data-model-col="ciftli">Müşteri başına süreyi kısaltır</td>
+                                <td data-model-col="tir">Büyük araç temizliğinde stabil akıcılık</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Kurulum Zorluğu</th>
+                                <td data-model-col="tekli">Düşük</td>
+                                <td data-model-col="ciftli">Orta</td>
+                                <td data-model-col="tir">Orta-Yüksek</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Yatırım Seviyesi</th>
+                                <td data-model-col="tekli">Düşük giriş seviyesi</td>
+                                <td data-model-col="ciftli">Orta seviye</td>
+                                <td data-model-col="tir">Proje bazlı teklif</td>
+                            </tr>
+                            <tr>
+                                <th class="row-title">Sizin İçin Uygun mu?</th>
+                                <td data-model-col="tekli">Tek kabin işletiyorsanız uygun</td>
+                                <td data-model-col="ciftli">Köpük + su hizmeti veriyorsanız uygun</td>
+                                <td data-model-col="tir">Ağır vasıta odaklıysanız uygun</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="purchase-guide-panel" aria-labelledby="rehber-title">
+                <h2 id="rehber-title" class="section-title" style="font-size: 2rem;">Satın Alma Rehberi</h2>
+                <p class="about-description">Seçimi doğru yapmak için fiyat tek başına yeterli değildir. Döner rekor kalitesi, montaj altyapısı, yedek parça erişimi ve satış sonrası teknik destek birlikte değerlendirilmelidir.</p>
+                <div class="guide-check-grid">
+                    <article class="guide-check-item">
+                        <h3>Altyapı Kontrolü</h3>
+                        <p>Kabin başına hortum sayısı, tavan yüksekliği ve hat yerleşimi modele doğrudan etki eder.</p>
+                    </article>
+                    <article class="guide-check-item">
+                        <h3>Günlük Trafik</h3>
+                        <p>Yoğunluk arttıkça çiftli sistemler operasyon süresini kısaltır ve kuyruk yönetimini iyileştirir.</p>
+                    </article>
+                    <article class="guide-check-item">
+                        <h3>Servis Sürekliliği</h3>
+                        <p>Yedek parça bulunabilirliği ve teknik destek hızı, uzun dönemde toplam maliyeti belirler.</p>
+                    </article>
+                </div>
+                <p class="about-description">Kurulum bilgilerinizi paylaştığınızda ekibimiz, size uygun modeli ve tahmini teslim planını net teklif ile iletir.</p>
+                <div class="guide-actions">
+                    <a href="../contact/" class="hero-button">Hızlı Teklif Alın</a>
+                    <a href="tel:+905364615330" class="compare-secondary-button">Hemen Ara: 0536 461 5330</a>
+                </div>
+            </section>
+
+            <section class="compare-faq" aria-labelledby="faq-title">
+                <h2 id="faq-title" class="section-title" style="font-size: 2rem;">Sık Sorulan Sorular</h2>
+                <div class="faq-stack">
+                    <details open>
+                        <summary>Oto yıkama pervanesi seçerken en kritik kriter nedir?</summary>
+                        <p>Kabin başına kullanım senaryosudur. Tek hortumlu kabinlerde boom tekli Z, köpük + su kullanılan yoğun kabinlerde boom çiftli model daha verimlidir.</p>
+                    </details>
+                    <details>
+                        <summary>Oto yıkama pervanesi fiyatı neye göre değişir?</summary>
+                        <p>Model tipi, malzeme kalitesi, döner rekor yapısı ve montaj altyapısı maliyeti belirler. Net fiyat için yerinde altyapı bilgisiyle teklif alınmalıdır.</p>
+                    </details>
+                    <details>
+                        <summary>Boom çiftli ile boom tekli arasındaki fark nedir?</summary>
+                        <p>Boom tekli model tek hortumla çalışır. Boom çiftli model aynı noktada iki farklı hat taşıyarak daha hızlı hizmet akışı sağlar.</p>
+                    </details>
+                </div>
             </section>
         </div>
     </main>
@@ -198,6 +621,49 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pills = document.querySelectorAll('.decision-pill');
+            const cards = document.querySelectorAll('.compare-card');
+            const tableCells = document.querySelectorAll('[data-model-col]');
+
+            if (!pills.length || !cards.length || !tableCells.length) return;
+
+            const setRecommendation = (model) => {
+                pills.forEach((pill) => {
+                    pill.classList.toggle('active', pill.dataset.recommend === model);
+                });
+
+                cards.forEach((card) => {
+                    if (model === 'all') {
+                        card.classList.remove('is-muted');
+                        card.classList.remove('is-focused');
+                        return;
+                    }
+
+                    const focused = card.dataset.model === model;
+                    card.classList.toggle('is-focused', focused);
+                    card.classList.toggle('is-muted', !focused);
+                });
+
+                tableCells.forEach((cell) => {
+                    if (model === 'all') {
+                        cell.classList.remove('is-active-col');
+                        return;
+                    }
+                    cell.classList.toggle('is-active-col', cell.dataset.modelCol === model);
+                });
+            };
+
+            pills.forEach((pill) => {
+                pill.addEventListener('click', () => {
+                    setRecommendation(pill.dataset.recommend);
+                });
+            });
+
+            setRecommendation('tekli');
+        });
+    </script>
     <script src="../assets/js/script.js?v=1"></script>
 </body>
 

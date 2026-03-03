@@ -1219,6 +1219,105 @@ ol {
 }
 
 /* ===================================
+   FAQ SECTION
+   =================================== */
+
+.home-faq {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(180deg, #C8D6E4 0%, #D9E2EC 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-faq::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(0, 187, 240, 0.08), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(0, 32, 74, 0.06), transparent 35%);
+    pointer-events: none;
+}
+
+.faq-grid {
+    position: relative;
+    max-width: 980px;
+    margin: var(--spacing-lg) auto 0;
+    display: grid;
+    gap: var(--spacing-sm);
+    z-index: 1;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 32, 74, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0, 32, 74, 0.08);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.faq-item:hover,
+.faq-item[open] {
+    border-color: rgba(0, 187, 240, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 32, 74, 0.12);
+}
+
+.faq-item summary {
+    list-style: none;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.4px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.faq-item[open] summary::after {
+    content: '-';
+}
+
+.faq-item p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text);
+    padding: 0 1.25rem 1.2rem;
+    margin: 0;
+}
+
+.faq-cta {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.faq-cta-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ===================================
    FOOTER
    =================================== */
 
@@ -1424,18 +1523,13 @@ ol {
     transform: translateY(0);
 }
 
-/* Different animation directions for variety */
-.product-card:nth-child(odd).scroll-reveal {
-    transform: translateX(-50px) translateY(30px);
+/* Keep product entry animation direction consistent */
+.product-card.scroll-reveal {
+    transform: translateY(36px);
 }
 
-.product-card:nth-child(even).scroll-reveal {
-    transform: translateX(50px) translateY(30px);
-}
-
-.product-card:nth-child(odd).scroll-reveal-active,
-.product-card:nth-child(even).scroll-reveal-active {
-    transform: translateX(0) translateY(0);
+.product-card.scroll-reveal-active {
+    transform: translateY(0);
 }
 
 /* About section animations */
@@ -1920,6 +2014,16 @@ ol {
     .products-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
+    }
+
+    .faq-item summary {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .faq-item p {
+        font-size: 0.95rem;
+        padding: 0 1rem 1rem;
     }
 
     .product-image {
