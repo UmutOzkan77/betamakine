@@ -11,6 +11,8 @@
     <meta name="keywords" content="oto yıkama pervanesi, oto yıkama pervanesi fiyatı, boom tekli pervane, boom çiftli pervane, tır yıkama pervanesi, self servis oto yıkama pervanesi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://betamakine.com/oto-yikama-pervanesi/">
+    <link rel="alternate" hreflang="tr-TR" href="https://betamakine.com/oto-yikama-pervanesi/">
+    <link rel="alternate" hreflang="x-default" href="https://betamakine.com/oto-yikama-pervanesi/">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <meta property="og:type" content="website">
@@ -18,6 +20,7 @@
     <meta property="og:title" content="Oto Yıkama Pervanesi Modelleri | Beta Makine">
     <meta property="og:description" content="Boom tekli Z, boom çiftli ve tır yıkama pervanesi modellerini karşılaştırın. İşletmenize uygun çözümü bulun.">
     <meta property="og:image" content="https://betamakine.com/assets/images/og-image.webp">
+    <meta property="og:image:alt" content="Oto yıkama pervanesi modelleri karşılaştırma görseli">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:site_name" content="Beta Makine">
 
@@ -25,6 +28,7 @@
     <meta name="twitter:title" content="Oto Yıkama Pervanesi Modelleri | Beta Makine">
     <meta name="twitter:description" content="Oto yıkama pervanesi satın alma rehberi, model karşılaştırmaları ve hızlı teklif.">
     <meta name="twitter:image" content="https://betamakine.com/assets/images/og-image.webp">
+    <meta name="twitter:image:alt" content="Beta Makine oto yıkama pervanesi model karşılaştırması">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,6 +243,27 @@
 
         .guide-actions .hero-button {
             margin: 0;
+            background: linear-gradient(135deg, var(--color-primary), #00386f);
+            border-color: var(--color-primary);
+            color: #ffffff;
+            opacity: 1;
+            transform: none;
+            animation: none;
+            box-shadow: 0 10px 24px rgba(0, 32, 74, 0.24);
+            text-shadow: none;
+            text-align: center;
+        }
+
+        .guide-actions .hero-button::before {
+            display: none;
+        }
+
+        .guide-actions .hero-button:hover {
+            background: #002a56;
+            border-color: #002a56;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 26px rgba(0, 32, 74, 0.3);
         }
 
         .compare-secondary-button {
@@ -263,12 +288,24 @@
 
         .compare-faq {
             margin-top: 2.25rem;
+            text-align: center;
+        }
+
+        .compare-faq .section-title {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .compare-faq .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .faq-stack {
             margin-top: 1rem;
             display: grid;
             gap: 0.7rem;
+            text-align: left;
         }
 
         .faq-stack details {
@@ -278,16 +315,39 @@
             padding: 0.85rem 1rem;
         }
 
+        .faq-stack details:hover,
+        .faq-stack details[open] {
+            border-color: rgba(0, 187, 240, 0.42);
+            box-shadow: 0 10px 24px rgba(0, 32, 74, 0.1);
+        }
+
         .faq-stack summary {
             cursor: pointer;
             font-family: var(--font-heading);
             font-size: 1rem;
             color: #0f2f56;
             list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.9rem;
         }
 
         .faq-stack summary::-webkit-details-marker {
             display: none;
+        }
+
+        .faq-stack summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            line-height: 1;
+            color: var(--color-accent);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .faq-stack details[open] summary::after {
+            content: '-';
         }
 
         .faq-stack p {
@@ -307,6 +367,11 @@
             .compare-lab,
             .purchase-guide-panel {
                 padding: 1.15rem;
+            }
+
+            .guide-actions .hero-button,
+            .guide-actions .compare-secondary-button {
+                width: 100%;
             }
 
             .decision-pills {
@@ -394,7 +459,7 @@
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -405,8 +470,10 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item"><a href="../" class="nav-link">Ana Sayfa</a></li>
-                        <li class="nav-item"><a href="../urunler/" class="nav-link active">Ürünler</a></li>
+                        <li class="nav-item"><a href="../urunler/" class="nav-link">Ürünler</a></li>
+                        <li class="nav-item"><a href="../oto-yikama-pervanesi/" class="nav-link active">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="../blog/" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="../about/" class="nav-link">Hakkımızda</a></li>
                         <li class="nav-item"><a href="../contact/" class="nav-link">İletişim</a></li>
                     </ul>
                 </nav>
@@ -603,6 +670,7 @@
                     <ul class="footer-links">
                         <li><a href="../" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
                         <li><a href="../blog/" class="footer-link">Blog</a></li>
                         <li><a href="../contact/" class="footer-link">İletişim</a></li>
                     </ul>
@@ -664,7 +732,7 @@
             setRecommendation('tekli');
         });
     </script>
-    <script src="../assets/js/script.js?v=1"></script>
+    <script src="../assets/js/script.js?v=2"></script>
 </body>
 
 </html>

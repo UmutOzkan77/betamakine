@@ -1,4 +1,18 @@
 // ===================================
+// PROTOCOL CANONICALIZATION
+// ===================================
+
+(function forceCanonicalHttps() {
+    const host = window.location.hostname.toLowerCase();
+    const isTargetHost = host === 'betamakine.com' || host === 'www.betamakine.com';
+
+    if (window.location.protocol === 'http:' && isTargetHost) {
+        const targetUrl = `https://betamakine.com${window.location.pathname}${window.location.search}${window.location.hash}`;
+        window.location.replace(targetUrl);
+    }
+})();
+
+// ===================================
 // HERO SLIDER FUNCTIONALITY
 // ===================================
 
@@ -8,6 +22,10 @@ class HeroSlider {
         this.indicators = document.querySelectorAll('.indicator');
         this.currentSlide = 0;
         this.slideInterval = null;
+        this.autoSlideStartTimeout = null;
+        this.autoSlideDelayMs = 7000;
+        this.viewportQuery = window.matchMedia('(max-width: 768px)');
+        this.isMobileViewport = this.viewportQuery.matches;
 
         this.init();
     }
@@ -15,13 +33,30 @@ class HeroSlider {
     init() {
         if (!this.slides.length) return;
 
-        // Ensure first visible hero image is loaded immediately.
+        // Ensure first visible hero image is loaded with the right source.
         this.ensureSlideBackground(this.currentSlide);
-        this.preloadSlideBackground((this.currentSlide + 1) % this.slides.length);
 
-        // Auto-slide every 5 seconds
+        // Defer non-critical image prefetch so LCP can settle first.
+        this.deferNextSlidePreload();
+
+        // Auto-slide starts after first content has already rendered.
         if (this.slides.length > 1) {
             this.startAutoSlide();
+        }
+
+        const handleViewportChange = () => {
+            const nextViewport = this.viewportQuery.matches;
+            if (nextViewport === this.isMobileViewport) return;
+
+            this.isMobileViewport = nextViewport;
+            this.ensureSlideBackground(this.currentSlide);
+            this.preloadSlideBackground((this.currentSlide + 1) % this.slides.length);
+        };
+
+        if (typeof this.viewportQuery.addEventListener === 'function') {
+            this.viewportQuery.addEventListener('change', handleViewportChange);
+        } else if (typeof this.viewportQuery.addListener === 'function') {
+            this.viewportQuery.addListener(handleViewportChange);
         }
 
         // Indicator clicks
@@ -57,24 +92,63 @@ class HeroSlider {
         }
     }
 
-    startAutoSlide() {
-        this.slideInterval = setInterval(() => {
-            this.changeSlide(this.currentSlide + 1);
-        }, 5000);
+    startAutoSlide(delayMs = this.autoSlideDelayMs) {
+        clearInterval(this.slideInterval);
+        clearTimeout(this.autoSlideStartTimeout);
+
+        const start = () => {
+            this.slideInterval = setInterval(() => {
+                this.changeSlide(this.currentSlide + 1);
+            }, this.autoSlideDelayMs);
+        };
+
+        if (delayMs > 0) {
+            this.autoSlideStartTimeout = setTimeout(start, delayMs);
+            return;
+        }
+
+        start();
     }
 
     resetAutoSlide() {
         clearInterval(this.slideInterval);
-        this.startAutoSlide();
+        clearTimeout(this.autoSlideStartTimeout);
+        this.startAutoSlide(0);
+    }
+
+    deferNextSlidePreload() {
+        const nextIndex = (this.currentSlide + 1) % this.slides.length;
+        const deferredPreload = () => this.preloadSlideBackground(nextIndex);
+
+        if (typeof window.requestIdleCallback === 'function') {
+            window.requestIdleCallback(deferredPreload, { timeout: 3000 });
+            return;
+        }
+
+        setTimeout(deferredPreload, 2000);
+    }
+
+    getPreferredBackground(slide) {
+        const mobileBg = slide.dataset.bgMobile;
+        const desktopBg = slide.dataset.bg;
+
+        if (this.isMobileViewport && mobileBg) {
+            return mobileBg;
+        }
+
+        return desktopBg;
     }
 
     ensureSlideBackground(index) {
         const slide = this.slides[index];
         if (!slide) return;
 
-        const bg = slide.dataset.bg;
-        if (bg && !slide.style.backgroundImage) {
+        const bg = this.getPreferredBackground(slide);
+        if (!bg) return;
+
+        if (slide.dataset.bgApplied !== bg) {
             slide.style.backgroundImage = `url('${bg}')`;
+            slide.dataset.bgApplied = bg;
         }
     }
 
@@ -82,12 +156,12 @@ class HeroSlider {
         const slide = this.slides[index];
         if (!slide) return;
 
-        const bg = slide.dataset.bg;
-        if (!bg || slide.dataset.prefetched === 'true') return;
+        const bg = this.getPreferredBackground(slide);
+        if (!bg || slide.dataset.prefetchedBg === bg) return;
 
         const preloader = new Image();
         preloader.src = bg;
-        slide.dataset.prefetched = 'true';
+        slide.dataset.prefetchedBg = bg;
     }
 }
 
@@ -104,6 +178,8 @@ class HeaderScroll {
     }
 
     init() {
+        if (!this.header) return;
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > this.scrollThreshold) {
                 this.header.classList.add('scrolled');
@@ -128,6 +204,8 @@ class MobileMenu {
     }
 
     init() {
+        if (!this.toggle || !this.nav) return;
+
         // Toggle menu on button click
         this.toggle.addEventListener('click', () => {
             this.toggle.classList.toggle('active');
@@ -391,6 +469,46 @@ class ProductCardEffects {
 }
 
 // ===================================
+// BLOG SIDEBAR ACTIVE LINK
+// ===================================
+
+class BlogSidebarCurrentLink {
+    constructor() {
+        this.links = document.querySelectorAll('.blog-sidebar-link');
+        this.init();
+    }
+
+    normalizePath(pathname) {
+        if (!pathname) return '/';
+        const cleanPath = pathname.split('#')[0].split('?')[0];
+        const normalized = cleanPath.replace(/\/+$/, '');
+        return normalized || '/';
+    }
+
+    init() {
+        if (!this.links.length) return;
+
+        const currentPath = this.normalizePath(window.location.pathname);
+
+        this.links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            const linkUrl = new URL(href, window.location.href);
+            const linkPath = this.normalizePath(linkUrl.pathname);
+            const isCurrent = currentPath === linkPath;
+
+            link.classList.toggle('is-current', isCurrent);
+            if (isCurrent) {
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.removeAttribute('aria-current');
+            }
+        });
+    }
+}
+
+// ===================================
 // INITIALIZE ALL COMPONENTS
 // ===================================
 
@@ -405,6 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { new CounterAnimation(); } catch (e) { console.debug('CounterAnimation not active on this page'); }
     try { new ParallaxEffect(); } catch (e) { console.debug('ParallaxEffect not active on this page'); }
     try { new ProductCardEffects(); } catch (e) { console.debug('ProductCardEffects not active on this page'); }
+    try { new BlogSidebarCurrentLink(); } catch (e) { console.debug('BlogSidebarCurrentLink not active on this page'); }
 
     // Log initialization
     console.log('🚀 Beta Makine - Website Initialized');

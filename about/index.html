@@ -10,7 +10,7 @@
     <meta name="title" content="Hakkımızda | Beta Makine - Oto Yıkama Pervanesi Üreticisi">
     <meta name="description" content="Beta Makine, 15+ yıllık tecrübesiyle Türkiye'nin lider oto yıkama pervanesi üreticisi. Bursa'da %100 yerli üretim, 10.000+ teslim edilen ürün. Misyonumuz, vizyonumuz ve değerlerimiz.">
     <meta name="keywords" content="Beta Makine, oto yıkama pervanesi üreticisi, Bursa oto yıkama ekipmanları, yerli üretim pervane, oto yıkama yedek parça">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://betamakine.com/about/">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
@@ -20,6 +20,7 @@
     <meta property="og:title" content="Hakkımızda | Beta Makine - Oto Yıkama Pervanesi Üreticisi">
     <meta property="og:description" content="15+ yıllık tecrübesiyle Türkiye'nin lider oto yıkama pervanesi üreticisi. Bursa'da %100 yerli üretim.">
     <meta property="og:image" content="https://betamakine.com/assets/images/hakkimizda.webp">
+    <meta property="og:image:alt" content="Beta Makine üretim tesisi ve ekip görüntüsü">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:site_name" content="Beta Makine">
 
@@ -28,6 +29,7 @@
     <meta name="twitter:title" content="Hakkımızda | Beta Makine - Oto Yıkama Pervanesi Üreticisi">
     <meta name="twitter:description" content="15+ yıllık tecrübesiyle Türkiye'nin lider oto yıkama pervanesi üreticisi.">
     <meta name="twitter:image" content="https://betamakine.com/assets/images/hakkimizda.webp">
+    <meta name="twitter:image:alt" content="Beta Makine üretim tesisi görseli">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,13 +82,20 @@
       ]
     }
     </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17920513521"></script>
+    <!-- Google tag (lazy gtag.js) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17920513521');
+      window.addEventListener('load', function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'AW-17920513521');
+
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17920513521';
+        document.head.appendChild(gtagScript);
+      });
     </script>
 </head>
 
@@ -104,6 +113,7 @@
                     <ul class="nav-list">
                         <li class="nav-item"><a href="../#hero" class="nav-link">Ana Sayfa</a></li>
                         <li class="nav-item"><a href="../urunler/" class="nav-link">Ürünler</a></li>
+                        <li class="nav-item"><a href="../oto-yikama-pervanesi/" class="nav-link">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="../blog/" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="./" class="nav-link active">Hakkımızda</a></li>
                         <li class="nav-item"><a href="../contact/" class="nav-link">İletişim</a></li>
@@ -264,6 +274,7 @@
                     <ul class="footer-links">
                         <li><a href="../" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
                         <li><a href="../blog/" class="footer-link">Blog</a></li>
                         <li><a href="./" class="footer-link">Hakkımızda</a></li>
                         <li><a href="../contact/" class="footer-link">İletişim</a></li>

@@ -10,7 +10,7 @@
     <meta name="title" content="Oto Yıkama Pervanesi Blog | Rehberler ve İpuçları - Beta Makine">
     <meta name="description" content="Oto yıkama pervanesi seçim rehberi, bakım ipuçları, döner rekor kullanımı ve oto yıkama istasyonu ekipmanları hakkında uzman içerikler. Beta Makine Blog.">
     <meta name="keywords" content="oto yıkama pervanesi blog, oto yıkama rehberi, pervane bakımı, döner rekor kullanımı, oto yıkama ekipmanları, oto yıkama istasyonu">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="Beta Makine">
     <link rel="canonical" href="https://betamakine.com/blog/">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
@@ -35,8 +35,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
 
     <!-- Schema Markup: Blog -->
     <script type="application/ld+json">
@@ -129,18 +129,25 @@
       ]
     }
     </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17920513521"></script>
+    <!-- Google tag (lazy gtag.js) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17920513521');
+      window.addEventListener('load', function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'AW-17920513521');
+
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17920513521';
+        document.head.appendChild(gtagScript);
+      });
     </script>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -152,70 +159,97 @@
                     <ul class="nav-list">
                         <li class="nav-item"><a href="../" class="nav-link">Ana Sayfa</a></li>
                         <li class="nav-item"><a href="../urunler/" class="nav-link">Ürünler</a></li>
+                        <li class="nav-item"><a href="../oto-yikama-pervanesi/" class="nav-link">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="./" class="nav-link active">Blog</a></li>
+                        <li class="nav-item"><a href="../about/" class="nav-link">Hakkımızda</a></li>
                         <li class="nav-item"><a href="../contact/" class="nav-link">İletişim</a></li>
                     </ul>
                 </nav>
+                <button class="mobile-menu-toggle" aria-label="Menü">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
 
     <main class="blog-list">
-        <div class="container">
-            <h1 class="section-title">Beta Makine Blog</h1>
-            <p class="section-subtitle">Sektörel bilgiler, ipuçları ve teknik rehberler.
-            </p>
-            <p class="section-subtitle">Ürün karşılaştırması için <a href="../oto-yikama-pervanesi/" style="color:inherit;text-decoration:underline;">oto yıkama pervanesi modelleri</a> sayfasını inceleyin.</p>
+        <div class="container blog-hub">
+            <section class="blog-hub-top">
+                <span class="blog-hub-eyebrow">Beta Makine Akademi</span>
+                <h1 class="section-title">Oto Yıkama Pervanesi Bilgi Merkezi</h1>
+                <p class="blog-hub-lead">Bu sayfa, oto yıkama pervanesi yatırımı yapacak işletmeler için hazırlanmış uygulamalı bir içerik merkezi. Model seçimi, fiyat, bakım ve istasyon kurulum kararlarını tek noktadan netleştirir.</p>
+                <div class="blog-topic-chips" aria-label="Öne çıkan konular">
+                    <span class="blog-topic-chip">Model Seçimi</span>
+                    <span class="blog-topic-chip">Fiyatlandırma</span>
+                    <span class="blog-topic-chip">Bakım ve Servis</span>
+                    <span class="blog-topic-chip">Tır Hattı Kurulumu</span>
+                    <span class="blog-topic-chip">Boom Tekli ve Çiftli</span>
+                </div>
+            </section>
 
-            <div class="blog-grid">
-                <article class="blog-card">
+            <section class="blog-grid" aria-label="Blog yazıları listesi">
+                <article class="blog-card blog-card--featured">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 9 dk okuma</p>
                         <h2 class="blog-title"><a href="oto-yikama-pervanesi-boom-nedir/">Oto Yıkama Pervanesi Boom Nedir? Tekli ve Çiftli Boom Karşılaştırması</a></h2>
-                        <p class="blog-excerpt">Boom pervane nedir, nasıl çalışır? Boom tekli Z ile boom çiftli pervane arasındaki fark, self servis istasyonlar için hangisi doğru seçim, krom pergel sistemi ve montaj rehberi.</p>
-                        <a href="oto-yikama-pervanesi-boom-nedir/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Boom tekli Z ve boom çiftli pervane arasındaki farkları işletme senaryolarına göre analiz edin. Hangi modelin hangi kabin yapısında daha verimli çalıştığını örneklerle görün.</p>
+                        <span class="blog-tag">Öne Çıkan Rehber</span>
+                        <a href="oto-yikama-pervanesi-boom-nedir/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
 
                 <article class="blog-card">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 7 dk okuma</p>
                         <h2 class="blog-title"><a href="oto-yikama-pervanesi-fiyatlari/">Oto Yıkama Pervanesi Fiyatları 2026</a></h2>
-                        <p class="blog-excerpt">Tekli Z tipi pervane 8.500-11.000 TL, çiftli boom pervane 10.000-13.000 TL. Güncel fiyat listesi, karşılaştırma tablosu ve fiyatı etkileyen faktörler.</p>
-                        <a href="oto-yikama-pervanesi-fiyatlari/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Tekli Z, çiftli boom ve tır yıkama pervaneleri için güncel fiyat aralıklarını ve teklif öncesi maliyet kalemlerini tek tabloda karşılaştırın.</p>
+                        <span class="blog-tag">Fiyat Rehberi</span>
+                        <a href="oto-yikama-pervanesi-fiyatlari/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
 
                 <article class="blog-card">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 8 dk okuma</p>
                         <h2 class="blog-title"><a href="en-iyi-oto-yikama-pervanesi-nasil-secilir/">En İyi Oto Yıkama Pervanesi Nasıl Seçilir?</a></h2>
-                        <p class="blog-excerpt">Tekli mi çiftli mi? Malzeme kalitesi, güvenlik özellikleri, ergonomi ve uyumluluk kriterleri. Profesyonel satın alma rehberi.</p>
-                        <a href="en-iyi-oto-yikama-pervanesi-nasil-secilir/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Yanlış model seçimini engelleyen teknik kontrol adımları, güvenlik kriterleri ve yatırım geri dönüşünü etkileyen kritik detaylar.</p>
+                        <span class="blog-tag">Satın Alma</span>
+                        <a href="en-iyi-oto-yikama-pervanesi-nasil-secilir/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
 
                 <article class="blog-card">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 6 dk okuma</p>
                         <h2 class="blog-title"><a href="oto-yikama-pervanesi-bakimi/">Oto Yıkama Pervanesi Bakımı</a></h2>
-                        <p class="blog-excerpt">Pervanenizin ömrünü uzatın: Mekanik kontrol, temizlik, keçe değişimi ve kış bakımı için adım adım rehber.</p>
-                        <a href="oto-yikama-pervanesi-bakimi/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Periyodik bakım planı, keçe/döner rekor kontrolü, temizlik rutini ve arıza riskini azaltan uygulamalarla ekipman ömrünü uzatın.</p>
+                        <span class="blog-tag">Bakım</span>
+                        <a href="oto-yikama-pervanesi-bakimi/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
 
                 <article class="blog-card">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 8 dk okuma</p>
                         <h2 class="blog-title"><a href="tir-yikama-istasyonu-ekipmanlari/">Tır Yıkama İstasyonu Ekipmanları</a></h2>
-                        <p class="blog-excerpt">Profesyonel tır yıkama istasyonu kurulum rehberi: Tır pervanesi, 200+ bar basınçlı makine, köpük tankı, kompresör ve vakum sistemi.</p>
-                        <a href="tir-yikama-istasyonu-ekipmanlari/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Ağır vasıta hattı kurarken gerekli ekipman listesini, basınç gereksinimlerini ve doğru pervane konfigürasyonunu adım adım inceleyin.</p>
+                        <span class="blog-tag">Tır Yıkama</span>
+                        <a href="tir-yikama-istasyonu-ekipmanlari/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
 
                 <article class="blog-card">
                     <div class="blog-content">
+                        <p class="blog-meta">Güncellendi: 3 Mart 2026 • 6 dk okuma</p>
                         <h2 class="blog-title"><a href="oto-yikama-pervanesi-nedir/">Oto Yıkama Pervanesi Nedir? Nasıl Çalışır?</a></h2>
-                        <p class="blog-excerpt">Oto yıkama işletmelerinde verimliliği artıran ve hortum karmaşasını önleyen oto yıkama pervanelerinin çalışma prensibi ve avantajları.</p>
-                        <a href="oto-yikama-pervanesi-nedir/" class="read-more">Devamını Oku →</a>
+                        <p class="blog-excerpt">Oto yıkama pervanesinin çalışma mantığını, işletmeye sağladığı operasyonel avantajları ve doğru kullanım senaryolarını öğrenin.</p>
+                        <span class="blog-tag">Temel Bilgi</span>
+                        <a href="oto-yikama-pervanesi-nedir/" class="read-more">Yazıya Git</a>
                     </div>
                 </article>
-            </div>
+            </section>
         </div>
     </main>
 
@@ -227,6 +261,7 @@
                     <ul class="footer-links">
                         <li><a href="../" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
                         <li><a href="./" class="footer-link">Blog</a></li>
                         <li><a href="../about/" class="footer-link">Hakkımızda</a></li>
                         <li><a href="../contact/" class="footer-link">İletişim</a></li>
@@ -275,6 +310,7 @@
             </div>
         </div>
     </footer>
+    <script src="../assets/js/script.js?v=3"></script>
 </body>
 
 </html>

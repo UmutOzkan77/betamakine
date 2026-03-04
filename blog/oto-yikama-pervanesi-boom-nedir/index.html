@@ -10,7 +10,7 @@
     <meta name="title" content="Oto Yıkama Pervanesi Boom Nedir? Tekli ve Çiftli Boom Karşılaştırması - Beta Makine">
     <meta name="description" content="Oto yıkama pervanesi boom nedir, nasıl çalışır? Boom tekli Z ve boom çiftli pervane arasındaki fark, self servis istasyonlar için hangisi uygun? Krom pergel sistemi, 360° dönüş, fiyat karşılaştırması.">
     <meta name="keywords" content="oto yıkama pervanesi boom nedir, boom pervane, boom çiftli pervane, boom tekli pervane, boom z pervane, self servis oto yıkama pervanesi, boom pergel, krom boom pervane, oto yıkama boom fiyatları">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="Beta Makine">
     <link rel="canonical" href="https://betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/">
     <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
@@ -40,8 +40,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=3">
 
     <!-- Schema Markup: Article -->
     <script type="application/ld+json">
@@ -142,18 +142,25 @@
     }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17920513521"></script>
+    <!-- Google tag (lazy gtag.js) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17920513521');
+      window.addEventListener('load', function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'AW-17920513521');
+
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17920513521';
+        document.head.appendChild(gtagScript);
+      });
     </script>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -165,6 +172,7 @@
                     <ul class="nav-list">
                         <li class="nav-item"><a href="../../" class="nav-link">Ana Sayfa</a></li>
                         <li class="nav-item"><a href="../../urunler/" class="nav-link">Ürünler</a></li>
+                        <li class="nav-item"><a href="../../oto-yikama-pervanesi/" class="nav-link">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="../" class="nav-link active">Blog</a></li>
                         <li class="nav-item"><a href="../../about/" class="nav-link">Hakkımızda</a></li>
                         <li class="nav-item"><a href="../../contact/" class="nav-link">İletişim</a></li>
@@ -320,6 +328,29 @@
             </ul>
 
         </div>
+            <div class="container blog-container">
+                <aside class="blog-sidebar-card" aria-label="Blog yazı navigasyonu">
+                    <h2 class="blog-sidebar-title">Diğer Yazılar</h2>
+                    <ul class="blog-sidebar-list">
+                        <li><a href="../oto-yikama-pervanesi-boom-nedir/" class="blog-sidebar-link">Boom Nedir? Tekli ve Çiftli Karşılaştırması</a></li>
+                        <li><a href="../oto-yikama-pervanesi-fiyatlari/" class="blog-sidebar-link">Oto Yıkama Pervanesi Fiyatları 2026</a></li>
+                        <li><a href="../en-iyi-oto-yikama-pervanesi-nasil-secilir/" class="blog-sidebar-link">En İyi Oto Yıkama Pervanesi Nasıl Seçilir?</a></li>
+                        <li><a href="../oto-yikama-pervanesi-bakimi/" class="blog-sidebar-link">Oto Yıkama Pervanesi Bakımı</a></li>
+                        <li><a href="../tir-yikama-istasyonu-ekipmanlari/" class="blog-sidebar-link">Tır Yıkama İstasyonu Ekipmanları</a></li>
+                        <li><a href="../oto-yikama-pervanesi-nedir/" class="blog-sidebar-link">Oto Yıkama Pervanesi Nedir? Nasıl Çalışır?</a></li>
+                    </ul>
+
+                    <div class="blog-sidebar-section">
+                        <h3 class="blog-sidebar-subtitle">Hızlı Geçiş</h3>
+                        <ul class="seo-cluster-list">
+                            <li><a href="../../oto-yikama-pervanesi/">Oto Yıkama Pervanesi Rehberi</a></li>
+                            <li><a href="../../blog/oto-yikama-pervanesi-fiyatlari/">Oto Yıkama Pervanesi Fiyatları</a></li>
+                            <li><a href="../../blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/">En İyi Model Nasıl Seçilir?</a></li>
+                        </ul>
+                        <p class="blog-sidebar-note">İşletme yapınıza uygun modeli netleştirmek için fiyat, kullanım yoğunluğu ve kabin altyapısını birlikte değerlendirin.</p>
+                    </div>
+                </aside>
+            </div>
     </main>
 
     <footer class="footer">
@@ -330,6 +361,7 @@
                     <ul class="footer-links">
                         <li><a href="../../" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="../../urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="../../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
                         <li><a href="../" class="footer-link">Blog</a></li>
                         <li><a href="../../about/" class="footer-link">Hakkımızda</a></li>
                         <li><a href="../../contact/" class="footer-link">İletişim</a></li>
@@ -362,7 +394,7 @@
         </div>
     </footer>
 
-    <script src="../../assets/js/script.js?v=1"></script>
+    <script src="../../assets/js/script.js?v=3"></script>
 </body>
 
 </html>

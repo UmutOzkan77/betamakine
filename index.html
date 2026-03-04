@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Oto Yıkama Pervanesi | Türkiye'nin #1 Üreticisi - Beta Makine</title>
-    <meta name="title" content="Oto Yıkama Pervanesi | Türkiye'nin #1 Üreticisi - Beta Makine">
-    <meta name="description" content="Oto yıkama pervanesi üretiminde Türkiye'nin lider markası Beta Makine. Tır yıkama pervanesi, araç yıkama pervanesi, döner rekor ve yedek parça. 15+ yıl tecrübe, %100 yerli üretim. Bursa'dan Türkiye'ye ve dünyaya.">
+    <title>Beta Makine | Oto Yıkama Pervanesi ve Boom Sistemleri Üreticisi</title>
+    <meta name="title" content="Beta Makine | Oto Yıkama Pervanesi ve Boom Sistemleri Üreticisi">
+    <meta name="description" content="Beta Makine; oto yıkama pervanesi, boom tekli/çiftli pervane, tır yıkama pervanesi ve döner rekor üreticisidir. Bursa'dan Türkiye geneline proje, üretim ve teknik destek.">
     <meta name="keywords" content="oto yıkama pervanesi, boom pervanesi, boom çiftli pervane, boom tekli pervane, oto yıkama pervanesi boom çiftli, oto yıkama pervanesi boom tekli, self servis oto yıkama pervanesi, pergel sistemi, krom pervane, araç yıkama pervanesi, tır yıkama pervanesi, yıkama pervanesi, döner rekor, oto yıkama ekipmanları, hortum askı sistemi, oto yıkama yedek parça, Beta Makine, Bursa">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="Beta Makine">
@@ -17,6 +17,8 @@
     <meta name="geo.position" content="40.2128;28.9744">
     <meta name="ICBM" content="40.2128, 28.9744">
     <link rel="canonical" href="https://betamakine.com/">
+    <link rel="alternate" hreflang="tr-TR" href="https://betamakine.com/">
+    <link rel="alternate" hreflang="x-default" href="https://betamakine.com/">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
     <!-- Open Graph / Facebook -->
@@ -25,6 +27,7 @@
     <meta property="og:title" content="Oto Yıkama Pervanesi | Türkiye'nin #1 Üreticisi - Beta Makine">
     <meta property="og:description" content="Oto yıkama pervanesi üretiminde Türkiye'nin lider markası. Tır yıkama pervanesi, araç yıkama pervanesi, döner rekor. 15+ yıl tecrübe, %100 yerli üretim.">
     <meta property="og:image" content="https://betamakine.com/assets/images/og-image.webp">
+    <meta property="og:image:alt" content="Beta Makine oto yıkama pervanesi ürün kolajı">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="tr_TR">
@@ -36,12 +39,14 @@
     <meta name="twitter:title" content="Oto Yıkama Pervanesi | Türkiye'nin #1 Üreticisi - Beta Makine">
     <meta name="twitter:description" content="Oto yıkama pervanesi üretiminde Türkiye'nin lider markası. Tır yıkama pervanesi, araç yıkama pervanesi, döner rekor. 15+ yıl tecrübe.">
     <meta name="twitter:image" content="https://betamakine.com/assets/images/og-image.webp">
+    <meta name="twitter:image:alt" content="Beta Makine oto yıkama pervanesi tanıtım görseli">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="assets/images/1.kapak.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/1.kapak-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/1.kapak.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -217,13 +222,20 @@
       ]
     }
     </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17920513521"></script>
+    <!-- Google tag (lazy gtag.js) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17920513521');
+      window.addEventListener('load', function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'AW-17920513521');
+
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17920513521';
+        document.head.appendChild(gtagScript);
+      });
     </script>
 </head>
 
@@ -241,6 +253,7 @@
                     <ul class="nav-list">
                         <li class="nav-item"><a href="#hero" class="nav-link active">Ana Sayfa</a></li>
                         <li class="nav-item"><a href="urunler/" class="nav-link">Ürünler</a></li>
+                        <li class="nav-item"><a href="oto-yikama-pervanesi/" class="nav-link">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="blog/" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="about/" class="nav-link">Hakkımızda</a></li>
                         <li class="nav-item"><a href="contact/" class="nav-link">İletişim</a></li>
@@ -258,13 +271,13 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-slider">
-            <div class="hero-slide active" data-bg="assets/images/1.kapak.webp" style="background-image: url('assets/images/1.kapak.webp');">
+            <div class="hero-slide active" data-bg="assets/images/1.kapak.webp" data-bg-mobile="assets/images/1.kapak-mobile.webp">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-slide" data-bg="assets/images/2.kapak.webp">
+            <div class="hero-slide" data-bg="assets/images/2.kapak.webp" data-bg-mobile="assets/images/2.kapak-mobile.webp">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-slide" data-bg="assets/images/3.kapak.webp">
+            <div class="hero-slide" data-bg="assets/images/3.kapak.webp" data-bg-mobile="assets/images/3.kapak-mobile.webp">
                 <div class="hero-overlay"></div>
             </div>
         </div>
@@ -291,53 +304,6 @@
                 <div class="scroll-wheel"></div>
             </div>
             <span class="scroll-text">Aşağı Kaydır</span>
-        </div>
-    </section>
-
-    <!-- Info Bar Section -->
-    <section class="info-bar">
-        <div class="container">
-            <div class="info-boxes">
-                <!-- Info Box 1 -->
-                <div class="info-box">
-                    <div class="info-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="info-title">Yüksek Teknoloji</h3>
-                    <p class="info-description">En son teknoloji ile donatılmış makineler ve ekipmanlar</p>
-                </div>
-
-                <!-- Info Box 2 -->
-                <div class="info-box">
-                    <div class="info-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <h3 class="info-title">Uzman Kadro</h3>
-                    <p class="info-description">Deneyimli mühendis ve teknisyenlerden oluşan ekip</p>
-                </div>
-
-                <!-- Info Box 3 -->
-                <div class="info-box">
-                    <div class="info-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <h3 class="info-title">7/24 Destek</h3>
-                    <p class="info-description">Kesintisiz teknik destek ve hızlı çözüm hizmeti</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -433,6 +399,83 @@
                         <a href="urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/" class="product-button">Detaylı
                             İncele</a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Pillar Section -->
+    <section class="seo-pillar" id="pervane-rehberi">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Oto Yıkama Pervanesi İçin Merkezi Rehber</h2>
+                <p class="section-subtitle">Doğru modeli daha hızlı seçebilmeniz için karşılaştırma, fiyat ve satın alma adımlarını tek akışta topladık.</p>
+            </div>
+
+            <div class="seo-pillar-grid">
+                <article class="pillar-card">
+                    <h3>Model Karşılaştırma Merkezi</h3>
+                    <p>Boom tekli, boom çiftli ve tır yıkama pervanesi modellerini teknik kriterlerle yan yana inceleyin.</p>
+                    <a href="oto-yikama-pervanesi/" class="pillar-link">Oto Yıkama Pervanesi Rehberi</a>
+                </article>
+
+                <article class="pillar-card">
+                    <h3>Güncel Fiyat ve Bütçe Planı</h3>
+                    <p>Model bazlı fiyat aralıkları, toplam maliyet kalemleri ve teklif öncesi hazırlık checklist'i.</p>
+                    <a href="blog/oto-yikama-pervanesi-fiyatlari/" class="pillar-link">Fiyat Rehberine Git</a>
+                </article>
+
+                <article class="pillar-card">
+                    <h3>Satın Alma ve Kurulum Kontrolü</h3>
+                    <p>Yanlış model riskini azaltmak için teknik kontrol adımlarını ve sahaya uygun seçim mantığını görün.</p>
+                    <a href="blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/" class="pillar-link">Satın Alma Rehberi</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Bar Section -->
+    <section class="info-bar">
+        <div class="container">
+            <div class="info-boxes">
+                <!-- Info Box 1 -->
+                <div class="info-box">
+                    <div class="info-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="info-title">Yüksek Teknoloji</h3>
+                    <p class="info-description">En son teknoloji ile donatılmış makineler ve ekipmanlar</p>
+                </div>
+
+                <!-- Info Box 2 -->
+                <div class="info-box">
+                    <div class="info-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3 class="info-title">Uzman Kadro</h3>
+                    <p class="info-description">Deneyimli mühendis ve teknisyenlerden oluşan ekip</p>
+                </div>
+
+                <!-- Info Box 3 -->
+                <div class="info-box">
+                    <div class="info-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="info-title">7/24 Destek</h3>
+                    <p class="info-description">Kesintisiz teknik destek ve hızlı çözüm hizmeti</p>
                 </div>
             </div>
         </div>
@@ -567,6 +610,7 @@
                     <ul class="footer-links">
                         <li><a href="./" class="footer-link">Ana Sayfa</a></li>
                         <li><a href="urunler/" class="footer-link">Ürünler</a></li>
+                        <li><a href="oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
                         <li><a href="about/" class="footer-link">Hakkımızda</a></li>
                         <li><a href="contact/" class="footer-link">İletişim</a></li>
                     </ul>
