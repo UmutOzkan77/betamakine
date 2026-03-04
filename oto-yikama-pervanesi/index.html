@@ -662,32 +662,87 @@
         </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="iletisim" role="contentinfo">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3 class="footer-title">Hızlı Linkler</h3>
-                    <ul class="footer-links">
-                        <li><a href="../" class="footer-link">Ana Sayfa</a></li>
-                        <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
-                        <li><a href="../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
-                        <li><a href="../blog/" class="footer-link">Blog</a></li>
-                        <li><a href="../contact/" class="footer-link">İletişim</a></li>
-                    </ul>
+            <div class="footer-content" itemscope itemtype="https://schema.org/Organization">
+                <meta itemprop="name" content="Beta Makine">
+                <meta itemprop="url" content="https://betamakine.com/">
+
+                <div class="footer-column footer-brand-column">
+                    <a href="../" class="footer-logo-link" aria-label="Beta Makine ana sayfasına dön" itemprop="url">
+                        <img src="../assets/images/logo.webp" alt="Beta Makine logo" class="footer-logo-image" loading="lazy"
+                            decoding="async" itemprop="logo">
+                    </a>
+                    <p class="footer-description" itemprop="description">
+                        Oto yıkama pervanesi, döner rekor ve araç yıkama ekipmanlarında uzun ömürlü yerli üretim çözümler.
+                    </p>
+                    <p class="footer-highlight">Bursa merkezli üretim, Türkiye geneli hızlı sevkiyat ve teknik destek.</p>
                 </div>
+
                 <div class="footer-column">
-                    <h3 class="footer-title">İletişim</h3>
-                    <ul class="footer-contact">
-                        <li class="contact-item"><span>0536 461 5330</span></li>
-                        <li class="contact-item"><span>Nilüfer / Bursa</span></li>
-                    </ul>
+                    <h2 class="footer-title">Kurumsal</h2>
+                    <nav class="footer-nav" aria-label="Kurumsal bağlantılar">
+                        <ul class="footer-links">
+                            <li><a href="../" class="footer-link">Ana Sayfa</a></li>
+                            <li><a href="../urunler/" class="footer-link">Ürünler</a></li>
+                            <li><a href="../oto-yikama-pervanesi/" class="footer-link">Pervane Rehberi</a></li>
+                            <li><a href="../blog/" class="footer-link">Blog</a></li>
+                            <li><a href="../about/" class="footer-link">Hakkımızda</a></li>
+                            <li><a href="../contact/" class="footer-link">İletişim</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-column">
+                    <h2 class="footer-title">Ürün Grupları</h2>
+                    <nav class="footer-nav" aria-label="Ürün grupları">
+                        <ul class="footer-links">
+                            <li><a href="../urunler/tekli-z-oto-yikama-pervanesi/" class="footer-link">Tekli Z Pervane</a></li>
+                            <li><a href="../urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/" class="footer-link">Çiftli Jet Pervane</a></li>
+                            <li><a href="../urunler/tir-yikama-pervanesi/" class="footer-link">Tır Yıkama Pervanesi</a></li>
+                            <li><a href="../urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/" class="footer-link">Tabanca Döner Rekor</a></li>
+                            <li><a href="../urunler/yikama-pervanesi-uc-rekoru/" class="footer-link">Yıkama Pervanesi Uç Rekoru</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-column">
+                    <h2 class="footer-title">İletişim</h2>
+                    <address class="footer-contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <p class="contact-item"><strong>Firma:</strong> Şener Çubukçu BE_TA Makine</p>
+                        <p class="contact-item">
+                            <strong>Adres:</strong>
+                            <span itemprop="streetAddress">Fethiye Mahallesi Doğru Sokak No:9</span>,
+                            <span itemprop="addressLocality">Nilüfer</span> /
+                            <span itemprop="addressRegion">Bursa</span>
+                        </p>
+                        <p class="contact-item">
+                            <strong>Telefon:</strong>
+                            <a href="tel:+905364615330" class="footer-link-inline" itemprop="telephone">+90 536 461 53 30</a>
+                        </p>
+                        <p class="contact-item"><strong>Çalışma Saatleri:</strong> 09:00 - 18:00 (Pazar Kapalı)</p>
+                    </address>
+                    <div class="footer-cta-links">
+                        <a href="../contact/" class="footer-cta-link">Hızlı Teklif Alın</a>
+                        <a href="https://maps.google.com/?q=Fethiye+Mahallesi+Do%C4%9Fru+Sokak+No%3A9+Nil%C3%BCfer+Bursa"
+                            target="_blank" rel="noopener noreferrer" class="footer-cta-link">Konumu Aç</a>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p class="copyright">&copy; 2026 Beta Makine. Tüm hakları saklıdır.</p>
+                <nav aria-label="Teknik bağlantılar">
+                    <ul class="footer-legal-links">
+                        <li><a href="../sitemap.xml" class="footer-link-inline">Sitemap</a></li>
+                        <li><a href="../robots.txt" class="footer-link-inline">Robots.txt</a></li>
+                        <li><a href="../llms.txt" class="footer-link-inline">LLMs.txt</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </footer>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

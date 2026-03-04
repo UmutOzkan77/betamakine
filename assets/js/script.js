@@ -469,6 +469,164 @@ class ProductCardEffects {
 }
 
 // ===================================
+// PRODUCT SEO CLUSTER FLOATING PANEL
+// ===================================
+
+class ProductSeoClusterFloatingPanel {
+    constructor() {
+        this.panel = document.querySelector('.product-detail .seo-cluster-links');
+        this.desktopQuery = window.matchMedia('(min-width: 1200px)');
+        this.mobileQuery = window.matchMedia('(max-width: 968px)');
+        this.reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        this.panelHeading = this.panel ? this.panel.querySelector('h2') : null;
+        this.defaultHeadingText = this.panelHeading ? this.panelHeading.textContent.trim() : '';
+        this.mobileHeadingText = 'Doğru Ürünü Seçmene yardımcı olabiliriz';
+        this.minimizeDelayMs = 5000;
+        this.minimizeTimer = null;
+        this.handleViewportChange = this.handleViewportChange.bind(this);
+        this.handleMotionChange = this.handleMotionChange.bind(this);
+        this.handlePanelActivate = this.handlePanelActivate.bind(this);
+        this.handlePanelKeydown = this.handlePanelKeydown.bind(this);
+        this.handleDocumentClick = this.handleDocumentClick.bind(this);
+        this.handleDocumentKeydown = this.handleDocumentKeydown.bind(this);
+        this.init();
+    }
+
+    init() {
+        if (!this.panel) return;
+
+        this.updateState();
+
+        if (typeof this.desktopQuery.addEventListener === 'function') {
+            this.desktopQuery.addEventListener('change', this.handleViewportChange);
+        } else if (typeof this.desktopQuery.addListener === 'function') {
+            this.desktopQuery.addListener(this.handleViewportChange);
+        }
+
+        if (typeof this.mobileQuery.addEventListener === 'function') {
+            this.mobileQuery.addEventListener('change', this.handleViewportChange);
+        } else if (typeof this.mobileQuery.addListener === 'function') {
+            this.mobileQuery.addListener(this.handleViewportChange);
+        }
+
+        if (typeof this.reduceMotionQuery.addEventListener === 'function') {
+            this.reduceMotionQuery.addEventListener('change', this.handleMotionChange);
+        } else if (typeof this.reduceMotionQuery.addListener === 'function') {
+            this.reduceMotionQuery.addListener(this.handleMotionChange);
+        }
+    }
+
+    handleViewportChange() {
+        this.updateState();
+    }
+
+    handleMotionChange() {
+        this.updateState();
+    }
+
+    clearMinimizeTimer() {
+        if (!this.minimizeTimer) return;
+        window.clearTimeout(this.minimizeTimer);
+        this.minimizeTimer = null;
+    }
+
+    collapseMobilePanel() {
+        if (!this.panel) return;
+        this.panel.classList.remove('is-expanded');
+        this.panel.setAttribute('aria-expanded', 'false');
+    }
+
+    toggleMobilePanel() {
+        const shouldExpand = !this.panel.classList.contains('is-expanded');
+        this.panel.classList.toggle('is-expanded', shouldExpand);
+        this.panel.setAttribute('aria-expanded', shouldExpand ? 'true' : 'false');
+    }
+
+    handlePanelActivate(event) {
+        if (!this.mobileQuery.matches) return;
+        if (event.target.closest('.seo-cluster-list a')) return;
+        event.preventDefault();
+        this.toggleMobilePanel();
+    }
+
+    handlePanelKeydown(event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        this.toggleMobilePanel();
+    }
+
+    handleDocumentClick(event) {
+        if (!this.mobileQuery.matches) return;
+        if (!this.panel.classList.contains('seo-cluster-mobile-tabbar')) return;
+        if (this.panel.contains(event.target)) return;
+        this.collapseMobilePanel();
+    }
+
+    handleDocumentKeydown(event) {
+        if (event.key !== 'Escape') return;
+        this.collapseMobilePanel();
+    }
+
+    scheduleMinimize(delay = this.minimizeDelayMs) {
+        this.clearMinimizeTimer();
+
+        this.minimizeTimer = window.setTimeout(() => {
+            const isInteracting = this.panel.matches(':hover') || this.panel.matches(':focus-within');
+            if (isInteracting) {
+                this.scheduleMinimize(1200);
+                return;
+            }
+
+            this.panel.classList.add('is-minimized');
+        }, delay);
+    }
+
+    updateState() {
+        if (!this.panel) return;
+
+        const shouldFloat = this.desktopQuery.matches;
+        const shouldUseMobileTabbar = this.mobileQuery.matches;
+        this.clearMinimizeTimer();
+        this.panel.classList.remove('seo-cluster-mobile-tabbar', 'is-expanded');
+        this.panel.classList.toggle('seo-cluster-floating', shouldFloat);
+        this.panel.classList.remove('is-minimized');
+        this.panel.removeEventListener('click', this.handlePanelActivate);
+        this.panel.removeEventListener('keydown', this.handlePanelKeydown);
+        document.removeEventListener('click', this.handleDocumentClick);
+        document.removeEventListener('keydown', this.handleDocumentKeydown);
+        this.panel.removeAttribute('role');
+        this.panel.removeAttribute('tabindex');
+        this.panel.removeAttribute('aria-label');
+        this.panel.removeAttribute('aria-expanded');
+
+        if (this.panelHeading && this.defaultHeadingText) {
+            this.panelHeading.textContent = this.defaultHeadingText;
+        }
+
+        if (shouldUseMobileTabbar) {
+            this.panel.classList.remove('seo-cluster-floating');
+            this.panel.classList.add('seo-cluster-mobile-tabbar');
+
+            if (this.panelHeading) {
+                this.panelHeading.textContent = this.mobileHeadingText;
+            }
+
+            this.panel.setAttribute('tabindex', '0');
+            this.panel.setAttribute('aria-label', this.mobileHeadingText);
+            this.panel.setAttribute('aria-expanded', 'false');
+            this.panel.addEventListener('click', this.handlePanelActivate);
+            this.panel.addEventListener('keydown', this.handlePanelKeydown);
+            document.addEventListener('click', this.handleDocumentClick);
+            document.addEventListener('keydown', this.handleDocumentKeydown);
+            return;
+        }
+
+        if (!shouldFloat || this.reduceMotionQuery.matches) return;
+        this.scheduleMinimize();
+    }
+}
+
+// ===================================
 // BLOG SIDEBAR ACTIVE LINK
 // ===================================
 
@@ -509,6 +667,38 @@ class BlogSidebarCurrentLink {
 }
 
 // ===================================
+// FLOATING WHATSAPP BUTTON
+// ===================================
+
+class WhatsAppFloatingButton {
+    constructor() {
+        this.href = 'https://wa.me/905364615330';
+        this.buttonClass = 'whatsapp-float-button';
+        this.init();
+    }
+
+    init() {
+        if (!document.body) return;
+        if (document.querySelector(`.${this.buttonClass}`)) return;
+
+        const button = document.createElement('a');
+        button.className = this.buttonClass;
+        button.href = this.href;
+        button.target = '_blank';
+        button.rel = 'noopener noreferrer';
+        button.setAttribute('aria-label', "WhatsApp'tan bize yazın");
+
+        button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg>
+        `;
+
+        document.body.appendChild(button);
+    }
+}
+
+// ===================================
 // INITIALIZE ALL COMPONENTS
 // ===================================
 
@@ -523,7 +713,9 @@ document.addEventListener('DOMContentLoaded', () => {
     try { new CounterAnimation(); } catch (e) { console.debug('CounterAnimation not active on this page'); }
     try { new ParallaxEffect(); } catch (e) { console.debug('ParallaxEffect not active on this page'); }
     try { new ProductCardEffects(); } catch (e) { console.debug('ProductCardEffects not active on this page'); }
+    try { new ProductSeoClusterFloatingPanel(); } catch (e) { console.debug('ProductSeoClusterFloatingPanel not active on this page'); }
     try { new BlogSidebarCurrentLink(); } catch (e) { console.debug('BlogSidebarCurrentLink not active on this page'); }
+    try { new WhatsAppFloatingButton(); } catch (e) { console.error('WhatsAppFloatingButton failed:', e); }
 
     // Log initialization
     console.log('🚀 Beta Makine - Website Initialized');

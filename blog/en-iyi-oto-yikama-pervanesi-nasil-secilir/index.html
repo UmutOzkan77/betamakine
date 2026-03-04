@@ -188,7 +188,7 @@
     </script>
 </head>
 
-<body>
+<body class="blog-page">
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
@@ -288,6 +288,10 @@
                         <li><a href="../oto-yikama-pervanesi-bakimi/" class="blog-sidebar-link">Oto Yıkama Pervanesi Bakımı</a></li>
                         <li><a href="../tir-yikama-istasyonu-ekipmanlari/" class="blog-sidebar-link">Tır Yıkama İstasyonu Ekipmanları</a></li>
                         <li><a href="../oto-yikama-pervanesi-nedir/" class="blog-sidebar-link">Oto Yıkama Pervanesi Nedir? Nasıl Çalışır?</a></li>
+                        <li><a href="../oto-yikama-pervanesi-montaj-rehberi/" class="blog-sidebar-link">Oto Yıkama Pervanesi Montaj Rehberi</a></li>
+                        <li><a href="../doner-rekor-arizasi-nasil-anlasilir/" class="blog-sidebar-link">Döner Rekor Arızası Nasıl Anlaşılır?</a></li>
+                        <li><a href="../self-servis-oto-yikama-istasyonu-ekipman-listesi/" class="blog-sidebar-link">Self Servis Oto Yıkama İstasyonu Ekipman Listesi</a></li>
+                        <li><a href="../oto-yikama-pervanesi-basinc-hortum-uyumu/" class="blog-sidebar-link">Oto Yıkama Pervanesinde Basınç ve Hortum Uyumu</a></li>
                     </ul>
 
                     <div class="blog-sidebar-section">
@@ -303,46 +307,87 @@
             </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="iletisim" role="contentinfo">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3 class="footer-title">Hızlı Linkler</h3>
-                    <ul class="footer-links">
-                        <li><a href="../../" class="footer-link">Ana Sayfa</a></li>
-                        <li><a href="../../urunler/" class="footer-link">Ürünler</a></li>
-                        <li><a href="../../oto-yikama-pervanesi/" class="footer-link">Oto Yıkama Pervanesi Rehberi</a></li>
-                        <li><a href="../" class="footer-link">Blog</a></li>
-                        <li><a href="../../about/" class="footer-link">Hakkımızda</a></li>
-                        <li><a href="../../contact/" class="footer-link">İletişim</a></li>
-                    </ul>
+            <div class="footer-content" itemscope itemtype="https://schema.org/Organization">
+                <meta itemprop="name" content="Beta Makine">
+                <meta itemprop="url" content="https://betamakine.com/">
+
+                <div class="footer-column footer-brand-column">
+                    <a href="../../" class="footer-logo-link" aria-label="Beta Makine ana sayfasına dön" itemprop="url">
+                        <img src="../../assets/images/logo.webp" alt="Beta Makine logo" class="footer-logo-image" loading="lazy"
+                            decoding="async" itemprop="logo">
+                    </a>
+                    <p class="footer-description" itemprop="description">
+                        Oto yıkama pervanesi, döner rekor ve araç yıkama ekipmanlarında uzun ömürlü yerli üretim çözümler.
+                    </p>
+                    <p class="footer-highlight">Bursa merkezli üretim, Türkiye geneli hızlı sevkiyat ve teknik destek.</p>
                 </div>
 
                 <div class="footer-column">
-                    <h3 class="footer-title">İletişim Bilgileri</h3>
-                    <ul class="footer-contact">
-                        <li class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <span>Şener Çubukçu BE_TA Makine<br>Fethiye Mahallesi Doğru Sokak NO:9<br>Nilüfer / Bursa</span>
-                        </li>
-                        <li class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                            </svg>
-                            <span>0536 461 5330</span>
-                        </li>
-                    </ul>
+                    <h2 class="footer-title">Kurumsal</h2>
+                    <nav class="footer-nav" aria-label="Kurumsal bağlantılar">
+                        <ul class="footer-links">
+                            <li><a href="../../" class="footer-link">Ana Sayfa</a></li>
+                            <li><a href="../../urunler/" class="footer-link">Ürünler</a></li>
+                            <li><a href="../../oto-yikama-pervanesi/" class="footer-link">Pervane Rehberi</a></li>
+                            <li><a href="../../blog/" class="footer-link">Blog</a></li>
+                            <li><a href="../../about/" class="footer-link">Hakkımızda</a></li>
+                            <li><a href="../../contact/" class="footer-link">İletişim</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-column">
+                    <h2 class="footer-title">Ürün Grupları</h2>
+                    <nav class="footer-nav" aria-label="Ürün grupları">
+                        <ul class="footer-links">
+                            <li><a href="../../urunler/tekli-z-oto-yikama-pervanesi/" class="footer-link">Tekli Z Pervane</a></li>
+                            <li><a href="../../urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/" class="footer-link">Çiftli Jet Pervane</a></li>
+                            <li><a href="../../urunler/tir-yikama-pervanesi/" class="footer-link">Tır Yıkama Pervanesi</a></li>
+                            <li><a href="../../urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/" class="footer-link">Tabanca Döner Rekor</a></li>
+                            <li><a href="../../urunler/yikama-pervanesi-uc-rekoru/" class="footer-link">Yıkama Pervanesi Uç Rekoru</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-column">
+                    <h2 class="footer-title">İletişim</h2>
+                    <address class="footer-contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <p class="contact-item"><strong>Firma:</strong> Şener Çubukçu BE_TA Makine</p>
+                        <p class="contact-item">
+                            <strong>Adres:</strong>
+                            <span itemprop="streetAddress">Fethiye Mahallesi Doğru Sokak No:9</span>,
+                            <span itemprop="addressLocality">Nilüfer</span> /
+                            <span itemprop="addressRegion">Bursa</span>
+                        </p>
+                        <p class="contact-item">
+                            <strong>Telefon:</strong>
+                            <a href="tel:+905364615330" class="footer-link-inline" itemprop="telephone">+90 536 461 53 30</a>
+                        </p>
+                        <p class="contact-item"><strong>Çalışma Saatleri:</strong> 09:00 - 18:00 (Pazar Kapalı)</p>
+                    </address>
+                    <div class="footer-cta-links">
+                        <a href="../../contact/" class="footer-cta-link">Hızlı Teklif Alın</a>
+                        <a href="https://maps.google.com/?q=Fethiye+Mahallesi+Do%C4%9Fru+Sokak+No%3A9+Nil%C3%BCfer+Bursa"
+                            target="_blank" rel="noopener noreferrer" class="footer-cta-link">Konumu Aç</a>
+                    </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p class="copyright">&copy; 2026 Beta Makine. Tüm hakları saklıdır.</p>
+                <nav aria-label="Teknik bağlantılar">
+                    <ul class="footer-legal-links">
+                        <li><a href="../../sitemap.xml" class="footer-link-inline">Sitemap</a></li>
+                        <li><a href="../../robots.txt" class="footer-link-inline">Robots.txt</a></li>
+                        <li><a href="../../llms.txt" class="footer-link-inline">LLMs.txt</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </footer>
+
 
     <script src="../../assets/js/script.js?v=3"></script>
 </body>
