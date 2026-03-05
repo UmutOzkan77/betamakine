@@ -133,6 +133,45 @@
     }
     </script>
 
+    <!-- Schema Markup: Main Navigation -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Ana Sayfa",
+          "url": "https://betamakine.com/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Ürünler",
+          "url": "https://betamakine.com/urunler/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Blog",
+          "url": "https://betamakine.com/blog/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "İletişim",
+          "url": "https://betamakine.com/contact/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Hakkımızda",
+          "url": "https://betamakine.com/about/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Pervane Rehberi",
+          "url": "https://betamakine.com/oto-yikama-pervanesi/"
+        }
+      ]
+    }
+    </script>
+
     <!-- Schema Markup: FAQ - Oto Yıkama Pervanesi -->
     <script type="application/ld+json">
     {
@@ -251,7 +290,7 @@
                 </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li class="nav-item"><a href="#hero" class="nav-link active">Ana Sayfa</a></li>
+                        <li class="nav-item"><a href="/" class="nav-link active">Ana Sayfa</a></li>
                         <li class="nav-item"><a href="urunler/" class="nav-link">Ürünler</a></li>
                         <li class="nav-item"><a href="oto-yikama-pervanesi/" class="nav-link">Pervane Rehberi</a></li>
                         <li class="nav-item"><a href="blog/" class="nav-link">Blog</a></li>
@@ -268,6 +307,7 @@
         </div>
     </header>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-slider">
@@ -600,6 +640,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="footer" id="iletisim" role="contentinfo">
         <div class="container">

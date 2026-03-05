@@ -173,6 +173,8 @@ class HeaderScroll {
     constructor() {
         this.header = document.getElementById('header');
         this.scrollThreshold = 50;
+        this.handleScroll = this.handleScroll.bind(this);
+        this.syncHeaderOffset = this.syncHeaderOffset.bind(this);
 
         this.init();
     }
@@ -180,13 +182,25 @@ class HeaderScroll {
     init() {
         if (!this.header) return;
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > this.scrollThreshold) {
-                this.header.classList.add('scrolled');
-            } else {
-                this.header.classList.remove('scrolled');
-            }
-        });
+        this.syncHeaderOffset();
+        this.handleScroll();
+        window.addEventListener('resize', this.syncHeaderOffset);
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
+    }
+
+    handleScroll() {
+        if (window.scrollY > this.scrollThreshold) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+    }
+
+    syncHeaderOffset() {
+        const headerHeight = Math.round(this.header.offsetHeight);
+        if (headerHeight > 0) {
+            document.documentElement.style.setProperty('--header-offset', `${headerHeight}px`);
+        }
     }
 }
 
@@ -199,28 +213,85 @@ class MobileMenu {
         this.toggle = document.querySelector('.mobile-menu-toggle');
         this.nav = document.querySelector('.nav');
         this.navLinks = document.querySelectorAll('.nav-link');
+        this.mobileViewport = window.matchMedia('(max-width: 768px)');
+        this.onToggleClick = this.onToggleClick.bind(this);
+        this.onDocumentClick = this.onDocumentClick.bind(this);
+        this.onDocumentKeydown = this.onDocumentKeydown.bind(this);
+        this.onViewportChange = this.onViewportChange.bind(this);
 
         this.init();
     }
 
     init() {
         if (!this.toggle || !this.nav) return;
+        this.toggle.setAttribute('aria-expanded', 'false');
+        this.nav.setAttribute('aria-hidden', 'true');
 
-        // Toggle menu on button click
-        this.toggle.addEventListener('click', () => {
-            this.toggle.classList.toggle('active');
-            this.nav.classList.toggle('active');
-            document.body.style.overflow = this.nav.classList.contains('active') ? 'hidden' : '';
-        });
+        this.toggle.addEventListener('click', this.onToggleClick);
+        document.addEventListener('click', this.onDocumentClick);
+        document.addEventListener('keydown', this.onDocumentKeydown);
+
+        if (typeof this.mobileViewport.addEventListener === 'function') {
+            this.mobileViewport.addEventListener('change', this.onViewportChange);
+        } else if (typeof this.mobileViewport.addListener === 'function') {
+            this.mobileViewport.addListener(this.onViewportChange);
+        }
 
         // Close menu when clicking on a link
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                this.toggle.classList.remove('active');
-                this.nav.classList.remove('active');
-                document.body.style.overflow = '';
+                this.closeMenu();
             });
         });
+    }
+
+    isOpen() {
+        return this.nav.classList.contains('active');
+    }
+
+    onToggleClick() {
+        if (this.isOpen()) {
+            this.closeMenu();
+            return;
+        }
+        this.openMenu();
+    }
+
+    onDocumentClick(event) {
+        if (!this.mobileViewport.matches || !this.isOpen()) return;
+        const clickedInsideMenu = this.nav.contains(event.target) || this.toggle.contains(event.target);
+        if (!clickedInsideMenu) {
+            this.closeMenu();
+        }
+    }
+
+    onDocumentKeydown(event) {
+        if (event.key === 'Escape' && this.isOpen()) {
+            this.closeMenu();
+            this.toggle.focus();
+        }
+    }
+
+    onViewportChange(event) {
+        if (!event.matches && this.isOpen()) {
+            this.closeMenu();
+        }
+    }
+
+    openMenu() {
+        this.toggle.classList.add('active');
+        this.toggle.setAttribute('aria-expanded', 'true');
+        this.nav.classList.add('active');
+        this.nav.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeMenu() {
+        this.toggle.classList.remove('active');
+        this.toggle.setAttribute('aria-expanded', 'false');
+        this.nav.classList.remove('active');
+        this.nav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
     }
 }
 
@@ -421,18 +492,39 @@ class CounterAnimation {
 class ParallaxEffect {
     constructor() {
         this.hero = document.querySelector('.hero');
+        this.mediaQuery = window.matchMedia('(min-width: 1025px)');
+        this.reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        this.ticking = false;
+        this.handleScroll = this.handleScroll.bind(this);
         this.init();
     }
 
     init() {
-        window.addEventListener('scroll', () => {
+        if (!this.hero) return;
+        if (!this.mediaQuery.matches || this.reduceMotionQuery.matches) {
+            this.hero.style.transform = '';
+            return;
+        }
+
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
+    }
+
+    handleScroll() {
+        if (this.ticking) return;
+        this.ticking = true;
+
+        window.requestAnimationFrame(() => {
             const scrolled = window.pageYOffset;
             const heroHeight = this.hero.offsetHeight;
 
             if (scrolled <= heroHeight) {
-                const parallaxSpeed = 0.5;
+                const parallaxSpeed = 0.2;
                 this.hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            } else {
+                this.hero.style.transform = '';
             }
+
+            this.ticking = false;
         });
     }
 }
@@ -444,16 +536,19 @@ class ParallaxEffect {
 class ProductCardEffects {
     constructor() {
         this.cards = document.querySelectorAll('.product-card');
+        this.hoverCapableQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
         this.init();
     }
 
     init() {
+        if (!this.cards.length || !this.hoverCapableQuery.matches) return;
+
         this.cards.forEach(card => {
-            card.addEventListener('mouseenter', (e) => {
+            card.addEventListener('mouseenter', () => {
                 this.cards.forEach(otherCard => {
                     if (otherCard !== card) {
-                        otherCard.style.opacity = '0.7';
-                        otherCard.style.transform = 'scale(0.95)';
+                        otherCard.style.opacity = '0.85';
+                        otherCard.style.transform = 'scale(0.98)';
                     }
                 });
             });
@@ -725,30 +820,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // TYPEWRITER EFFECT FOR CONTACT PAGE
 // ===================================
 
-window.onload = function () {
+window.addEventListener('load', () => {
     const h1Element = document.querySelector('#typewriter-hero h1');
     const pElement = document.querySelector('#typewriter-hero p');
     const cursor = document.getElementById('cursor');
 
-    // Sadece contact sayfasındaysa çalıştır
+    // Cursor elementi yoksa efekti zorlamadan mevcut başlığı koru.
     if (!h1Element || !cursor) return;
 
-    const targetText = "HAKKIMIZDA";
+    const targetText = h1Element.dataset.typewriterText || h1Element.textContent.trim();
     let currentIndex = 0;
+    h1Element.textContent = '';
+    h1Element.appendChild(cursor);
 
     function typeWriter() {
         if (currentIndex < targetText.length) {
-            // Harfi cursor'dan önce ekle
             const currentText = h1Element.textContent.replace('|', '');
             h1Element.textContent = currentText + targetText.charAt(currentIndex);
             h1Element.appendChild(cursor);
             currentIndex++;
             setTimeout(typeWriter, 150);
         } else {
-            // Yazma bitti, cursor'u kaldır
             cursor.style.display = 'none';
 
-            // Alt metni göster (fade-in)
             setTimeout(() => {
                 if (pElement) {
                     pElement.classList.add('show');
@@ -757,9 +851,8 @@ window.onload = function () {
         }
     }
 
-    // Başlat
     typeWriter();
-};
+});
 
 // ===================================
 // COUNTER ANIMATION
