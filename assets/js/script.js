@@ -13,6 +13,27 @@
 })();
 
 // ===================================
+// CLOUDFLARE WEB ANALYTICS (RUM)
+// ===================================
+
+// Set this once to enable Cloudflare Web Analytics on all pages that load script.js
+const CLOUDFLARE_WEB_ANALYTICS_TOKEN = '';
+
+(function initCloudflareWebAnalytics() {
+    const token = (window.CLOUDFLARE_WEB_ANALYTICS_TOKEN || CLOUDFLARE_WEB_ANALYTICS_TOKEN || '').trim();
+    if (!token) return;
+
+    const beaconSrc = 'https://static.cloudflareinsights.com/beacon.min.js';
+    if (document.querySelector(`script[src="${beaconSrc}"]`)) return;
+
+    const beaconScript = document.createElement('script');
+    beaconScript.defer = true;
+    beaconScript.src = beaconSrc;
+    beaconScript.setAttribute('data-cf-beacon', JSON.stringify({ token }));
+    document.head.appendChild(beaconScript);
+})();
+
+// ===================================
 // HERO SLIDER FUNCTIONALITY
 // ===================================
 
@@ -681,6 +702,7 @@ class ProductSeoClusterFloatingPanel {
 
         const shouldFloat = this.desktopQuery.matches;
         const shouldUseMobileTabbar = this.mobileQuery.matches;
+        document.body.classList.toggle('has-mobile-seo-cluster-tabbar', shouldUseMobileTabbar);
         this.clearMinimizeTimer();
         this.panel.classList.remove('seo-cluster-mobile-tabbar', 'is-expanded');
         this.panel.classList.toggle('seo-cluster-floating', shouldFloat);
@@ -813,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { new WhatsAppFloatingButton(); } catch (e) { console.error('WhatsAppFloatingButton failed:', e); }
 
     // Log initialization
-    console.log('🚀 Beta Makine - Website Initialized');
+    console.log('Beta Makine - Website Initialized');
 });
 
 // ===================================
@@ -853,51 +875,4 @@ window.addEventListener('load', () => {
 
     typeWriter();
 });
-
-// ===================================
-// COUNTER ANIMATION
-// ===================================
-
-// Sayaç animasyonu
-const animateCounter = (element) => {
-    const target = parseInt(element.getAttribute('data-target'));
-    const duration = 2000; // 2 saniye
-    const increment = target / (duration / 16); // 60 FPS için
-    let current = 0;
-
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            element.textContent = '+' + Math.floor(current).toLocaleString('tr-TR');
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = '+' + target.toLocaleString('tr-TR');
-        }
-    };
-
-    updateCounter();
-};
-
-// Intersection Observer ile sayaç başlatma
-const observeCounter = () => {
-    const counterElements = document.querySelectorAll('.stat-number[data-target]');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                entry.target.classList.add('counted');
-                animateCounter(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counterElements.forEach(counter => observer.observe(counter));
-};
-
-// Sayfa yüklendiğinde sayaç gözlemleyicisini başlat
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', observeCounter);
-} else {
-    observeCounter();
-}
 

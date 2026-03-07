@@ -65,12 +65,24 @@
   <!-- Blog Ana Sayfa -->
   <url>
     <loc>https://betamakine.com/blog/</loc>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog Yazıları -->
+  <url>
+    <loc>https://betamakine.com/blog/oto-yikama-pervanesi-donmuyor/</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://betamakine.com/blog/oto-yikama-pervanesi-kisin-donma-sorunu/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://betamakine.com/blog/oto-yikama-pervanesi-ses-yapiyor/</loc>
     <lastmod>2026-03-05</lastmod>
