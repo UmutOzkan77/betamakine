@@ -1,36 +1,36 @@
 # Beta Makine
 > Beta Makine, oto yikama pervanesi ve ilgili yedek parcalarda uzmanlasmis yerli ureticidir. Bu dosya, LLM sistemleri icin tercih edilen URL'leri ve icerik kapsamini listeler.
 
-- Site: https://betamakine.com/
+- Site: https://www.betamakine.com/
 - Dil: tr-TR
-- Son guncelleme: 2026-03-03
+- Son guncelleme: 2026-03-08
 
 ## Ana Sayfalar
-- [Ana Sayfa](https://betamakine.com/)
-- [Oto Yikama Pervanesi Satin Alma Rehberi](https://betamakine.com/oto-yikama-pervanesi/)
-- [Urunler](https://betamakine.com/urunler/)
-- [Blog](https://betamakine.com/blog/)
-- [Hakkimizda](https://betamakine.com/about/)
-- [Iletisim](https://betamakine.com/contact/)
+- [Ana Sayfa](https://www.betamakine.com/)
+- [Oto Yikama Pervanesi Satin Alma Rehberi](https://www.betamakine.com/oto-yikama-pervanesi/)
+- [Urunler](https://www.betamakine.com/urunler/)
+- [Blog](https://www.betamakine.com/blog/)
+- [Hakkimizda](https://www.betamakine.com/about/)
+- [Iletisim](https://www.betamakine.com/contact/)
 
 ## Urun Sayfalari
-- [Tir Yikama Pervanesi](https://betamakine.com/urunler/tir-yikama-pervanesi/)
-- [Boom Ciftli Oto Yikama Pervanesi](https://betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/)
-- [Boom Tekli Z Oto Yikama Pervanesi](https://betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/)
-- [1/4 Yikama Pervanesi Doner Rekor](https://betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/)
-- [Yikama Pervanesi Uc Rekoru](https://betamakine.com/urunler/yikama-pervanesi-uc-rekoru/)
-- [Tabanca Doner Rekoru](https://betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/)
+- [Tir Yikama Pervanesi](https://www.betamakine.com/urunler/tir-yikama-pervanesi/)
+- [Boom Ciftli Oto Yikama Pervanesi](https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/)
+- [Boom Tekli Z Oto Yikama Pervanesi](https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/)
+- [1/4 Yikama Pervanesi Doner Rekor](https://www.betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/)
+- [Yikama Pervanesi Uc Rekoru](https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/)
+- [Tabanca Doner Rekoru](https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/)
 
 ## Blog Yazilari
-- [Boom Nedir?](https://betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/)
-- [Oto Yikama Pervanesi Fiyatlari](https://betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/)
-- [En Iyi Oto Yikama Pervanesi Nasil Secilir?](https://betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/)
-- [Oto Yikama Pervanesi Bakimi](https://betamakine.com/blog/oto-yikama-pervanesi-bakimi/)
-- [Tir Yikama Istasyonu Ekipmanlari](https://betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/)
-- [Oto Yikama Pervanesi Nedir?](https://betamakine.com/blog/oto-yikama-pervanesi-nedir/)
+- [Oto Yikama Pervanesi Rulman Arizasi Nasil Anlasilir?](https://www.betamakine.com/blog/oto-yikama-pervanesi-rulman-arizasi/)
+- [Boom Nedir?](https://www.betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/)
+- [Oto Yikama Pervanesi Fiyatlari](https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/)
+- [En Iyi Oto Yikama Pervanesi Nasil Secilir?](https://www.betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/)
+- [Oto Yikama Pervanesi Bakimi](https://www.betamakine.com/blog/oto-yikama-pervanesi-bakimi/)
+- [Tir Yikama Istasyonu Ekipmanlari](https://www.betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/)
+- [Oto Yikama Pervanesi Nedir?](https://www.betamakine.com/blog/oto-yikama-pervanesi-nedir/)
 
 ## Yapilandirilmis Kaynaklar
-- [Sitemap](https://betamakine.com/sitemap.xml)
-- [Robots](https://betamakine.com/robots.txt)
-- [LLMs Full](https://betamakine.com/llms-full.txt)
-
+- [Sitemap](https://www.betamakine.com/sitemap.xml)
+- [Robots](https://www.betamakine.com/robots.txt)
+- [LLMs Full](https://www.betamakine.com/llms-full.txt)

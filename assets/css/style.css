@@ -40,7 +40,7 @@
     gap: 2rem;
     align-items: start;
     max-width: 1400px;
-    margin: 120px auto 0;
+    margin: clamp(42px, 6vw, 96px) auto 0;
 }
 
 .product-detail-left {
@@ -340,6 +340,7 @@
     .product-detail-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+        margin-top: clamp(14px, 3.5vw, 24px);
     }
 
     .product-title {
@@ -590,6 +591,19 @@ ol {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
 }
 
 /* ===================================
@@ -1238,6 +1252,13 @@ ol {
     color: var(--color-text-light);
     margin-top: var(--spacing-md);
     line-height: 1.75;
+    max-width: 70ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-subtitle + .section-subtitle {
+    margin-top: 0.75rem;
 }
 
 .inline-link-underlined {
@@ -2216,14 +2237,13 @@ ol {
 }
 
 .contact-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.85);
     border: 1px solid rgba(0, 187, 240, 0.4);
     box-shadow:
-        0 20px 50px rgba(0, 32, 74, 0.12),
-        0 0 0 1px rgba(0, 187, 240, 0.6),
-        0 0 40px rgba(0, 187, 240, 0.3),
-        0 0 80px rgba(0, 187, 240, 0.15),
+        0 14px 34px rgba(0, 32, 74, 0.12),
+        0 0 0 1px rgba(0, 187, 240, 0.45),
+        0 0 24px rgba(0, 187, 240, 0.16),
         inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
@@ -3691,6 +3711,12 @@ body.blog-page {
         overflow-x: auto;
         padding-bottom: 0.35rem;
         scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .blog-topic-chips::-webkit-scrollbar {
+        display: none;
     }
 
     .blog-topic-chip {
@@ -3805,6 +3831,26 @@ body.has-mobile-seo-cluster-tabbar .whatsapp-float-button {
     .product-card:hover::after {
         height: 0;
         opacity: 0;
+    }
+
+    .contact-card:hover,
+    .mv-card:hover,
+    .value-card:hover,
+    .why-item:hover {
+        transform: none;
+    }
+
+    .contact-card:hover {
+        box-shadow:
+            0 4px 20px rgba(0, 32, 74, 0.08),
+            0 0 0 1px rgba(0, 187, 240, 0.1),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .contact-card:hover .contact-card-icon,
+    .contact-card:hover .contact-card-icon.whatsapp-icon {
+        transform: none;
+        box-shadow: none;
     }
 }
 

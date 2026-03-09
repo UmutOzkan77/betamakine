@@ -5,9 +5,12 @@
 (function forceCanonicalHttps() {
     const host = window.location.hostname.toLowerCase();
     const isTargetHost = host === 'betamakine.com' || host === 'www.betamakine.com';
+    const canonicalHost = 'www.betamakine.com';
+    const needsHttps = window.location.protocol !== 'https:';
+    const needsWwwHost = host !== canonicalHost;
 
-    if (window.location.protocol === 'http:' && isTargetHost) {
-        const targetUrl = `https://betamakine.com${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (isTargetHost && (needsHttps || needsWwwHost)) {
+        const targetUrl = `https://${canonicalHost}${window.location.pathname}${window.location.search}${window.location.hash}`;
         window.location.replace(targetUrl);
     }
 })();
@@ -376,32 +379,37 @@ class SmoothScroll {
 
 class ActiveNavTracker {
     constructor() {
-        this.sections = document.querySelectorAll('section[id]');
-        this.navLinks = document.querySelectorAll('.nav-link');
+        this.sections = Array.from(document.querySelectorAll('section[id]'));
+        this.navLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
+        this.onScroll = this.onScroll.bind(this);
 
         this.init();
     }
 
     init() {
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const scrollPosition = window.scrollY + 100;
+        if (!this.sections.length || !this.navLinks.length) return;
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+        this.onScroll();
+    }
 
-            this.sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
+    onScroll() {
+        let current = '';
+        const scrollPosition = window.scrollY + 120;
 
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
+        this.sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
 
-            this.navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        if (!current) return;
+
+        this.navLinks.forEach(link => {
+            const isCurrent = link.getAttribute('href') === `#${current}`;
+            link.classList.toggle('active', isCurrent);
         });
     }
 }
@@ -561,6 +569,13 @@ class ProductCardEffects {
         this.init();
     }
 
+    resetCardStates() {
+        this.cards.forEach(card => {
+            card.style.opacity = '';
+            card.style.transform = '';
+        });
+    }
+
     init() {
         if (!this.cards.length || !this.hoverCapableQuery.matches) return;
 
@@ -575,10 +590,7 @@ class ProductCardEffects {
             });
 
             card.addEventListener('mouseleave', () => {
-                this.cards.forEach(otherCard => {
-                    otherCard.style.opacity = '1';
-                    otherCard.style.transform = 'scale(1)';
-                });
+                this.resetCardStates();
             });
         });
     }

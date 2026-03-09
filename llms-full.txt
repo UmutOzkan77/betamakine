@@ -1,7 +1,7 @@
 # Beta Makine - LLM Full Content Index
 > Bu dosya, LLM'lerin siteyi daha hizli anlamasi icin icerik kapsamini, urun ailelerini ve temel satin alma sorularini ozetler.
 
-- Site: https://betamakine.com/
+- Site: https://www.betamakine.com/
 - Company: Beta Makine
 - Language: tr-TR
 - Domain Focus: Oto yikama pervanesi, boom/pergel sistemleri, doner rekor ve yedek parca
@@ -21,31 +21,31 @@ Odak alanlari:
 - Teknik satin almacilar ve servis ekipleri
 
 ## Temel Sayfalar
-- https://betamakine.com/
-- https://betamakine.com/oto-yikama-pervanesi/
-- https://betamakine.com/urunler/
-- https://betamakine.com/blog/
-- https://betamakine.com/about/
-- https://betamakine.com/contact/
+- https://www.betamakine.com/
+- https://www.betamakine.com/oto-yikama-pervanesi/
+- https://www.betamakine.com/urunler/
+- https://www.betamakine.com/blog/
+- https://www.betamakine.com/about/
+- https://www.betamakine.com/contact/
 
 ## Urun Katalogu (Canonical URL)
 1. Tir Yikama Pervanesi
-   URL: https://betamakine.com/urunler/tir-yikama-pervanesi/
+   URL: https://www.betamakine.com/urunler/tir-yikama-pervanesi/
    Kullanim: Tir, kamyon, otobus yikama noktalari
 2. Oto Yikama Pervanesi Boom Ciftli
-   URL: https://betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
+   URL: https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
    Kullanim: Jet kopuk + su hatlarini birlikte yonetmek isteyen istasyonlar
 3. Oto Yikama Pervanesi Boom Tekli Z
-   URL: https://betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
+   URL: https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
    Kullanim: Tek hortumla self servis kabinleri
 4. 1/4 Yikama Pervanesi Doner Rekor
-   URL: https://betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/
+   URL: https://www.betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/
    Kullanim: Donus noktalarinda dayanikli baglanti
 5. Yikama Pervanesi Uc Rekoru
-   URL: https://betamakine.com/urunler/yikama-pervanesi-uc-rekoru/
+   URL: https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/
    Kullanim: Uc baglanti bolgesinde rahat donus
 6. Arac Yikama Pervanesi Tabanca Doner Rekoru
-   URL: https://betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/
+   URL: https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/
    Kullanim: Tabancada hortum karismasini azaltma
 
 ## Karar Verme Cercevesi (Kullaniciyi Yonlendiren Ozet)
@@ -63,20 +63,20 @@ Odak alanlari:
 - Montajda teknik destek var mi?
 
 ## Blog Kaynaklari
-- https://betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/
-- https://betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
-- https://betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/
-- https://betamakine.com/blog/oto-yikama-pervanesi-bakimi/
-- https://betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/
-- https://betamakine.com/blog/oto-yikama-pervanesi-nedir/
+- https://www.betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/
+- https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
+- https://www.betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/
+- https://www.betamakine.com/blog/oto-yikama-pervanesi-bakimi/
+- https://www.betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/
+- https://www.betamakine.com/blog/oto-yikama-pervanesi-nedir/
 
 ## Veri Kaynaklari
-- Sitemap: https://betamakine.com/sitemap.xml
-- Robots: https://betamakine.com/robots.txt
-- LLMs index: https://betamakine.com/llms.txt
+- Sitemap: https://www.betamakine.com/sitemap.xml
+- Robots: https://www.betamakine.com/robots.txt
+- LLMs index: https://www.betamakine.com/llms.txt
 
 ## Iletisim
-- Sayfa: https://betamakine.com/contact/
+- Sayfa: https://www.betamakine.com/contact/
 - Telefon: +90 536 461 5330
 - Konum: Bursa / Turkiye
 
