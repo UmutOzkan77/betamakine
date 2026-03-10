@@ -422,8 +422,8 @@ class ScrollReveal {
     constructor() {
         this.elements = [];
         this.revealGroups = [
-            { selector: '.section-header, .about-wrapper, .stat-item, .faq-item', step: 0.06, maxDelay: 0.24 },
-            { selector: '.product-card', step: 0.08, maxDelay: 0.4 }
+            { selector: '.section-header, .about-wrapper, .stat-item, .faq-item, .blog-hub-top, .model-advisor, .compare-lab, .purchase-guide-panel', step: 0.05, maxDelay: 0.25 },
+            { selector: '.product-card, .contact-card, .blog-card, .mv-card, .value-card, .why-item', step: 0.07, maxDelay: 0.42 }
         ];
         this.observerOptions = {
             threshold: 0.15,
@@ -434,14 +434,18 @@ class ScrollReveal {
     }
 
     init() {
+        const seenElements = new Set();
+
         // Add initial hidden state with per-group staggering
         this.revealGroups.forEach(group => {
             const groupElements = document.querySelectorAll(group.selector);
             groupElements.forEach((element, index) => {
+                if (seenElements.has(element)) return;
                 const delay = Math.min(index * group.step, group.maxDelay);
                 element.classList.add('scroll-reveal');
                 element.style.transitionDelay = `${delay.toFixed(2)}s`;
                 this.elements.push(element);
+                seenElements.add(element);
             });
         });
 

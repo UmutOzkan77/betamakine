@@ -56,6 +56,15 @@
             gap: 0.75rem;
             justify-content: center;
             margin-top: 1.25rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 0.2rem;
+            scroll-snap-type: x proximity;
+        }
+
+        .decision-pills::-webkit-scrollbar {
+            display: none;
         }
 
         .decision-pill {
@@ -70,6 +79,10 @@
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.25s ease;
+            min-height: 44px;
+            white-space: nowrap;
+            flex: 0 0 auto;
+            scroll-snap-align: start;
         }
 
         .decision-pill:hover {
@@ -149,6 +162,7 @@
             overflow: auto;
             border: 1px solid rgba(0, 32, 74, 0.12);
             background: #f7fbff;
+            -webkit-overflow-scrolling: touch;
         }
 
         .compare-table {
@@ -202,6 +216,18 @@
             background: linear-gradient(145deg, #eaf3fb 0%, #d4e4f3 100%);
             border: 1px solid rgba(0, 32, 74, 0.14);
             box-shadow: 0 12px 28px rgba(0, 32, 74, 0.08);
+        }
+
+        .about-description {
+            margin: 0 auto;
+            max-width: 72ch;
+            font-size: 1rem;
+            line-height: 1.72;
+            color: #334E68;
+        }
+
+        .purchase-guide-panel .about-description + .about-description {
+            margin-top: 0.8rem;
         }
 
         .guide-check-grid {
@@ -376,15 +402,21 @@
 
             .decision-pills {
                 justify-content: flex-start;
+                flex-wrap: nowrap;
             }
 
             .decision-pill {
-                width: 100%;
-                text-align: center;
+                width: auto;
+                text-align: left;
             }
 
             .compare-table .row-title {
-                min-width: 170px;
+                position: static;
+                min-width: 155px;
+            }
+
+            .compare-table {
+                min-width: 760px;
             }
         }
     </style>
