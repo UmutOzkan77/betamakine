@@ -307,6 +307,7 @@ class MobileMenu {
         this.toggle.setAttribute('aria-expanded', 'true');
         this.nav.classList.add('active');
         this.nav.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('mobile-menu-open');
         document.body.style.overflow = 'hidden';
     }
 
@@ -315,6 +316,7 @@ class MobileMenu {
         this.toggle.setAttribute('aria-expanded', 'false');
         this.nav.classList.remove('active');
         this.nav.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('mobile-menu-open');
         document.body.style.overflow = '';
     }
 }

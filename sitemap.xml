@@ -65,12 +65,18 @@
   <!-- Blog Ana Sayfa -->
   <url>
     <loc>https://www.betamakine.com/blog/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog Yazıları -->
+  <url>
+    <loc>https://www.betamakine.com/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://www.betamakine.com/blog/oto-yikama-pervanesi-yaglama-noktalari/</loc>
     <lastmod>2026-03-10</lastmod>

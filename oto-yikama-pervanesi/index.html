@@ -85,6 +85,11 @@
             scroll-snap-align: start;
         }
 
+        .decision-pill:focus-visible {
+            outline: 3px solid rgba(0, 82, 143, 0.42);
+            outline-offset: 2px;
+        }
+
         .decision-pill:hover {
             border-color: var(--color-accent);
             color: var(--color-primary);
@@ -265,6 +270,7 @@
             flex-wrap: wrap;
             gap: 0.75rem;
             margin-top: 1rem;
+            align-items: stretch;
         }
 
         .guide-actions .hero-button {
@@ -386,6 +392,10 @@
             .guide-check-grid {
                 grid-template-columns: 1fr;
             }
+
+            .compare-table {
+                min-width: 860px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -408,6 +418,8 @@
             .decision-pill {
                 width: auto;
                 text-align: left;
+                min-height: 46px;
+                font-size: 0.85rem;
             }
 
             .compare-table .row-title {
