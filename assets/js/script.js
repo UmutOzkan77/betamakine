@@ -237,7 +237,7 @@ class MobileMenu {
         this.toggle = document.querySelector('.mobile-menu-toggle');
         this.nav = document.querySelector('.nav');
         this.navLinks = document.querySelectorAll('.nav-link');
-        this.mobileViewport = window.matchMedia('(max-width: 768px)');
+        this.mobileViewport = window.matchMedia('(max-width: 992px)');
         this.onToggleClick = this.onToggleClick.bind(this);
         this.onDocumentClick = this.onDocumentClick.bind(this);
         this.onDocumentKeydown = this.onDocumentKeydown.bind(this);
@@ -530,21 +530,58 @@ class ParallaxEffect {
         this.mediaQuery = window.matchMedia('(min-width: 1025px)');
         this.reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         this.ticking = false;
+        this.isEnabled = false;
         this.handleScroll = this.handleScroll.bind(this);
+        this.handleMediaChange = this.handleMediaChange.bind(this);
         this.init();
     }
 
     init() {
         if (!this.hero) return;
-        if (!this.mediaQuery.matches || this.reduceMotionQuery.matches) {
-            this.hero.style.transform = '';
+
+        if (typeof this.mediaQuery.addEventListener === 'function') {
+            this.mediaQuery.addEventListener('change', this.handleMediaChange);
+        } else if (typeof this.mediaQuery.addListener === 'function') {
+            this.mediaQuery.addListener(this.handleMediaChange);
+        }
+
+        if (typeof this.reduceMotionQuery.addEventListener === 'function') {
+            this.reduceMotionQuery.addEventListener('change', this.handleMediaChange);
+        } else if (typeof this.reduceMotionQuery.addListener === 'function') {
+            this.reduceMotionQuery.addListener(this.handleMediaChange);
+        }
+
+        this.syncParallaxState();
+    }
+
+    handleMediaChange() {
+        this.syncParallaxState();
+    }
+
+    syncParallaxState() {
+        const shouldEnable = this.mediaQuery.matches && !this.reduceMotionQuery.matches;
+
+        if (shouldEnable && !this.isEnabled) {
+            window.addEventListener('scroll', this.handleScroll, { passive: true });
+            this.isEnabled = true;
             return;
         }
 
-        window.addEventListener('scroll', this.handleScroll, { passive: true });
+        if (!shouldEnable && this.isEnabled) {
+            window.removeEventListener('scroll', this.handleScroll);
+            this.isEnabled = false;
+            this.hero.style.transform = '';
+            this.ticking = false;
+            return;
+        }
+
+        if (!shouldEnable) {
+            this.hero.style.transform = '';
+        }
     }
 
     handleScroll() {
+        if (!this.isEnabled) return;
         if (this.ticking) return;
         this.ticking = true;
 
@@ -864,11 +901,23 @@ window.addEventListener('load', () => {
     const h1Element = document.querySelector('#typewriter-hero h1');
     const pElement = document.querySelector('#typewriter-hero p');
     const cursor = document.getElementById('cursor');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
 
     // Cursor elementi yoksa efekti zorlamadan mevcut başlığı koru.
     if (!h1Element || !cursor) return;
 
     const targetText = h1Element.dataset.typewriterText || h1Element.textContent.trim();
+    if (!targetText) return;
+
+    // Mobil ve reduced-motion senaryolarında metni anında göster.
+    if (prefersReducedMotion || isMobileViewport) {
+        h1Element.textContent = targetText;
+        cursor.style.display = 'none';
+        if (pElement) pElement.classList.add('show');
+        return;
+    }
+
     let currentIndex = 0;
     h1Element.textContent = '';
     h1Element.appendChild(cursor);

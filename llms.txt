@@ -3,7 +3,7 @@
 
 - Site: https://www.betamakine.com/
 - Dil: tr-TR
-- Son guncelleme: 2026-03-11
+- Son guncelleme: 2026-03-12
 
 ## Ana Sayfalar
 - [Ana Sayfa](https://www.betamakine.com/)
@@ -22,6 +22,7 @@
 - [Tabanca Doner Rekoru](https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/)
 
 ## Blog Yazilari
+- [Oto Yikama Pervanesi Balans Ayari](https://www.betamakine.com/blog/oto-yikama-pervanesi-balans-ayari/)
 - [Oto Yikama Pervanesi Mil Boslugu Olcumu](https://www.betamakine.com/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/)
 - [Oto Yikama Pervanesi Yaglama Noktalari](https://www.betamakine.com/blog/oto-yikama-pervanesi-yaglama-noktalari/)
 - [Oto Yikama Pervanesi Rulman Arizasi Nasil Anlasilir?](https://www.betamakine.com/blog/oto-yikama-pervanesi-rulman-arizasi/)
