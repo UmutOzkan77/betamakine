@@ -3,7 +3,7 @@
   <!-- Ana Sayfa -->
   <url>
     <loc>https://www.betamakine.com/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Oto Yıkama Pervanesi Landing -->
   <url>
     <loc>https://www.betamakine.com/oto-yikama-pervanesi/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- Ürün Sayfaları -->
   <url>
     <loc>https://www.betamakine.com/urunler/tir-yikama-pervanesi/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -45,19 +45,19 @@
   </url>
   <url>
     <loc>https://www.betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Blog Ana Sayfa -->
   <url>
     <loc>https://www.betamakine.com/blog/</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Blog Yazıları -->
   <url>
     <loc>https://www.betamakine.com/blog/oto-yikama-pervanesi-balans-ayari/</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
