@@ -29,18 +29,22 @@
 .product-detail {
     padding: calc(var(--header-offset) + 1rem) 0 2rem;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 1320px;
+    display: block;
 }
 
 .product-detail-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
     align-items: start;
-    max-width: 1400px;
+    max-width: 100%;
     margin: clamp(42px, 6vw, 96px) auto 0;
+}
+
+.product-detail > section {
+    width: 100%;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .product-detail-left {
