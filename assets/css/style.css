@@ -180,6 +180,99 @@
     box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
 }
 
+.product-buybox {
+    margin: 1.25rem 0;
+    padding: 1.15rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 82, 143, 0.18);
+    background: linear-gradient(180deg, #ffffff 0%, #eef7ff 100%);
+    box-shadow: 0 10px 28px rgba(0, 32, 74, 0.08);
+}
+
+.product-buybox-title {
+    font-family: var(--font-heading);
+    font-size: 1.18rem;
+    line-height: 1.25;
+    color: #0f2f56;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.product-buybox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 0.95rem;
+}
+
+.product-buybox-item {
+    padding: 0.75rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(0, 32, 74, 0.1);
+}
+
+.product-buybox-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #486581;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.product-buybox-value {
+    display: block;
+    margin-top: 0.2rem;
+    color: #102A43;
+    font-weight: 700;
+}
+
+.product-buybox-note {
+    margin-bottom: 0.9rem;
+    color: #334E68;
+    line-height: 1.6;
+}
+
+.product-buybox-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.product-buybox-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0066CC 0%, #00BBF0 100%);
+    box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
+}
+
+.product-buybox-action.secondary {
+    color: #00528f;
+    background: #ffffff;
+    border: 1px solid rgba(0, 82, 143, 0.24);
+    box-shadow: none;
+}
+
+@media (max-width: 640px) {
+    .product-buybox-grid,
+    .product-buybox-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
 .seo-cluster-links {
     margin-top: 2rem;
     padding: 1.2rem;
