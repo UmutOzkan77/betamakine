@@ -1091,6 +1091,108 @@ ol {
 }
 
 /* ===================================
+   AI ANSWER / GEO SECTION
+   =================================== */
+
+.answer-engine {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(180deg, #f7fbff 0%, #d9e2ec 100%);
+}
+
+.answer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.answer-card {
+    padding: 1.25rem;
+    border: 1px solid rgba(0, 32, 74, 0.14);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 32, 74, 0.07);
+}
+
+.answer-card-wide {
+    grid-column: span 2;
+}
+
+.answer-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.08rem;
+    line-height: 1.25;
+    color: #0f2f56;
+    margin-bottom: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.answer-card p {
+    color: #334E68;
+    line-height: 1.65;
+    font-size: 0.96rem;
+}
+
+.decision-table-wrap {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    border: 1px solid rgba(0, 32, 74, 0.14);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(0, 32, 74, 0.07);
+}
+
+.decision-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+}
+
+.decision-table th,
+.decision-table td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 32, 74, 0.1);
+    vertical-align: top;
+    color: #102A43;
+}
+
+.decision-table th {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    background: #e6f2ff;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.decision-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.decision-table a {
+    color: #00528f;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+    .answer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .answer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .answer-card-wide {
+        grid-column: auto;
+    }
+}
+
+/* ===================================
    INFO BAR SECTION
    =================================== */
 

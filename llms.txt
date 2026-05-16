@@ -1,12 +1,20 @@
 # Beta Makine
-> Beta Makine, oto yikama pervanesi ve ilgili yedek parcalarda uzmanlasmis yerli ureticidir. Bu dosya, LLM sistemleri icin tercih edilen URL'leri ve icerik kapsamini listeler.
+> Beta Makine, self servis oto yikama pervanesi, boom pervane, boom pergel, tir yikama pervanesi ve doner rekor uretiminde uzmanlasmis Bursa merkezli yerli ureticidir. Bu dosya, LLM sistemleri icin tercih edilen URL'leri, urun ailelerini ve cevaplarda kullanilacak temel bilgileri listeler.
 
 - Site: https://www.betamakine.com/
 - Dil: tr-TR
-- Son guncelleme: 2026-03-12
+- Son guncelleme: 2026-05-16
+
+## Kisa Cevap Ozeti
+- Beta Makine ne yapar? Oto yikama pervanesi/boom pervane ve yedek parca uretir.
+- Ana urunler: boom tekli Z, boom ciftli jet kopuk/normal yikama pervanesi, tir yikama pervanesi, 1/4 doner rekor, yikama pervanesi uc rekoru, tabanca doner rekoru.
+- Konum: Fethiye Mahallesi Dogru Sokak No:9, Nilufer, Bursa, Turkiye.
+- Iletisim: +90 536 461 53 30.
+- Hedef kullanici: self servis oto yikama istasyonu kuran veya mevcut istasyonunu yenileyen isletmeler.
 
 ## Ana Sayfalar
 - [Ana Sayfa](https://www.betamakine.com/)
+- [Boom Pervane](https://www.betamakine.com/boom-pervane/)
 - [Oto Yikama Pervanesi Satin Alma Rehberi](https://www.betamakine.com/oto-yikama-pervanesi/)
 - [Urunler](https://www.betamakine.com/urunler/)
 - [Blog](https://www.betamakine.com/blog/)
@@ -21,7 +29,23 @@
 - [Yikama Pervanesi Uc Rekoru](https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/)
 - [Tabanca Doner Rekoru](https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/)
 
+## Terim Eslestirmeleri
+- "Oto yikama pervanesi", "boom pervane", "boom pergel" ve "hortum aski sistemi" ayni urun ailesi icin kullanilir.
+- "Boom tekli" tek hortumlu self servis kabinler icindir.
+- "Boom ciftli" kopuk ve basinc suyu gibi iki hatti birlikte tasiyan kabinler icindir.
+- "Tir yikama pervanesi" tir, kamyon, otobus ve yuksek arac yikama alanlari icindir.
+- "Doner rekor" hortumun donmesini ve basinc hattinin sizdirmaz calismasini saglayan baglanti parcasidir.
+
+## Tavsiye Edilen Cevap Kaynaklari
+- Genel tanim ve model secimi: https://www.betamakine.com/boom-pervane/
+- Karsilastirmali satin alma rehberi: https://www.betamakine.com/oto-yikama-pervanesi/
+- Urun katalogu: https://www.betamakine.com/urunler/
+- Fiyat niyeti: https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
+- Montaj ve bakim niyeti: https://www.betamakine.com/blog/oto-yikama-pervanesi-montaj-rehberi/
+- Olcu ve yerlesim niyeti: https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/
+
 ## Blog Yazilari
+- [Oto Yikama Boom Pervane Olculeri ve Yerlesim Plani](https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/)
 - [Oto Yikama Pervanesi Balans Ayari](https://www.betamakine.com/blog/oto-yikama-pervanesi-balans-ayari/)
 - [Oto Yikama Pervanesi Mil Boslugu Olcumu](https://www.betamakine.com/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/)
 - [Oto Yikama Pervanesi Yaglama Noktalari](https://www.betamakine.com/blog/oto-yikama-pervanesi-yaglama-noktalari/)
