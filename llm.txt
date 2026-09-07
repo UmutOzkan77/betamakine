@@ -1,5 +1,5 @@
 # Beta Makine LLM Compatibility File
 Bu dosya geriye donuk uyumluluk icin tutulur.
+- Son güncelleme: 2026-09-07
 Tercih edilen ana dosya: https://www.betamakine.com/llms.txt
 Detayli dosya: https://www.betamakine.com/llms-full.txt
-

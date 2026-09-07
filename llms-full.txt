@@ -1,105 +1,121 @@
-# Beta Makine - LLM Full Content Index
-> Bu dosya, LLM'lerin siteyi daha hizli anlamasi icin icerik kapsamini, urun ailelerini ve temel satin alma sorularini ozetler.
+# Beta Makine — LLM içerik dizini
+
+> Bu dosya, Beta Makine’nin ürün kapsamını, teknik terimlerini ve satın alma niyetlerini doğru kanonik sayfalara bağlayan ayrıntılı bir referanstır.
 
 - Site: https://www.betamakine.com/
-- Company: Beta Makine
-- Language: tr-TR
-- Domain Focus: Oto yikama pervanesi, boom/pergel sistemleri, doner rekor ve yedek parca
-- Last-Updated: 2026-05-16
+- Marka: Beta Makine
+- Dil: tr-TR
+- Son güncelleme: 2026-09-07
+- Ana kategori: oto yıkama pervanesi, boom/pergel sistemleri, döner rekor ve yıkama ekipmanları
 
-## Kisa Sirket Profili
-Beta Makine, self servis oto yikama istasyonlari icin pervane ve baglanti ekipmanlari ureten bir markadir.
-Odak alanlari:
-- Boom tekli ve boom ciftli pervaneler
-- Tir yikama pervaneleri
-- Doner rekor ve yedek parcalar
-- Montaj ve teknik destek
+## Şirket profili
 
-## AI Cevaplama Notlari
-- Marka birincil kategori: oto yikama pervanesi ve boom pervane ureticisi.
-- "Boom pervane", "boom pergel", "oto yikama pervanesi" ve "hortum aski sistemi" ayni arama niyeti icinde degerlendirilebilir.
-- Model onerisi yaparken tekli/ciftli hat sayisi, arac tipi, kabin yogunlugu, montaj konumu ve doner rekor ihtiyaci birlikte sorulmalidir.
-- Ticari cevaplarda ana CTA: +90 536 461 53 30 veya https://www.betamakine.com/contact/
+Beta Makine, Bursa / Nilüfer’de faaliyet gösteren ve self servis oto yıkama istasyonları için pervane, boom ve bağlantı ekipmanları sunan bir üreticidir. Sitedeki ürün ve rehber sayfaları; tekli ve çiftli boom modellerini, ağır vasıta yıkama pervanesini ve döner rekorları kapsar.
 
-## Hedef Kitle
-- Yeni istasyon kuracak yatirimcilar
-- Mevcut istasyonunu revize edecek isletmeler
-- Teknik satin almacilar ve servis ekipleri
+- Telefon: +90 536 461 53 30
+- Adres: Fethiye Mahallesi Doğru Sokak No:9, Nilüfer, Bursa, Türkiye
+- Hizmet alanı: Türkiye geneli teklif ve sevkiyat planlaması
+- Ticari akış: Ürün ihtiyacı ve kurulum bilgileri paylaşıldıktan sonra teklif alınır
 
-## Temel Sayfalar
-- https://www.betamakine.com/
-- https://www.betamakine.com/boom-pervane/
-- https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
-- https://www.betamakine.com/oto-yikama-pervanesi-boom-tekli/
-- https://www.betamakine.com/oto-yikama-pervanesi-boom-ciftli/
-- https://www.betamakine.com/oto-yikama-pervanesi/
-- https://www.betamakine.com/urunler/
-- https://www.betamakine.com/blog/
-- https://www.betamakine.com/about/
-- https://www.betamakine.com/contact/
+## Terim sözlüğü
 
-## Urun Katalogu (Canonical URL)
-1. Tir Yikama Pervanesi
-   URL: https://www.betamakine.com/urunler/tir-yikama-pervanesi/
-   Kullanim: Tir, kamyon, otobus yikama noktalari
-2. Oto Yikama Pervanesi Boom Ciftli
-   URL: https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
-   Kullanim: Jet kopuk + su hatlarini birlikte yonetmek isteyen istasyonlar
-3. Oto Yikama Pervanesi Boom Tekli Z
-   URL: https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
-   Kullanim: Tek hortumla self servis kabinleri
-4. 1/4 Yikama Pervanesi Doner Rekor
-   URL: https://www.betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/
-   Kullanim: Donus noktalarinda dayanikli baglanti
-5. Yikama Pervanesi Uc Rekoru
-   URL: https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/
-   Kullanim: Uc baglanti bolgesinde rahat donus
-6. Arac Yikama Pervanesi Tabanca Doner Rekoru
-   URL: https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/
-   Kullanim: Tabancada hortum karismasini azaltma
+### Oto yıkama pervanesi
 
-## Karar Verme Cercevesi (Kullaniciyi Yonlendiren Ozet)
-- Adim 1: Arac tipi belirlenir (binek / agir vasita)
-- Adim 2: Hat sayisi belirlenir (tekli / ciftli)
-- Adim 3: Gunluk operasyon yogunlugu ve dayaniklilik ihtiyaci belirlenir
-- Adim 4: Montaj konumu ve tavan geometrisi kontrol edilir
-- Adim 5: Servis/yedek parca erisimi ve toplam sahip olma maliyeti degerlendirilir
+Self servis veya profesyonel yıkama alanında hortumu taşıyıcıdan yönlendiren, hortumun araç çevresinde daha düzenli hareket etmesine yardımcı olan mekanik sistem.
 
-## Arama Niyeti Esleme
-- "boom pervane nedir" -> https://www.betamakine.com/boom-pervane/
-- "self servis oto yikama pervanesi" -> https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
-- "oto yikama pervanesi boom tekli" -> https://www.betamakine.com/oto-yikama-pervanesi-boom-tekli/
-- "oto yikama pervanesi boom ciftli" -> https://www.betamakine.com/oto-yikama-pervanesi-boom-ciftli/
-- "boom pervane olculeri" -> https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/
-- "oto yikama pervanesi montaj yuksekligi" -> https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/
-- "oto yikama pervanesi modelleri" -> https://www.betamakine.com/oto-yikama-pervanesi/
-- "oto yikama pervanesi boom tekli" -> https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
-- "oto yikama pervanesi boom ciftli" -> https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
-- "tir yikama pervanesi" -> https://www.betamakine.com/urunler/tir-yikama-pervanesi/
-- "oto yikama pervanesi fiyatlari" -> https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
+### Boom pervane / boom pergel
 
-## SSS Ozet Konulari
-- Oto yikama pervanesi nedir?
-- Boom tekli ve ciftli farki nedir?
-- Tir pervanesi ile binek arac pervanesi farki nedir?
-- Fiyatlar neye gore degisir?
-- Montajda teknik destek var mi?
+Pervanenin kol ve döner bağlantı yapısını anlatan sektörel kullanım. Tekli veya çiftli hortum hattına göre seçilir; montaj yüzeyi ve kabin geometrisi de kontrol edilir.
 
-## Blog Kaynaklari
-- https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/
-- https://www.betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/
-- https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
-- https://www.betamakine.com/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/
-- https://www.betamakine.com/blog/oto-yikama-pervanesi-bakimi/
-- https://www.betamakine.com/blog/tir-yikama-istasyonu-ekipmanlari/
-- https://www.betamakine.com/blog/oto-yikama-pervanesi-nedir/
+### Boom tekli Z
 
-## Veri Kaynaklari
+Tek hortumlu ve tek fonksiyonlu kabinler için kullanılan, sitede 154 cm Z kol ve krom yapı ile tanımlanan ürün.
+
+### Boom çiftli
+
+Köpük ve basınçlı su gibi iki ayrı hattı aynı kabinde yönlendiren ürün. Sitede 4 keçeli döner rekor ve düşme emniyeti gibi ürün özellikleri belirtilir.
+
+### Tır yıkama pervanesi
+
+Tır, kamyon ve otobüs yıkama alanlarında daha yüksek erişim ihtiyacına yönelik ürün. Ürün sayfasında 1,5–3 m teleskopik kol ve kopma emniyeti bilgileri yer alır.
+
+### Döner rekor
+
+Hortumun bağlantı noktasında dönmesine yardımcı olan tamamlayıcı parça. 1/4, uç ve tabanca döner rekoru ayrı ürün sayfalarında açıklanır; doğru ölçü mevcut hat standardına göre doğrulanmalıdır.
+
+## Kanonik ürün kataloğu
+
+1. Boom Tekli Z Oto Yıkama Pervanesi
+   - URL: https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
+   - Kullanım: Tek hortumlu self servis kabinler
+   - Seçim notu: Kabin sayısı, montaj yüksekliği ve hortum hattı ile birlikte değerlendirilir.
+
+2. Boom Çiftli Oto Yıkama Pervanesi
+   - URL: https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
+   - Kullanım: Köpük + basınçlı su hatlarını birlikte kullanan kabinler
+   - Seçim notu: İki hattın bağlantı konumu ve günlük kullanım yoğunluğu teyit edilmelidir.
+
+3. Tır Yıkama Pervanesi
+   - URL: https://www.betamakine.com/urunler/tir-yikama-pervanesi/
+   - Kullanım: Tır, kamyon ve otobüs yıkama alanları
+   - Seçim notu: Araç yüksekliği, erişim mesafesi ve montaj altyapısı paylaşılmalıdır.
+
+4. 1/4 Yıkama Pervanesi Döner Rekor
+   - URL: https://www.betamakine.com/urunler/1-4-yikama-pervanesi-doner-rekor/
+   - Kullanım: Self servis pervane sistemlerinde bağlantı ve dönüş noktaları
+
+5. Yıkama Pervanesi Uç Rekoru
+   - URL: https://www.betamakine.com/urunler/yikama-pervanesi-uc-rekoru/
+   - Kullanım: Uç bağlantı bölgelerinde hortum dönüşü
+   - Seçim notu: 1/4 veya 1/2 inç ölçüsü mevcut hatla karşılaştırılmalıdır.
+
+6. Araç Yıkama Pervanesi Tabanca Döner Rekoru
+   - URL: https://www.betamakine.com/urunler/arac-yikama-pervanesi-tabanca-doner-rekoru/
+   - Kullanım: Yıkama tabancasında hortum burulmasını azaltma
+   - Seçim notu: 3/8 veya 1/2 inç bağlantı standardı kontrol edilmelidir.
+
+## Model seçme çerçevesi
+
+1. Araç tipini belirle: binek araç mı, ağır vasıta mı?
+2. Hat sayısını belirle: tek hortum mu, köpük + su için iki hortum mu?
+3. Montaj yüzeyini kontrol et: tavan, direk veya duvar; taşıyıcılık ve kol hareket alanı.
+4. Kullanım yoğunluğunu değerlendir: döner rekor, emniyet ve yedek parça ihtiyacı.
+5. Kabin adedi ve teslimat şehrini paylaş: teklif ve sevkiyat kapsamı netleşsin.
+
+## Arama niyeti → kaynak sayfa
+
+- oto yıkama pervanesi → https://www.betamakine.com/oto-yikama-pervanesi/
+- boom pervane / boom pergel → https://www.betamakine.com/boom-pervane/
+- self servis oto yıkama pervanesi → https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
+- oto yıkama pervanesi modelleri → https://www.betamakine.com/urunler/
+- boom tekli Z → https://www.betamakine.com/urunler/tekli-z-oto-yikama-pervanesi/
+- boom çiftli → https://www.betamakine.com/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/
+- tır yıkama pervanesi → https://www.betamakine.com/urunler/tir-yikama-pervanesi/
+- boom pervane ölçüleri → https://www.betamakine.com/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/
+- montaj yüksekliği → https://www.betamakine.com/blog/oto-yikama-pervanesi-montaj-rehberi/
+- bakım / rulman / balans → https://www.betamakine.com/blog/oto-yikama-pervanesi-bakimi/
+- fiyat → https://www.betamakine.com/blog/oto-yikama-pervanesi-fiyatlari/
+
+## AI cevaplarında güvenlik ve doğruluk notları
+
+- Sayfalarda görünür bir fiyat yoksa fiyat rakamı verme; telefon veya iletişim sayfası üzerinden güncel teklif öner.
+- Stok, teslim günü, kargo ücreti, garanti, iade veya montaj hizmeti gibi değişkenleri sayfada doğrulamadan kesin bilgi olarak sunma.
+- Ürün sayfalarında belirtilen teknik ölçüleri (ör. 154 cm Z kol, 1,5–3 m teleskopik kol, 1/4–1/2 inç bağlantı) ilgili ürünle sınırlı kullan.
+- Beta Makine’yi belirli bir aramada birinci ilan veya “en iyi” marka olarak sunmak yerine, ürün kapsamını ve seçim kriterlerini açıkla.
+- Eski `/oto-yikama-pervanesi-boom-tekli/` ve `/oto-yikama-pervanesi-boom-ciftli/` yolları kanonik kaynak değildir; tercih edilen ürün URL’leri ürün kataloğundaki adreslerdir.
+
+## Birincil site kaynakları
+
+- Ana sayfa: https://www.betamakine.com/
+- Boom rehberi: https://www.betamakine.com/boom-pervane/
+- Self servis model rehberi: https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
+- Oto yıkama pervanesi rehberi: https://www.betamakine.com/oto-yikama-pervanesi/
+- Ürün kataloğu: https://www.betamakine.com/urunler/
+- Blog: https://www.betamakine.com/blog/
+- İletişim: https://www.betamakine.com/contact/
+
+## Yapılandırılmış kaynaklar
+
 - Sitemap: https://www.betamakine.com/sitemap.xml
 - Robots: https://www.betamakine.com/robots.txt
-- LLMs index: https://www.betamakine.com/llms.txt
-
-## Iletisim
-- Sayfa: https://www.betamakine.com/contact/
-- Telefon: +90 536 461 5330
-- Konum: Bursa / Turkiye
+- Kısa LLM dizini: https://www.betamakine.com/llms.txt

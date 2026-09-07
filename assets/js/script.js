@@ -8,9 +8,13 @@
     const canonicalHost = 'www.betamakine.com';
     const needsHttps = window.location.protocol !== 'https:';
     const needsWwwHost = host !== canonicalHost;
+    const hasIndexPath = /\/index\.html$/i.test(window.location.pathname);
 
-    if (isTargetHost && (needsHttps || needsWwwHost)) {
-        const targetUrl = `https://${canonicalHost}${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (isTargetHost && (needsHttps || needsWwwHost || hasIndexPath)) {
+        const canonicalPath = hasIndexPath
+            ? window.location.pathname.replace(/index\.html$/i, '')
+            : window.location.pathname;
+        const targetUrl = `https://${canonicalHost}${canonicalPath}${window.location.search}${window.location.hash}`;
         window.location.replace(targetUrl);
     }
 })();
@@ -871,6 +875,61 @@ class WhatsAppFloatingButton {
 }
 
 // ===================================
+// CONTACT CONVERSION TRACKING
+// ===================================
+
+function initContactConversionTracking() {
+    const trackedEvents = {
+        phone: 'phone_click',
+        whatsapp: 'whatsapp_click',
+        quote: 'quote_click'
+    };
+
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href') || '';
+        const absoluteHref = link.href || href;
+        const normalizedHref = absoluteHref.toLowerCase();
+        let eventName = '';
+
+        if (href.toLowerCase().startsWith('tel:')) {
+            eventName = trackedEvents.phone;
+        } else if (normalizedHref.includes('wa.me/') || normalizedHref.includes('whatsapp.com/')) {
+            eventName = trackedEvents.whatsapp;
+        } else if (
+            link.matches('.hero-button, .contact-button, .contact-card-link, .footer-cta-link') ||
+            normalizedHref.includes('/contact/')
+        ) {
+            eventName = trackedEvents.quote;
+        }
+
+        if (!eventName) return;
+
+        const eventData = {
+            event: eventName,
+            link_url: absoluteHref,
+            link_text: (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120),
+            page_path: window.location.pathname
+        };
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(eventData);
+
+        // If a future GA4/GTM tag is added, the same normalized event is ready
+        // without requiring changes to every page template.
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, {
+                link_url: eventData.link_url,
+                link_text: eventData.link_text,
+                page_path: eventData.page_path
+            });
+        }
+    });
+}
+
+// ===================================
 // INITIALIZE ALL COMPONENTS
 // ===================================
 
@@ -888,6 +947,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { new ProductSeoClusterFloatingPanel(); } catch (e) { console.debug('ProductSeoClusterFloatingPanel not active on this page'); }
     try { new BlogSidebarCurrentLink(); } catch (e) { console.debug('BlogSidebarCurrentLink not active on this page'); }
     try { new WhatsAppFloatingButton(); } catch (e) { console.error('WhatsAppFloatingButton failed:', e); }
+    try { initContactConversionTracking(); } catch (e) { console.error('Conversion tracking failed:', e); }
 
     // Log initialization
     console.log('Beta Makine - Website Initialized');
