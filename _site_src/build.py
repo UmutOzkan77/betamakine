@@ -1,0 +1,143 @@
+"""Build the complete crawlable catalogue. No client framework or hosting changes."""
+from pathlib import Path
+from html import escape as e
+from urllib.parse import quote
+import json, re, hashlib
+from bs4 import BeautifulSoup
+
+ROOT=Path(__file__).resolve().parents[1]
+DATA=json.loads((ROOT/'_site_src/content.json').read_text())
+DOMAIN='https://www.betamakine.com'
+DATE='2026-09-08'
+WA='https://wa.me/905364615330'
+MAP='https://maps.google.com/?q=Fethiye+Mahallesi+Do%C4%9Fru+Sokak+No%3A9+Nil%C3%BCfer+Bursa'
+PRODUCTS=DATA['products']
+P={p['route'].split('/')[-2]:p for p in PRODUCTS}
+ORDER=['tekli-z-oto-yikama-pervanesi','ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi','tir-yikama-pervanesi','1-4-yikama-pervanesi-doner-rekor','yikama-pervanesi-uc-rekoru','arac-yikama-pervanesi-tabanca-doner-rekoru']
+PRODUCTS=[P[k] for k in ORDER]
+EXTRA=[
+ ('Tekli Z pervane','Tek hortumlu kabinler','154 cm Z kol · 360° dönüş',[('Kol uzunluğu','154 cm'),('Hortum hattı','Tek hortum'),('Dönüş','360°'),('Montaj','Tavan, direk veya duvar')]),
+ ('Çiftli boom pervane','Köpük ve su için iki hat','İki hortum · 4 keçeli sistem',[('Hortum hattı','Jet köpük + normal yıkama'),('Sızdırmazlık','4 keçeli sistem'),('Dönüş','360°'),('Montaj','Tavan, direk veya duvar')]),
+ ('Tır yıkama pervanesi','Ağır vasıta yıkama alanları','1,5–3 m teleskopik kol',[('Kapalı uzunluk','1,5 metre'),('Açık uzunluk','3 metre'),('Kol yapısı','Teleskopik, açılır kapanır'),('Emniyet','Kopma emniyeti')]),
+ ('1/4 döner rekor','Pervane bağlantı parçası','1/4 bağlantı · 2 / 4 keçe',[('Diş ölçüsü','1/4 inç'),('Seçenekler','2 veya 4 keçeli sistem'),('Kullanım','Boom pervane bağlantısı')]),
+ ('Pervane uç rekoru','Hortumun kol ucu bağlantısı','1/4 veya 1/2 bağlantı',[('Ölçü seçenekleri','1/4 veya 1/2 inç'),('Dönüş','360°'),('Kullanım','Pervane uç bağlantısı')]),
+ ('Tabanca döner rekoru','Tabanca ve hortum bağlantısı','3/8 veya 1/2 · 360° dönüş',[('Diş seçenekleri','3/8 veya 1/2 inç'),('Dönüş','360°'),('Kullanım','Yıkama tabancası bağlantısı')])]
+for p,x in zip(PRODUCTS,EXTRA): p.update(short=x[0],use=x[1],summary=x[2],specs=x[3])
+ARTICLES=DATA['articles']
+ORG={'@type':'Organization','@id':DOMAIN+'/#organization','name':'Beta Makine','legalName':'Şener Çubukçu BE_TA Makine','url':DOMAIN+'/','logo':DOMAIN+'/assets/images/logo.webp','telephone':'+90-536-461-53-30','address':{'@type':'PostalAddress','streetAddress':'Fethiye Mahallesi Doğru Sokak No:9','addressLocality':'Nilüfer','addressRegion':'Bursa','addressCountry':'TR'}}
+WA_ICON='''<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>'''
+def link(url,label,cls=''):
+ return f'<a href="{e(url)}"'+(f' class="{cls}"' if cls else '')+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https://wa.me') or url==MAP else '')+f'>{label}</a>'
+def img(src,alt,lazy=True,cls=''):
+ return f'<img src="{quote(src,safe="/.-")}" alt="{e(alt)}" width="1024" height="768" loading="{"lazy" if lazy else "eager"}" decoding="async"'+(' fetchpriority="high"' if not lazy else '')+f' class="{cls}">'
+def button(url,label,secondary=False):return link(url,label,'button'+(' secondary' if secondary else ''))
+def faq(items):return '<div class="faq">'+''.join(f'<details><summary>{e(x["q"])}</summary><p>{e(x["a"])}</p></details>' for x in items)+'</div>'
+def intro(kicker,title,desc):return f'<header class="page-intro"><p class="eyebrow">{kicker}</p><h1>{title}</h1><p class="lead">{desc}</p></header>'
+def cards(items):
+ return '<div class="product-grid">'+''.join(f'<article class="product-card">{link(p["route"],img(p["images"][0],p["name"]),"card-image")}<div class="card-copy"><p class="eyebrow">{p["use"]}</p><h3>{link(p["route"],p["short"])}</h3><p>{p["summary"]}</p>{link(p["route"],"Ürünü incele <span aria-hidden=\"true\">↗</span>","text-link")}</div></article>' for p in items)+'</div>'
+def cta():return '<section class="quote-strip"><div><p class="eyebrow">Doğrudan üreticiyle görüşün</p><h2>İstasyonunuza uygun ürünü<br>birlikte belirleyelim.</h2><p>Kabin ölçüsü, hat sayısı ve teslimat şehrini paylaşmanız yeterli.</p></div>'+button('/contact/','Teklif ve teknik destek ↗')+'</section>'
+def section(title,body,kicker='',id=''):
+ return f'<section class="section"'+(f' id="{id}"' if id else '')+f'><div class="section-heading"><div><p class="eyebrow">{kicker}</p><h2>{title}</h2></div></div>{body}</section>'
+def comparison():
+ return '<div class="table-wrap" tabindex="0" role="region" aria-label="Pervane modellerini karşılaştırın"><table><caption>Üç pervane modeli, üç farklı kullanım</caption><thead><tr><th scope="col">Kriter</th>'+''.join(f'<th scope="col">{link(p["route"],p["short"])}</th>' for p in PRODUCTS[:3])+'</tr></thead><tbody>'+''.join('<tr><th scope="row">'+r[0]+'</th>'+''.join('<td>'+v+'</td>' for v in r[1:])+'</tr>' for r in [('Kullanım','Tek hortumlu kabin','Köpük + su için iki hat','Tır, kamyon, otobüs'),('Kol / mekanizma','154 cm Z kol','Çift hortum taşıma','1,5–3 m teleskopik kol'),('Öne çıkan detay','360° dönüş','4 keçeli sistem','Kopma emniyeti'),('Teklif öncesi','Kabin ve montaj ölçüsü','İki hattın yerleşimi','Araç yüksekliği ve erişim')])+'</tbody></table></div>'
+
+ROUTES=[]
+def layout(route,title,description,body,kind='page',crumb=None,schema=None,image=None):
+ image=image or '/assets/images/og-image.webp'
+ nav=[('/urunler/','Ürünler'),('/oto-yikama-pervanesi/','Model seçimi'),('/blog/','Bilgi merkezi'),('/about/','Hakkımızda')]
+ navhtml=''.join(f'<a href="{u}"'+(' aria-current="page"' if route==u else '')+f'>{n}</a>' for u,n in nav)
+ crumbs=[('/','Ana sayfa')]+(crumb or [])
+ bread='' if route=='/' else '<nav class="breadcrumbs wrap" aria-label="Sayfa yolu">'+'<span aria-hidden="true">/</span>'.join(link(u,e(n)) for u,n in crumbs)+f'<span aria-hidden="true">/</span><span aria-current="page">{e(title.split(" | ")[0])}</span></nav>'
+ graph=[ORG,{'@type':'WebSite','@id':DOMAIN+'/#website','url':DOMAIN+'/','name':'Beta Makine','publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}, {'@type':'WebPage','@id':DOMAIN+route+'#webpage','url':DOMAIN+route,'name':title,'description':description,'isPartOf':{'@id':DOMAIN+'/#website'},'inLanguage':'tr-TR'}]
+ if route!='/':graph.append({'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':i+1,'name':n,'item':DOMAIN+u} for i,(u,n) in enumerate(crumbs+[(route,title.split(' | ')[0])])]})
+ graph+=schema or []
+ csshash=hashlib.sha256((ROOT/'assets/css/style.css').read_bytes()).hexdigest()[:10]
+ jshash=hashlib.sha256((ROOT/'assets/js/script.js').read_bytes()).hexdigest()[:10]
+ text=f'''<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{e(title)}</title>
+<meta name="description" content="{e(description)}"><meta name="robots" content="{'noindex, follow' if route=='/404.html' else 'index, follow, max-image-preview:large'}"><link rel="canonical" href="{DOMAIN+route}">
+<meta name="theme-color" content="#142D3D"><link rel="icon" href="/assets/images/favicon.png"><link rel="stylesheet" href="/assets/css/style.css?v={csshash}">
+<meta property="og:type" content="{'article' if kind=='article' else 'website'}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{DOMAIN+route}"><meta property="og:image" content="{DOMAIN+quote(image,safe='/.-')}"><meta property="og:locale" content="tr_TR"><meta property="og:site_name" content="Beta Makine"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('</','<\\/')}</script><script defer src="/assets/js/script.js?v={jshash}"></script></head>
+<body class="{kind}"><a class="skip-link" href="#main">Ana içeriğe geç</a>
+<div class="topline"><div class="wrap"><span>Bursa'dan · Yerli üretim</span>{link('tel:+905364615330','0536 461 53 30')}</div></div>
+<header class="site-header"><div class="wrap nav-wrap">{link('/', '<img src="/assets/images/logo.webp" width="156" height="60" alt="Beta Makine ana sayfa">','brand')}<button class="menu-toggle" hidden aria-expanded="false" aria-controls="main-nav">Menü <span aria-hidden="true">☰</span></button><nav id="main-nav" aria-label="Ana menü">{navhtml}{button('/contact/','İletişim ↗')}</nav></div></header>
+{bread}<main id="main" class="wrap" tabindex="-1">{body}</main>
+<footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand">{link('/','<img src="/assets/images/logo.webp" width="156" height="60" alt="Beta Makine" loading="lazy">')}<p>Oto yıkama pervanesi ve<br>döner bağlantı parçaları.</p><small>Şener Çubukçu BE_TA Makine</small></div><nav aria-label="Ürün bağlantıları"><h2>Ürünler</h2>{''.join(link(p['route'],p['short']) for p in PRODUCTS)}</nav><nav aria-label="Rehber bağlantıları"><h2>Keşfedin</h2>{link('/oto-yikama-pervanesi/','Model karşılaştırması')}{link('/boom-pervane/','Boom / pergel sistemleri')}{link('/self-servis-oto-yikama-pervanesi/','Self servis kurulum planı')}{link('/blog/','Teknik rehberler')}{link('/about/','Hakkımızda')}</nav><div><h2>Görüşelim</h2><address>Fethiye Mahallesi Doğru Sokak No:9<br>Nilüfer / Bursa</address>{link('tel:+905364615330','0536 461 53 30','footer-phone')}<p>09:00–18:00 · Pazar kapalı</p>{link(MAP,'Haritada aç ↗')}</div></div><div class="wrap footer-bottom"><small>© 2026 Beta Makine</small>{link('/sitemap.xml','Site haritası')}</div></footer>
+<aside class="contact-dock" aria-label="Hızlı iletişim"><div class="wrap"><span>Ürün seçimi veya yedek parça için</span>{link(WA,WA_ICON+'<span>Bize WhatsApp ile ulaşın</span>','whatsapp-link')}</div></aside></body></html>'''
+ path=ROOT/(route.strip('/')+'/index.html' if route not in ['/','/404.html'] else ('index.html' if route=='/' else '404.html'))
+ path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text+'\n')
+ if route!='/404.html':ROUTES.append(route)
+
+def home():
+ p=PRODUCTS[0]
+ hero=f'''<section class="hero"><div class="hero-copy"><p class="eyebrow">Oto yıkama pervanesi üreticisi / Bursa</p><h1>Hareket özgürlüğü.<br><span>Her yıkamada.</span></h1><p class="lead">Oto yıkama pervanesi, boom sistemleri ve döner rekorlar. Self servis kabinlerden ağır vasıta hatlarına, doğrudan üreticiden.</p><div class="actions">{button('/urunler/','Ürünleri keşfedin ↗')}{link('/oto-yikama-pervanesi/','Hangi model bana uygun?','text-link')}</div><p class="hero-footnote">Tekli Z · Çiftli boom · Teleskopik tır pervanesi</p></div><figure class="hero-plate">{img(p['images'][0],p['name'],False)}<figcaption><span>Tekli Z pervane</span><span class="dimension">154 cm <span aria-hidden="true">↔</span> 360°</span></figcaption></figure></section>'''
+ body=hero+section('İşinize uygun ekipman.',cards(PRODUCTS[:3]),'Pervane sistemleri')
+ body+='<section class="parts-banner"><div><p class="eyebrow">Döner bağlantı parçaları</p><h2>Küçük parça.<br>Önemli bağlantı.</h2><p>Pervane, hortum ve tabanca bağlantıları için döner rekor seçeneklerini inceleyin.</p>'+button('/urunler/#yedek-parcalar','Yedek parçaları görün',True)+'</div><div class="parts-preview">'+''.join(link(x['route'],img(x['images'][0],x['short'])+'<span>'+x['short']+'</span>') for x in PRODUCTS[3:])+'</div></section>'
+ body+=section('Seçimden bakıma.', '<div class="guide-grid">'+guide('/oto-yikama-pervanesi/','Model seçimi','Tekli, çiftli veya teleskopik?','Hat sayısına ve araç tipine göre karşılaştırın.')+guide('/self-servis-oto-yikama-pervanesi/','Kurulum planı','Yeni bir istasyon mu kuruyorsunuz?','Kabin ölçüsü, montaj ve bağlantıları birlikte planlayın.')+guide('/blog/','Bilgi merkezi','Ekipmanınızı yakından tanıyın.','Montaj, bakım ve arıza belirtileri için teknik rehberler.')+'</div>','Doğru bilgiyle başlayın')+cta()
+ layout('/','Oto Yıkama Pervanesi ve Boom Üreticisi | Beta Makine','Bursa merkezli Beta Makine: tekli Z, çiftli boom, teleskopik tır yıkama pervanesi ve döner rekorlar. Modelleri karşılaştırın, üreticiden teklif alın.',body,'home',image=p['images'][0])
+def guide(url,kicker,title,desc):return f'<article class="guide-card"><p class="eyebrow">{kicker}</p><h3>{link(url,title)}</h3><p>{desc}</p>{link(url,"İnceleyin ↗","text-link")}</article>'
+
+def products():
+ layout('/urunler/','Pervane ve Döner Rekor Ürün Kataloğu | Beta Makine','Tekli Z, çiftli boom ve tır yıkama pervanesi; 1/4 döner rekor, uç rekor ve tabanca bağlantı parçaları. Altı ürünü ve teknik özelliklerini inceleyin.',intro('Ürün kataloğu','Pervane ve döner rekorlar.','Üç pervane modeli ve tamamlayıcı bağlantı parçaları. Kullanımınıza uygun ürünü seçin; ölçülerini, fotoğraflarını ve teklif seçeneklerini inceleyin.')+'<nav class="jump-links" aria-label="Ürün grupları">'+link('#pervaneler','Pervane sistemleri ↓')+link('#yedek-parcalar','Döner rekorlar ↓')+'</nav>'+section('Pervane sistemleri',cards(PRODUCTS[:3]),id='pervaneler')+section('Döner rekorlar ve yedek parçalar',cards(PRODUCTS[3:]),id='yedek-parcalar')+cta(),kind='catalogue',schema=[{'@type':'ItemList','itemListElement':[{'@type':'ListItem','position':i+1,'url':DOMAIN+p['route'],'name':p['name']} for i,p in enumerate(PRODUCTS)]}])
+ for p in PRODUCTS:
+  thumbs='<div class="thumbnails" aria-label="Ürün görünümleri">'+''.join(f'<a href="{quote(src,safe="/.-")}" class="thumbnail" data-gallery-src="{quote(src,safe="/.-")}" aria-label="{e(p["short"])} — görünüm {i+1}"'+(' aria-current="true"' if i==0 else '')+'>'+img(src,p['short']+' — görünüm '+str(i+1))+'</a>' for i,src in enumerate(p['images']))+'</div>'
+  details='<dl class="specs">'+''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k,v in p['specs'])+'</dl>'
+  body=f'<section class="product-hero"><div class="gallery"><div class="main-photo">{img(p["images"][0],p["name"],False,"gallery-main")}</div>{thumbs}<p class="caption">Gerçek ürün fotoğrafları · Farklı görünüm için küçük görsele dokunun.</p></div><div class="product-overview"><p class="eyebrow">{p["use"]}</p><h1>{e(p["name"])}</h1><p class="lead">{p["summary"]}</p>{details}<div class="product-quote"><h2>Üreticiden teklif alın</h2><p>Adet, bağlantı seçeneği ve teslimat şehrine göre fiyatlandırılır. Stok, teslim süresi ve garanti kapsamı yazılı teklifte netleştirilir.</p>{button(WA+"?text="+quote(p["name"]+" için fiyat ve uyumluluk bilgisi almak istiyorum."),"WhatsApp ile teklif isteyin ↗")}<p>{link("tel:+905364615330","veya 0536 461 53 30 numarasını arayın")}</p></div></div></section>'
+  body+='<section class="product-body section"><div class="section-heading"><div><p class="eyebrow">Ürünü tanıyın</p><h2>Detaylar ve kullanım alanları</h2></div></div><div class="prose">'+p['body']+'</div></section>'
+  if p['faq']:body+=section('Sık sorulan sorular',faq(p['faq']))
+  related=[x for x in PRODUCTS if x!=p and (PRODUCTS.index(x)<3 if PRODUCTS.index(p)<3 else PRODUCTS.index(x)>=3)]
+  body+=section('Diğer seçenekleri inceleyin',cards(related))+cta()
+  schema=[{'@type':'Product','name':p['name'],'url':DOMAIN+p['route'],'image':[DOMAIN+quote(i,safe='/.-') for i in p['images']],'description':p['description'],'brand':{'@type':'Brand','name':'Beta Makine'},'manufacturer':{'@id':DOMAIN+'/#organization'},'additionalProperty':[{'@type':'PropertyValue','name':k,'value':v} for k,v in p['specs']]}]
+  if p['faq']:schema.append({'@type':'FAQPage','mainEntity':[{'@type':'Question','name':f['q'],'acceptedAnswer':{'@type':'Answer','text':f['a']}} for f in p['faq']]})
+  layout(p['route'],p['title'],p['description'],body,'product',[('/urunler/','Ürünler')],schema,p['images'][0])
+
+def landings():
+ body=intro('Model seçim rehberi','Hangi oto yıkama<br>pervanesi size uygun?','Önce araç tipini, sonra aynı kabinde kullanılacak hortum sayısını belirleyin. Tekli Z, çiftli boom ve tır pervanesini bu iki ihtiyaca göre karşılaştırın.')
+ body+='<div class="decision-grid">'+guide(PRODUCTS[0]['route'],'Tek hortum','Tekli Z pervane','Binek araç kabininde tek su veya köpük hattı için 154 cm Z kol.')+guide(PRODUCTS[1]['route'],'Köpük + su','Çiftli boom pervane','Aynı kabinde iki ayrı hortumu taşıyan, 4 keçeli sistem.')+guide(PRODUCTS[2]['route'],'Ağır vasıta','Teleskopik tır pervanesi','Tır, kamyon ve otobüs hatları için 1,5–3 metre açılır kapanır kol.')+'</div>'
+ body+=section('Farkları yan yana görün.',comparison())+section('Kararı vermeden önce','<div class="prose"><p>Hortum sayısı, kabin sayısından farklıdır: bir istasyonda çok sayıda tekli pervane bulunabilir. Çiftli model seçiminin temel nedeni yoğunluk tek başına değil, aynı kabinde iki ayrı hat ihtiyacıdır.</p><p>Kabin eni, boyu, montaj yüksekliği ve hortum uzunluğunu birlikte değerlendirin. Ürün üzerindeki kol uzunluğu, kuruluma uygun dönüş açıklığıyla aynı şey değildir.</p><p>'+link('/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/','Ölçü ve yerleşim rehberini okuyun →')+'</p></div>')+cta()
+ layout('/oto-yikama-pervanesi/','Oto Yıkama Pervanesi Seçimi ve Karşılaştırma | Beta Makine','Hangi oto yıkama pervanesi size uygun? Tekli Z, çiftli boom ve teleskopik tır modellerini hat sayısı, kol yapısı ve kullanım alanına göre karşılaştırın.',body)
+ body=intro('Boom / pergel sistemleri','Hortum yerde değil,<br>hareketin içinde.','Boom pervane; oto yıkama hortumunu yukarıdan taşıyan, araç çevresinde yönlendiren döner kol sistemidir. Sektörde pergel veya hortum askı pervanesi olarak da adlandırılır.')
+ body+='<div class="split-feature">'+img(PRODUCTS[1]['images'][0],PRODUCTS[1]['name'],False)+'<div class="prose"><h2>Birbirini tamamlayan üç parça</h2><dl class="explainer"><dt>Taşıyıcı kol</dt><dd>Hortumun kabin içinde hareket edeceği alanı belirler.</dd><dt>Döner bağlantı</dt><dd>Akışkan hattının dönme noktasındaki bağlantısını sağlar.</dd><dt>Montaj yüzeyi</dt><dd>Kol ve hortum yükünü taşır; saha koşullarına göre doğrulanır.</dd></dl><p>Bu sistem bir fan ya da motorlu pervane değildir. Kullanıcının hortumu yönlendirmesiyle hareket eder.</p></div></div>'
+ body+=section('Boom pervane seçenekleri',cards(PRODUCTS[:3]))+section('Kurulumda neye dikkat edilir?','<div class="prose"><p>Tavan, direk veya duvar montajı; seçilen ürün, taşıyıcı yüzey ve kabin geometrisine bağlıdır. Kolun tam hareketinde tabela, aydınlatma, araç ve komşu ekipmanlarla temas etmemesi gerekir.</p><p>Basınç, sıcaklık, bağlantı dişi ve kimyasal uyumu yalnızca dış görünüşten anlaşılmaz. Rekor ve hortum seçimini sistemin teknik bilgileriyle doğrulayın.</p>'+link('/oto-yikama-pervanesi/','Modelleri karşılaştırın →')+'</div>')+cta()
+ layout('/boom-pervane/','Boom Pervane ve Pergel Sistemleri | Beta Makine','Boom pervane nedir, hangi parçalardan oluşur? Tekli, çiftli ve teleskopik pergel sistemlerini gerçek ürün fotoğraflarıyla inceleyin.',body)
+ body=intro('Self servis istasyon planı','Kurulumu parça parça<br>değil, birlikte düşünün.','Self servis oto yıkama pervanesi seçimi; kabin, araç, hortum ve montaj yapısı birlikte netleştiğinde kolaylaşır. Teklif öncesi aşağıdaki bilgileri hazırlayın.')
+ body+=section('Teklif öncesi saha bilgileri','<div class="checklist">'+''.join(f'<div><span>{i+1:02}</span><div><h3>{t}</h3><p>{d}</p></div></div>' for i,(t,d) in enumerate([('Araç ve kabin','Binek araç mı, ağır vasıta mı? Kabin adedi, net en ve boy ölçüsü nedir?'),('Hortum hatları','Her kabinde yalnızca su mu, köpük ve su için iki ayrı hat mı kullanılacak?'),('Montaj altyapısı','Tavan, direk veya duvar fotoğrafı; montaj yüksekliği ve taşıyıcı yüzey bilgisi.'),('Mevcut bağlantılar','Hortum ve rekor diş standardı, çalışma basıncı ve kimyasal hattı bilgisi.'),('Teslimat ve kapsam','İstenen adet, teslimat şehri ve teklife dahil olması gereken bağlantı parçaları.')]))+'</div>')
+ body+=section('Önce modeli belirleyin.',comparison())+section('Teklifi aynı kapsamda karşılaştırın.','<div class="prose"><p>Teklifte ürün modeli ve adedi, rekor seçenekleri, dahil olan parçalar, vergi ve taşıma kapsamı ayrı ayrı yazılmalıdır. Üretim süresi, sevkiyat yöntemi, garanti ve teknik destek koşullarını sipariş öncesinde doğrulayın.</p><p>Pompa, kompresör veya komple istasyon kurulumu ile pervane tedariki aynı kapsam değildir. Beta Makine ürün kataloğu pervane ve döner bağlantı parçalarından oluşur.</p>'+link('/blog/self-servis-oto-yikama-istasyonu-ekipman-listesi/','İstasyon ekipman listesini inceleyin →')+'</div>')+cta()
+ layout('/self-servis-oto-yikama-pervanesi/','Self Servis Pervane Kurulum ve Teklif Planı | Beta Makine','Self servis oto yıkama pervanesi için kabin ölçüsü, hortum sayısı, montaj yüzeyi ve bağlantı bilgilerini hazırlayın. Kurulum ve teklif kontrol listesi.',body)
+
+def corporate():
+ body=intro('Beta Makine hakkında','Odağımız belli.<br>Pervane ve bağlantı parçaları.','Bursa Nilüfer’de oto yıkama pervanesi ve yedek parça üretimine odaklanıyoruz. Tekli Z, çiftli boom ve teleskopik tır modellerini, döner rekor seçenekleriyle birlikte sunuyoruz.')
+ body+='<div class="split-feature">'+img(PRODUCTS[2]['images'][0],PRODUCTS[2]['name'],False)+'<div class="prose"><h2>Üründen önce ihtiyacı dinliyoruz.</h2><p>Bir self servis kabiniyle ağır vasıta hattının erişim ihtiyacı aynı değildir. Ürün seçimini araç tipi, hat sayısı, montaj noktası ve mevcut bağlantılar üzerinden değerlendiriyoruz.</p><p>Yerli üretim odağımızı, ürünlerimizle uyumlu döner rekor ve bağlantı parçalarıyla tamamlıyoruz. Model ve parça seçimi için doğrudan bizimle görüşebilirsiniz.</p>'+button('/urunler/','Ürün kataloğunu inceleyin',True)+'</div></div>'
+ body+=section('Açık ve doğrudan iletişim.','<div class="prose"><p><strong>Firma:</strong> Şener Çubukçu BE_TA Makine</p><p><strong>Adres:</strong> Fethiye Mahallesi Doğru Sokak No:9, Nilüfer / Bursa</p><p>Üretim, teslimat ve garanti kapsamını ürününüze özel yazılı teklifte netleştiriyoruz. İhtiyacınız olan ürün fotoğrafı ve kurulum bilgileriyle bize ulaşabilirsiniz.</p></div>')+cta()
+ layout('/about/','Hakkımızda | Bursa Pervane Üreticisi Beta Makine','Beta Makine, Bursa Nilüfer’de oto yıkama pervanesi ve döner bağlantı parçaları üretir. Ürün odağımızı ve firma iletişim bilgilerini öğrenin.',body)
+ body=intro('İletişim / teklif','Birlikte netleştirelim.','Yeni istasyon, mevcut hattın yenilenmesi veya yedek parça ihtiyacı. Ürün ve saha bilgilerinizi paylaşın, doğru seçenek üzerinden görüşelim.')
+ body+='<div class="contact-grid"><section class="contact-primary"><p class="eyebrow">Telefon ve WhatsApp</p><h2>'+link('tel:+905364615330','0536 461 53 30')+'</h2><p>Pazartesi–Cumartesi · 09:00–18:00</p>'+button(WA,WA_ICON+' Bize WhatsApp ile ulaşın')+'<p class="caption">WhatsApp açılır. Mesajınızı göndermeden önce düzenleyebilirsiniz.</p></section><section class="address-card"><h2>Bursa / Nilüfer</h2><address>Şener Çubukçu BE_TA Makine<br>Fethiye Mahallesi Doğru Sokak No:9<br>Nilüfer / Bursa</address>'+link(MAP,'Haritada yol tarifi alın ↗','text-link')+'</section></div>'
+ body+=section('Teklif için ne paylaşmalısınız?','<div class="guide-grid">'+guide('/urunler/','Ürün','Model veya parça adı','Varsa mevcut parçanın fotoğrafı ve bağlantı ölçüsü.')+guide('/self-servis-oto-yikama-pervanesi/','Kurulum','Kabin ve hat bilgisi','Araç tipi, kabin adedi, hortum sayısı ve montaj yüksekliği.')+guide('/blog/oto-yikama-pervanesi-fiyatlari/','Kapsam','Adet ve teslimat şehri','Talep edilen bağlantı parçaları ve sevkiyat kapsamı.')+'</div>')
+ layout('/contact/','İletişim ve Teklif | Beta Makine Bursa','Beta Makine telefon ve WhatsApp: 0536 461 53 30. Fethiye Mahallesi Doğru Sokak No:9, Nilüfer / Bursa. Pervane ve yedek parça teklifi alın.',body)
+
+if __name__=='__main__':
+ from editorial import prepare_article
+ home();products();landings();corporate()
+ for a in ARTICLES: prepare_article(a)
+ categories=['Seçim ve bütçe','Kurulum ve uyum','Bakım ve arıza']
+ listing=intro('Bilgi merkezi','Doğru ekipman.<br>Bilinçli kullanım.','Model seçiminden montaja, bakım planından arıza belirtilerine kadar oto yıkama pervanesi rehberleri.')+'<nav class="jump-links" aria-label="Rehber konuları">'+''.join(link('#konu-'+str(i),c+' ↓') for i,c in enumerate(categories))+'</nav>'
+ for i,c in enumerate(categories):listing+=section(c,'<div class="article-list">'+''.join(f'<article><div><p class="eyebrow">{a["category"]}</p><h3>{link(a["route"],a["name"])}</h3><p>{e(a["description"])}</p></div>{link(a["route"],"Rehberi okuyun ↗","text-link")}</article>' for a in ARTICLES if a['category']==c)+'</div>',id='konu-'+str(i))
+ layout('/blog/','Oto Yıkama Pervanesi Teknik Bilgi Merkezi | Beta Makine','Oto yıkama pervanesi model seçimi, fiyat teklifi, kurulum, bakım ve arıza belirtileri. İhtiyacınıza göre düzenlenmiş 18 teknik rehber.',listing)
+ for a in ARTICLES:
+  s=BeautifulSoup(a['body'],'html.parser')
+  toc=[]
+  for i,h in enumerate(s.select('h2')):
+   h['id']='bolum-'+str(i+1);toc.append(link('#'+h['id'],e(h.get_text(' ',strip=True))))
+  for t in s.select('table'):
+   w=s.new_tag('div',attrs={'class':'table-wrap','tabindex':'0','role':'region','aria-label':'Teknik karşılaştırma tablosu'});t.wrap(w)
+   for th in t.select('thead th'):th['scope']='col'
+  body=intro(a['category'],e(a['name']),e(a['description']))+'<p class="article-meta">Beta Makine · Teknik bilgi merkezi <span>İçerik güncellemesi: <time datetime="2026-09-08">8 Eylül 2026</time></span></p><div class="article-layout"><aside class="toc"><h2>Bu rehberde</h2>'+''.join(toc)+'</aside><article class="prose article-copy">'+str(s)+'</article></div>'+cta()
+  schema=[{'@type':'TechArticle','headline':a['name'],'description':a['description'],'dateModified':DATE,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
+  layout(a['route'],a['title'],a['description'],body,'article',[('/blog/','Bilgi merkezi')],schema)
+ layout('/404.html','Sayfa Bulunamadı | Beta Makine','Aradığınız sayfa bulunamadı. Beta Makine ürün kataloğuna veya iletişim sayfasına geçebilirsiniz.',intro('404 / Sayfa bulunamadı','Burada bir sayfa yok.','Bağlantı değişmiş veya adres yanlış yazılmış olabilir. Aradığınız pervaneye ürün kataloğundan ulaşabilirsiniz.')+'<div class="actions">'+button('/urunler/','Ürün kataloğuna git')+button('/contact/','Bize ulaşın',True)+'</div>')
+ for old,target in [('oto-yikama-pervanesi-boom-tekli',PRODUCTS[0]),('oto-yikama-pervanesi-boom-ciftli',PRODUCTS[1])]:
+  (ROOT/old/'index.html').write_text(f'<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(target["name"])} | Beta Makine</title><link rel="canonical" href="{DOMAIN+target["route"]}"><meta http-equiv="refresh" content="0;url={target["route"]}"><meta name="description" content="Güncel ürün detayına geçin."></head><body><main><h1>{e(target["name"])}</h1><p>Ürün sayfası güncellendi.</p>{link(target["route"],"Güncel ürün detayına geçin")}</main></body></html>\n')
+ (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{DOMAIN+r}</loc><lastmod>{DATE}</lastmod></url>\n' for r in sorted(ROUTES))+'</urlset>\n')
+ (ROOT/'_site_src/routes.json').write_text(json.dumps(ROUTES,ensure_ascii=False,indent=2)+'\n')
+ print(f'Built {len(ROUTES)} indexable routes, 2 legacy redirects, and 404.')
