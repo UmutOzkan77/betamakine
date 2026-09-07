@@ -5,7 +5,7 @@
 - Site: https://www.betamakine.com/
 - Marka: Beta Makine
 - Dil: tr-TR
-- Son güncelleme: 2026-09-07
+- Son güncelleme: 2026-09-08
 - Ana kategori: oto yıkama pervanesi, boom/pergel sistemleri, döner rekor ve yıkama ekipmanları
 
 ## Şirket profili
@@ -108,7 +108,7 @@ Hortumun bağlantı noktasında dönmesine yardımcı olan tamamlayıcı parça.
 
 - Ana sayfa: https://www.betamakine.com/
 - Boom rehberi: https://www.betamakine.com/boom-pervane/
-- Self servis model rehberi: https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
+- Self servis kurulum ve teklif planı: https://www.betamakine.com/self-servis-oto-yikama-pervanesi/
 - Oto yıkama pervanesi rehberi: https://www.betamakine.com/oto-yikama-pervanesi/
 - Ürün kataloğu: https://www.betamakine.com/urunler/
 - Blog: https://www.betamakine.com/blog/

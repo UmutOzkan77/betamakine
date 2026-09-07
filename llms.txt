@@ -4,7 +4,7 @@
 
 - Site: https://www.betamakine.com/
 - Dil: tr-TR
-- Son güncelleme: 2026-09-07
+- Son güncelleme: 2026-09-08
 - İletişim: +90 536 461 53 30
 - Adres: Fethiye Mahallesi Doğru Sokak No:9, Nilüfer, Bursa, Türkiye
 
@@ -21,10 +21,10 @@
 
 - [Ana Sayfa](https://www.betamakine.com/)
 - [Boom Pervane](https://www.betamakine.com/boom-pervane/)
-- [Self Servis Oto Yıkama Pervanesi Model Rehberi](https://www.betamakine.com/self-servis-oto-yikama-pervanesi/)
-- [Oto Yıkama Pervanesi Modelleri](https://www.betamakine.com/oto-yikama-pervanesi/)
-- [Ürünler](https://www.betamakine.com/urunler/)
-- [Blog](https://www.betamakine.com/blog/)
+- [Self Servis Kurulum ve Teklif Planı](https://www.betamakine.com/self-servis-oto-yikama-pervanesi/)
+- [Oto Yıkama Pervanesi Model Karşılaştırması](https://www.betamakine.com/oto-yikama-pervanesi/)
+- [Pervane ve Döner Rekor Kataloğu](https://www.betamakine.com/urunler/)
+- [Teknik Bilgi Merkezi](https://www.betamakine.com/blog/)
 - [Hakkımızda](https://www.betamakine.com/about/)
 - [İletişim](https://www.betamakine.com/contact/)
 
