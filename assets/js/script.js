@@ -2,26 +2,47 @@
 (() => {
   'use strict';
   const menu = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('#main-nav');
-  const narrow = window.matchMedia('(max-width: 800px)');
-  if (menu && nav) {
-    const close = () => {
+  const panel = document.querySelector('#mobile-menu');
+  const narrow = window.matchMedia('(max-width: 900px)');
+  if (menu && panel && typeof panel.showModal === 'function') {
+    document.documentElement.classList.add('nav-ready');
+    const sync = () => {
       menu.hidden = !narrow.matches;
-      menu.setAttribute('aria-expanded', 'false');
-      nav.classList.toggle('is-collapsed', narrow.matches);
+      if (!narrow.matches && panel.open) panel.close();
     };
-    close();
-    narrow.addEventListener('change', close);
-    menu.addEventListener('click', () => {
-      const open = menu.getAttribute('aria-expanded') !== 'true';
-      menu.setAttribute('aria-expanded', String(open));
-      nav.classList.toggle('is-collapsed', !open);
+    panel.addEventListener('close', () => {
+      menu.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      if (narrow.matches) menu.focus({preventScroll: true});
     });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
-        close(); menu.focus();
+    menu.addEventListener('click', () => {
+      if (!narrow.matches) return;
+      panel.showModal();
+      menu.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    });
+    panel.querySelector('.menu-close').addEventListener('click', () => panel.close());
+    panel.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const links = [...panel.querySelectorAll('a[href], button:not([disabled])')];
+      const first = links[0], last = links[links.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     });
+    panel.addEventListener('click', event => {
+      if (event.target.closest('a')) panel.close();
+      if (event.target === panel) {
+        const rect = panel.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) panel.close();
+      }
+    });
+    narrow.addEventListener('change', sync);
+    sync();
   }
   const mainImage = document.querySelector('.gallery-main');
   document.querySelectorAll('[data-gallery-src]').forEach(thumb => {
@@ -41,7 +62,7 @@
     const href = a.getAttribute('href') || '';
     const type = href.startsWith('tel:') ? 'phone_click' : href.startsWith('https://wa.me/') ? 'whatsapp_click' : href === '/contact/' ? 'quote_click' : '';
     if (type) {
-      const fields = {page_path: location.pathname, link_location: a.closest('.contact-dock') ? 'contact_dock' : 'page'};
+      const fields = {page_path: location.pathname, link_location: a.closest('.whatsapp-corner') ? 'whatsapp_corner' : a.closest('.contact-dock') ? 'contact_dock' : a.closest('.mobile-menu') ? 'mobile_menu' : 'page'};
       window.dataLayer.push({event: type, ...fields});
       if (typeof window.gtag === 'function') window.gtag('event', type, fields);
     }
