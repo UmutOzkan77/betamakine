@@ -35,6 +35,14 @@ for route,s in cache.items():
    check(bool(corner[0].svg),route+': corner WhatsApp logo')
    check(corner[0].get('target')=='_blank' and 'noopener' in corner[0].get('rel',[]),route+': safe external WhatsApp link')
   check(not s.select('.seo-cluster-links,.whatsapp-float-button'),route+': legacy overlay')
+  menu=s.select_one('button.menu-toggle')
+  panel=s.select_one('dialog#mobile-menu')
+  check(bool(menu and panel),route+': accessible mobile menu missing')
+  if menu and panel:
+   check(menu.get('aria-controls')==panel.get('id') and menu.get('aria-haspopup')=='dialog',route+': mobile menu relationship')
+   check(bool(s.find(id=panel.get('aria-labelledby'))),route+': dialog name')
+   check(bool(panel.select_one('button.menu-close')),route+': menu close button')
+  check(len(s.select('link[rel="preload"][as="font"]'))==2,route+': local font preloads')
   ids=[n['id'] for n in s.select('[id]')];check(len(ids)==len(set(ids)),route+': duplicate ID')
   for image in s.select('img'):
    check(bool(image.get('alt')),route+': missing alt')
@@ -77,7 +85,12 @@ sitemap=ET.parse(ROOT/'sitemap.xml');locs=[n.text for n in sitemap.findall('.//{
 check(set(locs)=={DOMAIN+r for r in routes},'sitemap mismatch')
 check('Sitemap: '+DOMAIN+'/sitemap.xml' in (ROOT/'robots.txt').read_text(),'robots sitemap')
 check((ROOT/'CNAME').read_text().strip()=='www.betamakine.com','production domain changed')
-check((ROOT/'assets/css/style.css').stat().st_size<25000,'CSS budget')
+# Local font declarations and the accessible dialog add styles; retain a bounded
+# 32 KB uncompressed stylesheet and the existing 6 KB JavaScript limit.
+check((ROOT/'assets/css/style.css').stat().st_size<32000,'CSS budget')
+font_files=list((ROOT/'assets/fonts').glob('*.woff2'))
+check(len(font_files)==4 and sum(p.stat().st_size for p in font_files)<100000,'local font budget')
+check('Arial Narrow' not in (ROOT/'assets/css/style.css').read_text(),'condensed font regression')
 check((ROOT/'assets/js/script.js').stat().st_size<6000,'JS budget')
 report={'html_pages':len(cache),'indexable_routes':len(routes),'checked_local_references':checked,'json_ld_blocks':schemas,'protected_products':len(DATA['products']),'protected_product_images':sum(len(p['images']) for p in DATA['products']),'duplicate_titles':len(titles)-len(set(titles)),'duplicate_descriptions':len(descriptions)-len(set(descriptions)),'css_bytes':(ROOT/'assets/css/style.css').stat().st_size,'js_bytes':(ROOT/'assets/js/script.js').stat().st_size,'errors':errors}
 print(json.dumps(report,ensure_ascii=False,indent=2))
