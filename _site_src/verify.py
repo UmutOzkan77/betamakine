@@ -27,6 +27,13 @@ for route,s in cache.items():
   check(s.select_one('link[rel="canonical"]')['href']==DOMAIN+route,route+': canonical')
   check('noindex' not in s.select_one('meta[name="robots"]')['content'],route+': noindex')
   check(len(s.select('.whatsapp-link'))==1,route+': WhatsApp link')
+  corner=s.select('a.whatsapp-corner')
+  check(len(corner)==1,route+': expected one corner WhatsApp shortcut')
+  if corner:
+   check(corner[0].get('href')=='https://wa.me/905364615330',route+': corner WhatsApp destination')
+   check(corner[0].get_text(strip=True)=='WP ile ulaşın',route+': corner WhatsApp label')
+   check(bool(corner[0].svg),route+': corner WhatsApp logo')
+   check(corner[0].get('target')=='_blank' and 'noopener' in corner[0].get('rel',[]),route+': safe external WhatsApp link')
   check(not s.select('.seo-cluster-links,.whatsapp-float-button'),route+': legacy overlay')
   ids=[n['id'] for n in s.select('[id]')];check(len(ids)==len(set(ids)),route+': duplicate ID')
   for image in s.select('img'):
