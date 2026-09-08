@@ -12,11 +12,29 @@ Bu dosya yayınlanan sayfalardan derlenir. Ayrıntılar ve güncel teknik kapsam
 
 - [Oto Yıkama Pervanesi ve Boom Üreticisi](https://www.betamakine.com/): Bursa merkezli Beta Makine: tekli Z, çiftli boom, teleskopik tır yıkama pervanesi ve döner rekorlar. Modelleri karşılaştırın, üreticiden teklif alın.
 
-Sayfadaki başlıklar: Her istasyona doğru hareket.; Bütünü tamamlayan küçük detaylar.; Doğru seçim, iyi bir başlangıç.; İstasyonunuza uygun ürünü birlikte belirleyelim.
+- 360° hareket: Tekli ve çiftli oto yıkama pervaneleri, hortumu yukarıdan taşıyarak araç çevresinde yönlendirmenize yardımcı olur. Dönüş alanı, kabin ölçüsü ve montaj noktasına göre planlanır.
+- İhtiyacınıza göre: Tek hortum için Z kol, köpük ve su için çiftli boom, ağır vasıta için teleskopik pervane. Araç tipi ve hat sayısınıza uygun modeli birlikte belirleyelim.
+- Yerli üretim: Bursa Nilüfer’de pervane ve döner bağlantı parçaları üretiyoruz. Model, bağlantı ölçüsü ve yedek parça ihtiyacınızı doğrudan üreticiyle görüşebilirsiniz.
+- Tekli Z pervane: 154 cm Z kol · 360° dönüş Tek su veya köpük hortumunun kullanıldığı binek araç kabinleri için. Z biçimli kol, hortumu üstten taşır; araç çevresindeki hareket alanı kabin yerleşimiyle birlikte değerlendirilir. Seçim öncesi Kabin ölçüsü, montaj noktası ve hortum uzunluğu.
+- Çiftli boom pervane: İki hortum · 4 keçeli sistem Köpük ve basınçlı su hortumlarını aynı kabinde ayrı hatlar olarak kullanmak için. İki hortumun yerleşimini tek bir yıkama alanında planlamanıza yardımcı olur. Seçim öncesi İki hattın konumu, bağlantıları ve kol hareket alanı.
+- Tır yıkama pervanesi: 1,5–3 m teleskopik kol Tır, kamyon ve otobüs yıkama alanlarının erişim ihtiyacı için. Açılır kapanır teleskopik kolun konumu, araç yüksekliği ve sahanın kullanılabilir alanıyla birlikte belirlenir. Seçim öncesi Araç ölçüleri, montaj yüksekliği ve erişim mesafesi.
+- Oto yıkama pervanesi ne işe yarar?: Pervane, yıkama hortumunu yukarıdan taşıyan ve araç çevresinde yönlendiren kol sistemidir. Sektörde boom, pergel veya hortum askı pervanesi adlarıyla da anılır. Pompa gibi basınç üretmez; hortumun çalışma alanını düzenler.
+- Tekli Z mi, çiftli boom mu seçmeliyim?: Aynı kabinde tek hortum kullanılacaksa tekli Z; köpük ve su için iki ayrı hortum kullanılacaksa çiftli boom değerlendirilir. Kabin sayısı tek başına bu kararı verdirmez. Her kabinin hat ihtiyacı ve yerleşimi ayrıca belirlenmelidir.
+- Mevcut sistem için hangi döner rekor uygundur?: Önce parçanın pervane gövdesinde, kol ucunda veya tabanca bağlantısında mı olduğunu belirleyin. Ardından diş ölçüsünü, bağlantı standardını ve sistemin çalışma bilgilerini paylaşın. Fotoğraf ön değerlendirmeye yardımcı olur; ölçü ve teknik uyum doğrulanmadan parça seçilmemelidir.
+- Pervane fiyat teklifi almak için ne göndermeliyim?: Model veya kullanım amacı, istenen adet, kabin ölçüleri, hortum sayısı ve teslimat şehrini paylaşın. Mevcut bir sistemi yeniliyorsanız bağlantı fotoğraflarını da ekleyin. Dahil olan parçalar, stok, teslim süresi ve garanti kapsamı yazılı teklifte netleştirilir.
+
+Sayfadaki başlıklar: 360° hareket; İhtiyacınıza göre; Yerli üretim; Her istasyona doğru hareket.; Bütünü tamamlayan küçük detaylar.; Doğru seçim, iyi bir başlangıç.; Pervane seçimi hakkında merak edilenler; İstasyonunuza uygun ürünü birlikte belirleyelim.
 
 ## Pervane ve Döner Rekor Ürün Kataloğu
 
 - [Pervane ve Döner Rekor Ürün Kataloğu](https://www.betamakine.com/urunler/): Tekli Z, çiftli boom ve tır yıkama pervanesi; 1/4 döner rekor, uç rekor ve tabanca bağlantı parçaları. Altı ürünü ve teknik özelliklerini inceleyin.
+
+- Tekli Z pervane: 154 cm Z kol · 360° dönüş Tek su veya köpük hortumunun kullanıldığı binek araç kabinleri için. Z biçimli kol, hortumu üstten taşır; araç çevresindeki hareket alanı kabin yerleşimiyle birlikte değerlendirilir. Seçim öncesi Kabin ölçüsü, montaj noktası ve hortum uzunluğu.
+- Çiftli boom pervane: İki hortum · 4 keçeli sistem Köpük ve basınçlı su hortumlarını aynı kabinde ayrı hatlar olarak kullanmak için. İki hortumun yerleşimini tek bir yıkama alanında planlamanıza yardımcı olur. Seçim öncesi İki hattın konumu, bağlantıları ve kol hareket alanı.
+- Tır yıkama pervanesi: 1,5–3 m teleskopik kol Tır, kamyon ve otobüs yıkama alanlarının erişim ihtiyacı için. Açılır kapanır teleskopik kolun konumu, araç yüksekliği ve sahanın kullanılabilir alanıyla birlikte belirlenir. Seçim öncesi Araç ölçüleri, montaj yüksekliği ve erişim mesafesi.
+- 1/4 döner rekor: 1/4 bağlantı · 2 / 4 keçe Boom pervanenin döner bağlantı noktasında kullanılan parça. Mevcut sistem için 2 veya 4 keçeli seçeneği belirlerken parçanın konumunu ve bağlantı ölçüsünü birlikte kontrol edin. Seçim öncesi Mevcut rekor fotoğrafı, diş standardı ve keçe seçeneği.
+- Pervane uç rekoru: 1/4 veya 1/2 bağlantı Hortumun pervane kolunun ucuna bağlandığı nokta için. Uç rekor seçimini yalnızca dış görünüşe göre değil, hortum bağlantısı ve sistemin çalışma bilgilerine göre yapın. Seçim öncesi 1/4 veya 1/2 bağlantı seçeneği ve hortum uyumu.
+- Tabanca döner rekoru: 3/8 veya 1/2 · 360° dönüş Yıkama tabancası ile hortum arasındaki döner bağlantı için. Hortum burulmasını azaltmaya yardımcı olan bu parçanın ölçüsünü tabanca ve hortum bağlantısıyla eşleştirin. Seçim öncesi 3/8 veya 1/2 diş seçeneği ve tabanca bağlantısı.
 
 Sayfadaki başlıklar: Pervane sistemleri; Döner rekorlar ve yedek parçalar; İstasyonunuza uygun ürünü birlikte belirleyelim.
 
@@ -87,17 +105,31 @@ Sayfadaki başlıklar: Üreticiden teklif alın; Detaylar ve kullanım alanları
 
 - [Oto Yıkama Pervanesi Seçimi ve Karşılaştırma](https://www.betamakine.com/oto-yikama-pervanesi/): Hangi oto yıkama pervanesi size uygun? Tekli Z, çiftli boom ve teleskopik tır modellerini hat sayısı, kol yapısı ve kullanım alanına göre karşılaştırın.
 
-Sayfadaki başlıklar: Farkları yan yana görün.; Kararı vermeden önce; İstasyonunuza uygun ürünü birlikte belirleyelim.
+- Tekli Z pervane: Binek araç kabininde tek su veya köpük hattı için 154 cm Z kol. Tek bir hortumun erişimi yeterliyse bu modeli değerlendirin; kolun dönüş alanını kabin ve montaj ölçüleriyle kontrol edin.
+- Çiftli boom pervane: Aynı kabinde iki ayrı hortumu taşıyan, 4 keçeli sistem. Köpük ve yıkama suyunun ayrı hatlardan kullanılacağı yerleşimler için değerlendirin; her iki hortumun hareket alanını birlikte planlayın.
+- Teleskopik tır pervanesi: Tır, kamyon ve otobüs hatları için 1,5–3 metre açılır kapanır kol. Uzunluk tek başına yeterli değildir: araç yüksekliği, montaj noktası ve hortumun ulaşması gereken alanı da belirleyin.
+
+Sayfadaki başlıklar: Farkları yan yana görün.; Kararı vermeden önce; Yeni kabin mi, mevcut hattın yenilenmesi mi?; İstasyonunuza uygun ürünü birlikte belirleyelim.
 
 ## Boom Pervane ve Pergel Sistemleri
 
 - [Boom Pervane ve Pergel Sistemleri](https://www.betamakine.com/boom-pervane/): Boom pervane nedir, hangi parçalardan oluşur? Tekli, çiftli ve teleskopik pergel sistemlerini gerçek ürün fotoğraflarıyla inceleyin.
+
+- Tekli Z pervane: 154 cm Z kol · 360° dönüş Tek su veya köpük hortumunun kullanıldığı binek araç kabinleri için. Z biçimli kol, hortumu üstten taşır; araç çevresindeki hareket alanı kabin yerleşimiyle birlikte değerlendirilir. Seçim öncesi Kabin ölçüsü, montaj noktası ve hortum uzunluğu.
+- Çiftli boom pervane: İki hortum · 4 keçeli sistem Köpük ve basınçlı su hortumlarını aynı kabinde ayrı hatlar olarak kullanmak için. İki hortumun yerleşimini tek bir yıkama alanında planlamanıza yardımcı olur. Seçim öncesi İki hattın konumu, bağlantıları ve kol hareket alanı.
+- Tır yıkama pervanesi: 1,5–3 m teleskopik kol Tır, kamyon ve otobüs yıkama alanlarının erişim ihtiyacı için. Açılır kapanır teleskopik kolun konumu, araç yüksekliği ve sahanın kullanılabilir alanıyla birlikte belirlenir. Seçim öncesi Araç ölçüleri, montaj yüksekliği ve erişim mesafesi.
 
 Sayfadaki başlıklar: Birbirini tamamlayan üç parça; Boom pervane seçenekleri; Kurulumda neye dikkat edilir?; İstasyonunuza uygun ürünü birlikte belirleyelim.
 
 ## Self Servis Pervane Kurulum ve Teklif Planı
 
 - [Self Servis Pervane Kurulum ve Teklif Planı](https://www.betamakine.com/self-servis-oto-yikama-pervanesi/): Self servis oto yıkama pervanesi için kabin ölçüsü, hortum sayısı, montaj yüzeyi ve bağlantı bilgilerini hazırlayın. Kurulum ve teklif kontrol listesi.
+
+- Araç ve kabin: Binek araç mı, ağır vasıta mı? Kabin adedi, net en ve boy ölçüsü nedir? Giriş, çıkış ve yan kabinleri gösteren genel fotoğraf, kolun hareket alanını değerlendirmeye yardımcı olur.
+- Hortum hatları: Her kabinde yalnızca su mu, köpük ve su için iki ayrı hat mı kullanılacak? Kullanılacak hortumların sayısını ve uzunluğunu ayrı ayrı belirtin; kabin adediyle hortum sayısını karıştırmayın.
+- Montaj altyapısı: Tavan, direk veya duvar fotoğrafını; montaj yüksekliği ve taşıyıcı yüzey bilgisini paylaşın. Yakındaki aydınlatma ve tabelaları da gösterin. Taşıyıcı yapının uygunluğu saha üzerinde doğrulanmalıdır.
+- Mevcut bağlantılar: Hortum ve rekor diş standardı, çalışma basıncı ve kimyasal hattı bilgilerini hazırlayın. Varsa ekipman etiketini ve bağlantı noktasını fotoğraflayın; bilinmeyen ölçüleri tahmin etmek yerine doğrulatın.
+- Teslimat ve kapsam: İstenen adet, teslimat şehri ve teklife dahil olması gereken bağlantı parçalarını belirtin. Yeni kurulum ile yalnızca parça değişimini ayırın; hangi ekipmanların mevcut olduğunu açıkça yazın.
 
 Sayfadaki başlıklar: Teklif öncesi saha bilgileri; Önce modeli belirleyin.; Teklifi aynı kapsamda karşılaştırın.; İstasyonunuza uygun ürünü birlikte belirleyelim.
 
