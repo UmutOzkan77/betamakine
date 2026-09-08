@@ -23,6 +23,13 @@ def export(root, domain, date, routes, products, articles):
   if r in amap:
    full+='Kısa cevap:\n'+'\n'.join('- '+x for x in amap[r]['takeaways'])+'\n\n'
    full+='İlgili ürün: '+domain+amap[r]['product']['route']+'\n\n'
+  if r in ['/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/']:
+   blocks=docs[r].select('main .fact-copy, main .product-grid-detailed .card-copy, main .decision-grid .guide-card, main .checklist>div, main .faq details')
+   for block in blocks:
+    heading=block.select_one('h2,h3,summary')
+    paragraphs=[p.get_text(' ',strip=True) for p in block.select('p:not(.eyebrow)')]
+    if heading and paragraphs:full+='- '+heading.get_text(' ',strip=True)+': '+' '.join(paragraphs)+'\n'
+   if blocks:full+='\n'
   headings=[h.get_text(' ',strip=True) for h in docs[r].select('main h2') if h.get_text(' ',strip=True)]
   full+='Sayfadaki başlıklar: '+'; '.join(headings)+'\n\n'
  (root/'llms-full.txt').write_text(full.rstrip()+'\n')

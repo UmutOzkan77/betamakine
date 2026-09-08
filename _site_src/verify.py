@@ -130,12 +130,33 @@ robots=RobotFileParser();robots.parse((ROOT/'robots.txt').read_text().splitlines
 for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot']:
  for route in routes+['/llms.txt','/llms-full.txt']:
   check(robots.can_fetch(bot,DOMAIN+route),bot+': blocked '+route)
-# The user approved the overall design: assert non-guide main content remains exact.
+# This iteration authorizes content changes on five commercial pages only.
+# All other main content, including complete product pages and guides, stays exact.
+content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/'}
 for route in routes:
- if route.startswith('/blog/'):continue
+ if route in content_routes:continue
  path='index.html' if route=='/' else route.lstrip('/')+'index.html'
- baseline=subprocess.check_output(['git','show','5e24ee13a1cc5c94f655b41377a098cb1188d131:'+path],cwd=ROOT,text=True)
+ baseline=subprocess.check_output(['git','show','0f6b40b82df98e81a9c8d60a5e961f1790d2b38b:'+path],cwd=ROOT,text=True)
  check(str(BeautifulSoup(baseline,'html.parser').main)==str(cache[route].main),route+': approved main content changed')
+home=cache['/']
+baseline_home=BeautifulSoup(subprocess.check_output(['git','show','0f6b40b82df98e81a9c8d60a5e961f1790d2b38b:index.html'],cwd=ROOT,text=True),'html.parser')
+check(str(home.select_one('.hero'))==str(baseline_home.select_one('.hero')),'approved hero changed')
+facts=home.select('.home-facts>li')
+check(len(facts)==3,'expected three illustrated feature explanations')
+check([f.h2.get_text() for f in facts]==['360° hareket','İhtiyacınıza göre','Yerli üretim'],'feature headings changed')
+for f in facts:
+ check(bool(f.select_one('.fact-copy p')) and bool(f.select_one('.fact-copy a[href]')),'feature description or destination missing')
+ icon=f.select_one('.fact-icon svg')
+ check(bool(icon) and icon.get('aria-hidden')=='true' and icon.get('focusable')=='false','feature icon accessibility')
+check((ROOT/'assets/licenses/lucide.txt').is_file(),'icon license missing')
+for route,count in [('/',3),('/urunler/',6),('/boom-pervane/',3)]:
+ check(len(cache[route].select('.card-description'))==count,route+': detailed card descriptions missing')
+ check(len(cache[route].select('.card-preparation'))==count,route+': product selection guidance missing')
+check(len({n.get_text(' ',strip=True) for n in cache['/urunler/'].select('.card-description')})==6,'product card explanations must be specific')
+check(len(home.select('.faq details'))==4,'home buying questions missing')
+check(len(cache['/oto-yikama-pervanesi/'].select('.guide-grid .guide-card'))==3,'selection scenarios missing')
+for paragraph in home.select('.fact-copy p,.faq details p')+cache['/urunler/'].select('.card-description'):
+ check(paragraph.get_text(' ',strip=True) in full,'new visible buying guidance missing from LLM export')
 check((ROOT/'assets/js/script.js').stat().st_size<6000,'JS budget')
 report={'html_pages':len(cache),'indexable_routes':len(routes),'checked_local_references':checked,'json_ld_blocks':schemas,'protected_products':len(DATA['products']),'protected_product_images':sum(len(p['images']) for p in DATA['products']),'duplicate_titles':len(titles)-len(set(titles)),'duplicate_descriptions':len(descriptions)-len(set(descriptions)),'css_bytes':(ROOT/'assets/css/style.css').stat().st_size,'js_bytes':(ROOT/'assets/js/script.js').stat().st_size,'errors':errors}
 print(json.dumps(report,ensure_ascii=False,indent=2))
