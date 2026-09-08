@@ -4,6 +4,7 @@ from html import escape as e
 from urllib.parse import quote
 import json, re, hashlib
 from bs4 import BeautifulSoup
+from knowledge import enrich, card as knowledge_card, picture, answer_box, inline_figure
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=json.loads((ROOT/'_site_src/content.json').read_text())
@@ -25,6 +26,7 @@ EXTRA=[
 for p,x in zip(PRODUCTS,EXTRA): p.update(short=x[0],use=x[1],summary=x[2],specs=x[3])
 ARTICLES=DATA['articles']
 ORG={'@type':'Organization','@id':DOMAIN+'/#organization','name':'Beta Makine','legalName':'Şener Çubukçu BE_TA Makine','url':DOMAIN+'/','logo':DOMAIN+'/assets/images/logo.webp','telephone':'+90-536-461-53-30','address':{'@type':'PostalAddress','streetAddress':'Fethiye Mahallesi Doğru Sokak No:9','addressLocality':'Nilüfer','addressRegion':'Bursa','addressCountry':'TR'}}
+ORG.update({'@type':'LocalBusiness','image':DOMAIN+'/assets/images/logo.webp','openingHoursSpecification':[{'@type':'OpeningHoursSpecification','dayOfWeek':['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],'opens':'09:00','closes':'18:00'}]})
 WA_ICON='''<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>'''
 def link(url,label,cls=''):
  return f'<a href="{e(url)}"'+(f' class="{cls}"' if cls else '')+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https://wa.me') or url==MAP else '')+f'>{label}</a>'
@@ -51,12 +53,19 @@ def layout(route,title,description,body,kind='page',crumb=None,schema=None,image
  graph=[ORG,{'@type':'WebSite','@id':DOMAIN+'/#website','url':DOMAIN+'/','name':'Beta Makine','publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}, {'@type':'WebPage','@id':DOMAIN+route+'#webpage','url':DOMAIN+route,'name':title,'description':description,'isPartOf':{'@id':DOMAIN+'/#website'},'inLanguage':'tr-TR'}]
  if route!='/':graph.append({'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':i+1,'name':n,'item':DOMAIN+u} for i,(u,n) in enumerate(crumbs+[(route,title.split(' | ')[0])])]})
  graph+=schema or []
+ graph[2]['@type']={'/blog/':'CollectionPage','/about/':'AboutPage','/contact/':'ContactPage'}.get(route,'WebPage')
+ graph[2]['primaryImageOfPage']={'@type':'ImageObject','url':DOMAIN+quote(image,safe='/.-')}
  csshash=hashlib.sha256((ROOT/'assets/css/style.css').read_bytes()).hexdigest()[:10]
  jshash=hashlib.sha256((ROOT/'assets/js/script.js').read_bytes()).hexdigest()[:10]
+ knowledge_css=''
+ if kind in ('article','knowledge'):
+  khash=hashlib.sha256((ROOT/'assets/css/knowledge.css').read_bytes()).hexdigest()[:10]
+  knowledge_css=f'<link rel="stylesheet" href="/assets/css/knowledge.css?v={khash}">'
  text=f'''<!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{e(title)}</title>
 <meta name="description" content="{e(description)}"><meta name="robots" content="{'noindex, follow' if route=='/404.html' else 'index, follow, max-image-preview:large'}"><link rel="canonical" href="{DOMAIN+route}">
 <meta name="theme-color" content="#102B43"><link rel="icon" href="/assets/images/favicon.png"><link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/css/style.css?v={csshash}">
+{knowledge_css}<link rel="describedby" href="/llms.txt" type="text/plain"><meta property="og:image:alt" content="{e(title.split(' | ')[0])}">
 <meta property="og:type" content="{'article' if kind=='article' else 'website'}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{DOMAIN+route}"><meta property="og:image" content="{DOMAIN+quote(image,safe='/.-')}"><meta property="og:locale" content="tr_TR"><meta property="og:site_name" content="Beta Makine"><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('</','<\\/')}</script><script defer src="/assets/js/script.js?v={jshash}"></script></head>
 <body class="{kind}"><a class="skip-link" href="#main">Ana içeriğe geç</a>
@@ -65,7 +74,7 @@ def layout(route,title,description,body,kind='page',crumb=None,schema=None,image
 {bread}<main id="main" class="wrap" tabindex="-1">{body}</main>
 <footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand">{link('/','<img src="/assets/images/logo.webp" width="156" height="60" alt="Beta Makine" loading="lazy">')}<p>Oto yıkama pervanesi ve<br> döner bağlantı parçaları.</p><small>Şener Çubukçu BE_TA Makine</small></div><nav aria-label="Ürün bağlantıları"><h2>Ürünler</h2>{''.join(link(p['route'],p['short']) for p in PRODUCTS)}</nav><nav aria-label="Rehber bağlantıları"><h2>Keşfedin</h2>{link('/oto-yikama-pervanesi/','Model karşılaştırması')}{link('/boom-pervane/','Boom / pergel sistemleri')}{link('/self-servis-oto-yikama-pervanesi/','Self servis kurulum planı')}{link('/blog/','Teknik rehberler')}{link('/about/','Hakkımızda')}</nav><div><h2>Görüşelim</h2><address>Fethiye Mahallesi Doğru Sokak No:9<br> Nilüfer / Bursa</address>{link('tel:+905364615330','0536 461 53 30','footer-phone')}<p>09:00–18:00 · Pazar kapalı</p>{link(MAP,'Haritada aç ↗')}</div></div><div class="wrap footer-bottom"><small>© 2026 Beta Makine</small>{link('/sitemap.xml','Site haritası')}</div></footer>
 <aside class="contact-dock" aria-label="Hızlı iletişim"><div class="wrap"><span>Ürün seçimi veya yedek parça için</span>{link(WA,WA_ICON+'<span>Bize WhatsApp ile ulaşın</span>','whatsapp-link')}</div></aside>
-{link(WA,WA_ICON+'<span>WP ile ulaşın</span>','whatsapp-corner')}</body></html>'''
+{link(WA,WA_ICON+'<span>Bize WhatsApp’tan ulaşın</span>','whatsapp-corner')}</body></html>'''
  path=ROOT/(route.strip('/')+'/index.html' if route not in ['/','/404.html'] else ('index.html' if route=='/' else '404.html'))
  path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text+'\n')
  if route!='/404.html':ROUTES.append(route)
@@ -121,11 +130,16 @@ def corporate():
 if __name__=='__main__':
  from editorial import prepare_article
  home();products();landings();corporate()
- for a in ARTICLES: prepare_article(a)
+ for a in ARTICLES:
+  prepare_article(a)
+  enrich(a,PRODUCTS)
  categories=['Seçim ve bütçe','Kurulum ve uyum','Bakım ve arıza']
- listing=intro('Bilgi merkezi','Doğru ekipman.<br> Bilinçli kullanım.','Model seçiminden montaja, bakım planından arıza belirtilerine kadar oto yıkama pervanesi rehberleri.')+'<nav class="jump-links" aria-label="Rehber konuları">'+''.join(link('#konu-'+str(i),c+' ↓') for i,c in enumerate(categories))+'</nav>'
- for i,c in enumerate(categories):listing+=section(c,'<div class="article-list">'+''.join(f'<article><div><p class="eyebrow">{a["category"]}</p><h3>{link(a["route"],a["name"])}</h3><p>{e(a["description"])}</p></div>{link(a["route"],"Rehberi okuyun ↗","text-link")}</article>' for a in ARTICLES if a['category']==c)+'</div>',id='konu-'+str(i))
- layout('/blog/','Oto Yıkama Pervanesi Teknik Bilgi Merkezi | Beta Makine','Oto yıkama pervanesi model seçimi, fiyat teklifi, kurulum, bakım ve arıza belirtileri. İhtiyacınıza göre düzenlenmiş 18 teknik rehber.',listing)
+ featured=next(a for a in ARTICLES if a['route']=='/blog/oto-yikama-pervanesi-boom-nedir/')
+ listing=intro('Beta Makine / Bilgi merkezi','Oto yıkama pervanesi<br> rehberleri.','Doğru modeli seçin, kurulumunuzu planlayın, ekipmanınızı daha yakından tanıyın. Gerçek ürün fotoğraflarıyla seçimden bakıma 18 rehber.')
+ listing+='<section class="knowledge-feature"><a class="knowledge-feature-image" href="'+featured['route']+'">'+picture(featured['image'],featured['image_alt'],True)+'</a><div><p class="eyebrow">Buradan başlayın · Model seçimi</p><h2>'+link(featured['route'],'Tekli mi,<br> çiftli mi?')+'</h2><p>Aynı kabinde kaç hortum kullanacaksınız? Tekli Z ve çiftli boom arasındaki farkı gerçek ürünler üzerinden keşfedin.</p>'+button(featured['route'],'Farkları keşfedin ↗')+'</div></section>'
+ listing+='<nav class="jump-links" aria-label="Rehber konuları">'+''.join(link('#konu-'+str(i),c+' ↓') for i,c in enumerate(categories))+'</nav>'
+ for i,c in enumerate(categories):listing+=section(c,'<div class="knowledge-grid">'+''.join(knowledge_card(a) for a in ARTICLES if a['category']==c)+'</div>',id='konu-'+str(i))
+ layout('/blog/','Oto Yıkama Pervanesi Teknik Bilgi Merkezi | Beta Makine','Oto yıkama pervanesi model seçimi, fiyat teklifi, kurulum, bakım ve arıza belirtileri. Gerçek ürün fotoğrafları ve kısa cevaplarla 18 teknik rehber.',listing,kind='knowledge',image=featured['image'],schema=[{'@type':'ItemList','name':'Oto yıkama pervanesi rehberleri','itemListElement':[{'@type':'ListItem','position':i+1,'url':DOMAIN+a['route'],'name':a['name']} for i,a in enumerate(ARTICLES)]}])
  for a in ARTICLES:
   s=BeautifulSoup(a['body'],'html.parser')
   toc=[]
@@ -134,12 +148,18 @@ if __name__=='__main__':
   for t in s.select('table'):
    w=s.new_tag('div',attrs={'class':'table-wrap','tabindex':'0','role':'region','aria-label':'Teknik karşılaştırma tablosu'});t.wrap(w)
    for th in t.select('thead th'):th['scope']='col'
-  body=intro(a['category'],e(a['name']),e(a['description']))+'<p class="article-meta">Beta Makine · Teknik bilgi merkezi <span>İçerik güncellemesi: <time datetime="2026-09-08">8 Eylül 2026</time></span></p><div class="article-layout"><aside class="toc"><h2>Bu rehberde</h2>'+''.join(toc)+'</aside><article class="prose article-copy">'+str(s)+'</article></div>'+cta()
-  schema=[{'@type':'TechArticle','headline':a['name'],'description':a['description'],'dateModified':DATE,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
-  layout(a['route'],a['title'],a['description'],body,'article',[('/blog/','Bilgi merkezi')],schema)
+  headings=s.select('h2')
+  if headings:headings[min(2,len(headings)-1)].insert_before(BeautifulSoup(inline_figure(a),'html.parser'))
+  meta='<p class="article-meta">'+link('/about/','Beta Makine')+' · '+str(a['reading_minutes'])+' dk okuma <span>Güncelleme: <time datetime="2026-09-08">8 Eylül 2026</time></span></p>'
+  cover='<figure class="article-cover">'+picture(a['image'],a['image_alt'],True)+'<figcaption>'+e(a['image_caption'])+' '+link(a['product']['route'],'Ürünü inceleyin →')+'</figcaption></figure>'
+  body='<div class="article-intro"><div>'+intro(a['category'],e(a['name']),e(a['description']))+meta+'</div>'+cover+'</div><div class="article-layout"><aside class="toc"><h2>Bu rehberde</h2>'+''.join(toc)+'</aside><article class="prose article-copy">'+answer_box(a)+str(s)+'<aside class="guide-source"><h2>Ürün ve üretici bilgisi</h2><p>Bu rehber genel seçim ve ön değerlendirme bilgisi sunar. Modele özel teknik değerler ve güncel tedarik kapsamı için '+link(a['product']['route'],e(a['product']['short'])+' ürün sayfasını')+' inceleyin veya '+link('/contact/','Beta Makine ile görüşün')+'. Temsili illüstrasyonlar teknik çizim ya da uygulama talimatı değildir.</p></aside></article></div>'+cta()
+  schema=[{'@type':['BlogPosting','TechArticle'],'@id':DOMAIN+a['route']+'#article','headline':a['name'],'description':a['description'],'abstract':' '.join(a['takeaways']),'image':DOMAIN+quote(a['image'],safe='/.-'),'articleSection':a['category'],'isAccessibleForFree':True,'dateModified':DATE,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
+  layout(a['route'],a['title'],a['description'],body,'article',[('/blog/','Bilgi merkezi')],schema,a['image'])
  layout('/404.html','Sayfa Bulunamadı | Beta Makine','Aradığınız sayfa bulunamadı. Beta Makine ürün kataloğuna veya iletişim sayfasına geçebilirsiniz.',intro('404 / Sayfa bulunamadı','Burada bir sayfa yok.','Bağlantı değişmiş veya adres yanlış yazılmış olabilir. Aradığınız pervaneye ürün kataloğundan ulaşabilirsiniz.')+'<div class="actions">'+button('/urunler/','Ürün kataloğuna git')+button('/contact/','Bize ulaşın',True)+'</div>')
  for old,target in [('oto-yikama-pervanesi-boom-tekli',PRODUCTS[0]),('oto-yikama-pervanesi-boom-ciftli',PRODUCTS[1])]:
   (ROOT/old/'index.html').write_text(f'<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(target["name"])} | Beta Makine</title><link rel="canonical" href="{DOMAIN+target["route"]}"><meta http-equiv="refresh" content="0;url={target["route"]}"><meta name="description" content="Güncel ürün detayına geçin."></head><body><main><h1>{e(target["name"])}</h1><p>Ürün sayfası güncellendi.</p>{link(target["route"],"Güncel ürün detayına geçin")}</main></body></html>\n')
  (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{DOMAIN+r}</loc><lastmod>{DATE}</lastmod></url>\n' for r in sorted(ROUTES))+'</urlset>\n')
  (ROOT/'_site_src/routes.json').write_text(json.dumps(ROUTES,ensure_ascii=False,indent=2)+'\n')
+ from seo_exports import export
+ export(ROOT,DOMAIN,DATE,ROUTES,PRODUCTS,ARTICLES)
  print(f'Built {len(ROUTES)} indexable routes, 2 legacy redirects, and 404.')
