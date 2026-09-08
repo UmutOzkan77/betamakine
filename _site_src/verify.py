@@ -2,7 +2,8 @@
 from pathlib import Path
 from urllib.parse import urlsplit, urljoin, unquote
 from collections import Counter
-import json, subprocess, hashlib, xml.etree.ElementTree as ET
+import json, subprocess, hashlib, re, xml.etree.ElementTree as ET
+from urllib.robotparser import RobotFileParser
 from bs4 import BeautifulSoup
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -31,7 +32,7 @@ for route,s in cache.items():
   check(len(corner)==1,route+': expected one corner WhatsApp shortcut')
   if corner:
    check(corner[0].get('href')=='https://wa.me/905364615330',route+': corner WhatsApp destination')
-   check(corner[0].get_text(strip=True)=='WP ile ulaşın',route+': corner WhatsApp label')
+   check(corner[0].get_text(strip=True)=='Bize WhatsApp’tan ulaşın',route+': corner WhatsApp label')
    check(bool(corner[0].svg),route+': corner WhatsApp logo')
    check(corner[0].get('target')=='_blank' and 'noopener' in corner[0].get('rel',[]),route+': safe external WhatsApp link')
   check(not s.select('.seo-cluster-links,.whatsapp-float-button'),route+': legacy overlay')
@@ -81,7 +82,7 @@ for p in DATA['products']:
 check(len(titles)==len(set(titles)),'duplicate titles')
 check(len(descriptions)==len(set(descriptions)),'duplicate descriptions')
 check(len(routes)==32,'indexable route count changed')
-sitemap=ET.parse(ROOT/'sitemap.xml');locs=[n.text for n in sitemap.findall('.//{*}loc')]
+sitemap=ET.parse(ROOT/'sitemap.xml');locs=[n.text for n in sitemap.findall('./{*}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
 check(set(locs)=={DOMAIN+r for r in routes},'sitemap mismatch')
 check('Sitemap: '+DOMAIN+'/sitemap.xml' in (ROOT/'robots.txt').read_text(),'robots sitemap')
 check((ROOT/'CNAME').read_text().strip()=='www.betamakine.com','production domain changed')
@@ -91,6 +92,50 @@ check((ROOT/'assets/css/style.css').stat().st_size<32000,'CSS budget')
 font_files=list((ROOT/'assets/fonts').glob('*.woff2'))
 check(len(font_files)==4 and sum(p.stat().st_size for p in font_files)<100000,'local font budget')
 check('Arial Narrow' not in (ROOT/'assets/css/style.css').read_text(),'condensed font regression')
+check((ROOT/'assets/css/knowledge.css').stat().st_size<7000,'knowledge CSS budget')
+check(sum(p.stat().st_size for p in (ROOT/'assets/images/guides').glob('*.webp'))<160000,'editorial image budget')
+guide_routes=[r for r in routes if r.startswith('/blog/') and r!='/blog/']
+for route in guide_routes:
+ s=cache[route]
+ check(bool(s.select_one('.article-cover img')),route+': guide cover missing')
+ check(bool(s.select_one('.guide-figure img')),route+': inline illustration missing')
+ check(len(s.select('.answer-box li'))==3,route+': short answer missing')
+ graph=json.loads(s.select_one('script[type="application/ld+json"]').string)['@graph']
+ article=next((x for x in graph if 'BlogPosting' in x.get('@type',[])),None)
+ check(bool(article),route+': article schema missing')
+ if article:
+  check(article['image']==urljoin(DOMAIN,s.select_one('.article-cover img')['src']),route+': article image mismatch')
+  check(article['image']==s.select_one('meta[property="og:image"]')['content'],route+': social image mismatch')
+  check(article['abstract']==' '.join(n.get_text(' ',strip=True) for n in s.select('.answer-box li')),route+': abstract not visible')
+  check(article['headline']==s.h1.get_text(' ',strip=True),route+': article headline mismatch')
+ if '/assets/images/guides/' in s.select_one('.guide-figure img')['src']:
+  check('temsili' in s.select_one('.guide-figure figcaption').get_text(),route+': generated illustration disclosure')
+check(len(cache['/blog/'].select('.knowledge-card'))==18,'guide card count')
+for node in sitemap.findall('./{*}url'):
+ route=node.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text.removeprefix(DOMAIN)
+ actual={n.text for n in node.findall('./{http://www.google.com/schemas/sitemap-image/1.1}image/{http://www.google.com/schemas/sitemap-image/1.1}loc')}
+ expected={urljoin(DOMAIN,i['src']) for i in cache[route].select('main img[src]')}
+ check(actual==expected,route+': image sitemap mismatch')
+for file in ['llms.txt','llms-full.txt']:
+ content=(ROOT/file).read_text()
+ check(content.startswith('# Beta Makine\n\n> '),file+': LLM format')
+ for name,url,description in re.findall(r'^- \[([^\]]+)\]\(([^)]+)\): (.+)$',content,re.M):
+  check(url.startswith(DOMAIN+'/'),file+': noncanonical URL')
+  check(path_for(unquote(urlsplit(url).path)).is_file(),file+': broken source '+url)
+  check(bool(description.strip()),file+': empty description')
+llms=(ROOT/'llms.txt').read_text();full=(ROOT/'llms-full.txt').read_text()
+check(10<=len(re.findall(r'^- \[',llms,re.M))<=30,'LLM index entry count')
+for route in routes:check(']('+DOMAIN+route+'):' in full,route+': missing full LLM entry')
+robots=RobotFileParser();robots.parse((ROOT/'robots.txt').read_text().splitlines())
+for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot']:
+ for route in routes+['/llms.txt','/llms-full.txt']:
+  check(robots.can_fetch(bot,DOMAIN+route),bot+': blocked '+route)
+# The user approved the overall design: assert non-guide main content remains exact.
+for route in routes:
+ if route.startswith('/blog/'):continue
+ path='index.html' if route=='/' else route.lstrip('/')+'index.html'
+ baseline=subprocess.check_output(['git','show','5e24ee13a1cc5c94f655b41377a098cb1188d131:'+path],cwd=ROOT,text=True)
+ check(str(BeautifulSoup(baseline,'html.parser').main)==str(cache[route].main),route+': approved main content changed')
 check((ROOT/'assets/js/script.js').stat().st_size<6000,'JS budget')
 report={'html_pages':len(cache),'indexable_routes':len(routes),'checked_local_references':checked,'json_ld_blocks':schemas,'protected_products':len(DATA['products']),'protected_product_images':sum(len(p['images']) for p in DATA['products']),'duplicate_titles':len(titles)-len(set(titles)),'duplicate_descriptions':len(descriptions)-len(set(descriptions)),'css_bytes':(ROOT/'assets/css/style.css').stat().st_size,'js_bytes':(ROOT/'assets/js/script.js').stat().st_size,'errors':errors}
 print(json.dumps(report,ensure_ascii=False,indent=2))

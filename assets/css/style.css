@@ -241,7 +241,8 @@ th a{text-decoration:underline;text-underline-offset:4px}
 .whatsapp-link:hover{color:#065d35}
 .whatsapp-corner{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:30;display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:11px 17px;border:2px solid #fff;border-radius:30px;background:var(--green);color:#fff;font-size:14px;font-weight:600;line-height:1.4;box-shadow:0 5px 20px #102b4326}
 .whatsapp-corner svg{width:23px;height:23px;flex:none}
-.whatsapp-corner:hover{background:#065d35;color:#fff}
+.whatsapp-corner{background:#25d366;color:#063d25;box-shadow:0 5px 22px #12964b30}
+.whatsapp-corner:hover{background:#20c45c;color:#063d25}
 .whatsapp-corner:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 @media(min-width:1600px){
 .wrap{width:min(1360px,calc(100% - 120px))}.hero{min-height:720px;padding-top:82px}.hero h1{font-size:72px}
