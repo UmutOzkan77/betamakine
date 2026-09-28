@@ -11,6 +11,10 @@ ROOT=Path(__file__).resolve().parents[1]
 DATA=json.loads((ROOT/'_site_src/content.json').read_text())
 DOMAIN='https://www.betamakine.com'
 DATE='2026-09-08'
+CONTENT_UPDATES={
+ '/urunler/':'2026-09-14',
+ '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-09-28',
+}
 WA='https://wa.me/905364615330'
 MAP='https://maps.google.com/?q=Fethiye+Mahallesi+Do%C4%9Fru+Sokak+No%3A9+Nil%C3%BCfer+Bursa'
 PRODUCTS=DATA['products']
@@ -34,6 +38,10 @@ def link(url,label,cls=''):
 def img(src,alt,lazy=True,cls=''):
  return f'<img src="{quote(src,safe="/.-")}" alt="{e(alt)}" width="1024" height="768" loading="{"lazy" if lazy else "eager"}" decoding="async"'+(' fetchpriority="high"' if not lazy else '')+f' class="{cls}">'
 def button(url,label,secondary=False):return link(url,label,'button'+(' secondary' if secondary else ''))
+def display_date(value):
+ months={'01':'Ocak','02':'Şubat','03':'Mart','04':'Nisan','05':'Mayıs','06':'Haziran','07':'Temmuz','08':'Ağustos','09':'Eylül','10':'Ekim','11':'Kasım','12':'Aralık'}
+ year,month,day=value.split('-')
+ return f'{int(day)} {months[month]} {year}'
 def faq(items):return '<div class="faq">'+''.join(f'<details><summary>{e(x["q"])}</summary><p>{e(x["a"])}</p></details>' for x in items)+'</div>'
 def intro(kicker,title,desc):return f'<header class="page-intro"><p class="eyebrow">{kicker}</p><h1>{title}</h1><p class="lead">{desc}</p></header>'
 def cards(items,detailed=False):
@@ -158,17 +166,17 @@ if __name__=='__main__':
    for th in t.select('thead th'):th['scope']='col'
   headings=s.select('h2')
   if headings:headings[min(2,len(headings)-1)].insert_before(BeautifulSoup(inline_figure(a),'html.parser'))
-  meta='<p class="article-meta">'+link('/about/','Beta Makine')+' · '+str(a['reading_minutes'])+' dk okuma <span>Güncelleme: <time datetime="2026-09-08">8 Eylül 2026</time></span></p>'
+  modified=CONTENT_UPDATES.get(a['route'],DATE)
+  meta='<p class="article-meta">'+link('/about/','Beta Makine')+' · '+str(a['reading_minutes'])+' dk okuma <span>Güncelleme: <time datetime="'+modified+'">'+display_date(modified)+'</time></span></p>'
   cover='<figure class="article-cover">'+picture(a['image'],a['image_alt'],True)+'<figcaption>'+e(a['image_caption'])+' '+link(a['product']['route'],'Ürünü inceleyin →')+'</figcaption></figure>'
   body='<div class="article-intro"><div>'+intro(a['category'],e(a['name']),e(a['description']))+meta+'</div>'+cover+'</div><div class="article-layout"><aside class="toc"><h2>Bu rehberde</h2>'+''.join(toc)+'</aside><article class="prose article-copy">'+answer_box(a)+str(s)+'<aside class="guide-source"><h2>Ürün ve üretici bilgisi</h2><p>Bu rehber genel seçim ve ön değerlendirme bilgisi sunar. Modele özel teknik değerler ve güncel tedarik kapsamı için '+link(a['product']['route'],e(a['product']['short'])+' ürün sayfasını')+' inceleyin veya '+link('/contact/','Beta Makine ile görüşün')+'. Temsili illüstrasyonlar teknik çizim ya da uygulama talimatı değildir.</p></aside></article></div>'+cta()
-  schema=[{'@type':['BlogPosting','TechArticle'],'@id':DOMAIN+a['route']+'#article','headline':a['name'],'description':a['description'],'abstract':' '.join(a['takeaways']),'image':DOMAIN+quote(a['image'],safe='/.-'),'articleSection':a['category'],'isAccessibleForFree':True,'dateModified':DATE,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
+  schema=[{'@type':['BlogPosting','TechArticle'],'@id':DOMAIN+a['route']+'#article','headline':a['name'],'description':a['description'],'abstract':' '.join(a['takeaways']),'image':DOMAIN+quote(a['image'],safe='/.-'),'articleSection':a['category'],'isAccessibleForFree':True,'dateModified':modified,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
   layout(a['route'],a['title'],a['description'],body,'article',[('/blog/','Bilgi merkezi')],schema,a['image'])
  layout('/404.html','Sayfa Bulunamadı | Beta Makine','Aradığınız sayfa bulunamadı. Beta Makine ürün kataloğuna veya iletişim sayfasına geçebilirsiniz.',intro('404 / Sayfa bulunamadı','Burada bir sayfa yok.','Bağlantı değişmiş veya adres yanlış yazılmış olabilir. Aradığınız pervaneye ürün kataloğundan ulaşabilirsiniz.')+'<div class="actions">'+button('/urunler/','Ürün kataloğuna git')+button('/contact/','Bize ulaşın',True)+'</div>')
  for old,target in [('oto-yikama-pervanesi-boom-tekli',PRODUCTS[0]),('oto-yikama-pervanesi-boom-ciftli',PRODUCTS[1])]:
   (ROOT/old/'index.html').write_text(f'<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(target["name"])} | Beta Makine</title><link rel="canonical" href="{DOMAIN+target["route"]}"><meta http-equiv="refresh" content="0;url={target["route"]}"><meta name="description" content="Güncel ürün detayına geçin."></head><body><main><h1>{e(target["name"])}</h1><p>Ürün sayfası güncellendi.</p>{link(target["route"],"Güncel ürün detayına geçin")}</main></body></html>\n')
- SITEMAP_DATES={'/urunler/':'2026-09-14'}
- (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{DOMAIN+r}</loc><lastmod>{SITEMAP_DATES.get(r,DATE)}</lastmod></url>\n' for r in sorted(ROUTES))+'</urlset>\n')
+ (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{DOMAIN+r}</loc><lastmod>{CONTENT_UPDATES.get(r,DATE)}</lastmod></url>\n' for r in sorted(ROUTES))+'</urlset>\n')
  (ROOT/'_site_src/routes.json').write_text(json.dumps(ROUTES,ensure_ascii=False,indent=2)+'\n')
  from seo_exports import export
- export(ROOT,DOMAIN,DATE,ROUTES,PRODUCTS,ARTICLES)
+ export(ROOT,DOMAIN,DATE,ROUTES,PRODUCTS,ARTICLES,CONTENT_UPDATES)
  print(f'Built {len(ROUTES)} indexable routes, 2 legacy redirects, and 404.')
