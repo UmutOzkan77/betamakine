@@ -3,10 +3,13 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import xml.etree.ElementTree as ET
 
-def export(root, domain, date, routes, products, articles):
+def export(root, domain, date, routes, products, articles, content_updates=None):
+ content_updates=content_updates or {}
  docs={r:BeautifulSoup((root/(r.strip('/')+'/index.html' if r!='/' else 'index.html')).read_text(),'html.parser') for r in routes}
  summaries={r:s.select_one('meta[name="description"]')['content'] for r,s in docs.items()}
  titles={r:s.title.get_text().split(' | ')[0] for r,s in docs.items()}
+ # Keep the approved branded catalogue title in machine-readable exports.
+ titles['/urunler/']=docs['/urunler/'].title.get_text()
  def entry(r):return f'- [{titles[r]}]({domain+r}): {summaries[r]}'
  main=['/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/']
  selected=['oto-yikama-pervanesi-nedir','oto-yikama-pervanesi-boom-nedir','oto-yikama-pervanesi-fiyatlari','oto-yikama-boom-pervane-olculeri-yerlesim-plani','oto-yikama-pervanesi-montaj-rehberi','oto-yikama-pervanesi-basinc-hortum-uyumu','oto-yikama-pervanesi-bakimi','doner-rekor-arizasi-nasil-anlasilir']
@@ -39,7 +42,7 @@ def export(root, domain, date, routes, products, articles):
  for r in sorted(routes):
   node=ET.SubElement(sitemap,'{'+ns+'}url')
   ET.SubElement(node,'{'+ns+'}loc').text=domain+r
-  ET.SubElement(node,'{'+ns+'}lastmod').text=date
+  ET.SubElement(node,'{'+ns+'}lastmod').text=content_updates.get(r,date)
   for src in dict.fromkeys(i['src'] for i in docs[r].select('main img[src]')):
    image=ET.SubElement(node,'{'+ins+'}image')
    ET.SubElement(image,'{'+ins+'}loc').text=urljoin(domain,src)
