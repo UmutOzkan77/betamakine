@@ -130,9 +130,9 @@ robots=RobotFileParser();robots.parse((ROOT/'robots.txt').read_text().splitlines
 for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot']:
  for route in routes+['/llms.txt','/llms-full.txt']:
   check(robots.can_fetch(bot,DOMAIN+route),bot+': blocked '+route)
-# This iteration authorizes content changes on five commercial pages only.
-# All other main content, including complete product pages and guides, stays exact.
-content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/'}
+# Approved main-content changes: the five commercial pages plus the price guide
+# and its listing card. Product pages and all other guides stay exact.
+content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/'}
 for route in routes:
  if route in content_routes:continue
  path='index.html' if route=='/' else route.lstrip('/')+'index.html'
