@@ -2,7 +2,7 @@
 from pathlib import Path
 from urllib.parse import urlsplit, urljoin, unquote
 from collections import Counter
-import json, subprocess, hashlib, re, xml.etree.ElementTree as ET
+import copy, json, subprocess, hashlib, re, xml.etree.ElementTree as ET
 from urllib.robotparser import RobotFileParser
 from bs4 import BeautifulSoup
 
@@ -108,6 +108,12 @@ for route in guide_routes:
   check(article['image']==s.select_one('meta[property="og:image"]')['content'],route+': social image mismatch')
   check(article['abstract']==' '.join(n.get_text(' ',strip=True) for n in s.select('.answer-box li')),route+': abstract not visible')
   check(article['headline']==s.h1.get_text(' ',strip=True),route+': article headline mismatch')
+  dates=s.select('.article-meta time[datetime]')
+  check(len(dates)==2,route+': visible publish/update dates missing')
+  if len(dates)==2:
+   check(article['datePublished']==dates[0]['datetime'],route+': published date mismatch')
+   check(article['dateModified']==dates[1]['datetime'],route+': modified date mismatch')
+   check(article['datePublished']<=article['dateModified'],route+': published date after modified date')
  if '/assets/images/guides/' in s.select_one('.guide-figure img')['src']:
   check('temsili' in s.select_one('.guide-figure figcaption').get_text(),route+': generated illustration disclosure')
 check(len(cache['/blog/'].select('.knowledge-card'))==18,'guide card count')
@@ -131,13 +137,19 @@ for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot'
  for route in routes+['/llms.txt','/llms-full.txt']:
   check(robots.can_fetch(bot,DOMAIN+route),bot+': blocked '+route)
 # Approved main-content changes: the five commercial pages plus the price guide
-# and its listing card. Product pages and all other guides stay exact.
+# and its listing card. Guide bodies stay exact; publication metadata is checked
+# separately above and excluded from the body regression comparison.
 content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/'}
 for route in routes:
  if route in content_routes:continue
  path='index.html' if route=='/' else route.lstrip('/')+'index.html'
  baseline=subprocess.check_output(['git','show','0f6b40b82df98e81a9c8d60a5e961f1790d2b38b:'+path],cwd=ROOT,text=True)
- check(str(BeautifulSoup(baseline,'html.parser').main)==str(cache[route].main),route+': approved main content changed')
+ old_main=copy.deepcopy(BeautifulSoup(baseline,'html.parser').main)
+ new_main=copy.deepcopy(cache[route].main)
+ if route.startswith('/blog/'):
+  for main in (old_main,new_main):
+   if main.select_one('.article-meta'):main.select_one('.article-meta').decompose()
+ check(str(old_main)==str(new_main),route+': approved main content changed')
 home=cache['/']
 baseline_home=BeautifulSoup(subprocess.check_output(['git','show','0f6b40b82df98e81a9c8d60a5e961f1790d2b38b:index.html'],cwd=ROOT,text=True),'html.parser')
 check(str(home.select_one('.hero'))==str(baseline_home.select_one('.hero')),'approved hero changed')
