@@ -1,0 +1,58 @@
+{
+  "/blog/oto-yikama-pervanesi-balans-ayari/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "168a7304ebce2f5e4d40ca18319741e47fa4d904",
+    "first_added_author_timestamp": "2026-03-12T07:02:26Z",
+    "original_schema_date_published": "2026-03-12T12:00:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/168a7304ebce2f5e4d40ca18319741e47fa4d904/blog/oto-yikama-pervanesi-balans-ayari/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-donmuyor/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "8b56e80ccca50c8f3c326f6ecbaaf37ac051bf87",
+    "first_added_author_timestamp": "2026-03-07T15:56:59Z",
+    "original_schema_date_published": "2026-03-07T11:15:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/8b56e80ccca50c8f3c326f6ecbaaf37ac051bf87/blog/oto-yikama-pervanesi-donmuyor/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-kisin-donma-sorunu/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "8b56e80ccca50c8f3c326f6ecbaaf37ac051bf87",
+    "first_added_author_timestamp": "2026-03-07T15:56:59Z",
+    "original_schema_date_published": "2026-03-06T10:45:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/8b56e80ccca50c8f3c326f6ecbaaf37ac051bf87/blog/oto-yikama-pervanesi-kisin-donma-sorunu/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "eb05bb759c82301ac1a6ed8ef9ff387ad70e3a67",
+    "first_added_author_timestamp": "2026-03-11T07:02:38Z",
+    "original_schema_date_published": "2026-03-11T12:00:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/eb05bb759c82301ac1a6ed8ef9ff387ad70e3a67/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-rulman-arizasi/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "cdcbf05e7d93fdb3865e82eb669b9b6869185d77",
+    "first_added_author_timestamp": "2026-03-09T07:03:01Z",
+    "original_schema_date_published": "2026-03-08T12:00:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/cdcbf05e7d93fdb3865e82eb669b9b6869185d77/blog/oto-yikama-pervanesi-rulman-arizasi/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-ses-yapiyor/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "b6a9d970110ce7492979adfebb64a293843f045f",
+    "first_added_author_timestamp": "2026-03-05T06:10:34Z",
+    "original_schema_date_published": "2026-03-05T11:30:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/b6a9d970110ce7492979adfebb64a293843f045f/blog/oto-yikama-pervanesi-ses-yapiyor/index.html"
+  },
+  "/blog/oto-yikama-pervanesi-yaglama-noktalari/": {
+    "publication_date": null,
+    "status": "unconfirmed",
+    "first_added_commit": "8fd1c87d5b6b5626aff5ded3810e28fee25738ce",
+    "first_added_author_timestamp": "2026-03-10T11:06:35Z",
+    "original_schema_date_published": "2026-03-10T12:00:00+03:00",
+    "source": "https://github.com/UmutOzkan77/betamakine/blob/8fd1c87d5b6b5626aff5ded3810e28fee25738ce/blog/oto-yikama-pervanesi-yaglama-noktalari/index.html"
+  }
+}
