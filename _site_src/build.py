@@ -15,6 +15,26 @@ CONTENT_UPDATES={
  '/urunler/':'2026-09-14',
  '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-09-28',
 }
+PUBLISHED_DATES={
+ '/blog/doner-rekor-arizasi-nasil-anlasilir/':'2026-03-05',
+ '/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/':'2026-02-02',
+ '/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/':'2026-05-16',
+ '/blog/oto-yikama-pervanesi-bakimi/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-balans-ayari/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-basinc-hortum-uyumu/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-boom-nedir/':'2026-02-21',
+ '/blog/oto-yikama-pervanesi-donmuyor/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-kisin-donma-sorunu/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-montaj-rehberi/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-nedir/':'2026-01-30',
+ '/blog/oto-yikama-pervanesi-rulman-arizasi/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-ses-yapiyor/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-yaglama-noktalari/':'2026-03-05',
+ '/blog/self-servis-oto-yikama-istasyonu-ekipman-listesi/':'2026-03-05',
+ '/blog/tir-yikama-istasyonu-ekipmanlari/':'2026-02-02',
+}
 WA='https://wa.me/905364615330'
 MAP='https://maps.google.com/?q=Fethiye+Mahallesi+Do%C4%9Fru+Sokak+No%3A9+Nil%C3%BCfer+Bursa'
 PRODUCTS=DATA['products']
@@ -166,11 +186,12 @@ if __name__=='__main__':
    for th in t.select('thead th'):th['scope']='col'
   headings=s.select('h2')
   if headings:headings[min(2,len(headings)-1)].insert_before(BeautifulSoup(inline_figure(a),'html.parser'))
+  published=PUBLISHED_DATES[a['route']]
   modified=CONTENT_UPDATES.get(a['route'],DATE)
-  meta='<p class="article-meta">'+link('/about/','Beta Makine')+' · '+str(a['reading_minutes'])+' dk okuma <span>Güncelleme: <time datetime="'+modified+'">'+display_date(modified)+'</time></span></p>'
+  meta='<p class="article-meta">'+link('/about/','Beta Makine')+' · '+str(a['reading_minutes'])+' dk okuma <span>Yayın: <time datetime="'+published+'">'+display_date(published)+'</time> · Güncelleme: <time datetime="'+modified+'">'+display_date(modified)+'</time></span></p>'
   cover='<figure class="article-cover">'+picture(a['image'],a['image_alt'],True)+'<figcaption>'+e(a['image_caption'])+' '+link(a['product']['route'],'Ürünü inceleyin →')+'</figcaption></figure>'
   body='<div class="article-intro"><div>'+intro(a['category'],e(a['name']),e(a['description']))+meta+'</div>'+cover+'</div><div class="article-layout"><aside class="toc"><h2>Bu rehberde</h2>'+''.join(toc)+'</aside><article class="prose article-copy">'+answer_box(a)+str(s)+'<aside class="guide-source"><h2>Ürün ve üretici bilgisi</h2><p>Bu rehber genel seçim ve ön değerlendirme bilgisi sunar. Modele özel teknik değerler ve güncel tedarik kapsamı için '+link(a['product']['route'],e(a['product']['short'])+' ürün sayfasını')+' inceleyin veya '+link('/contact/','Beta Makine ile görüşün')+'. Temsili illüstrasyonlar teknik çizim ya da uygulama talimatı değildir.</p></aside></article></div>'+cta()
-  schema=[{'@type':['BlogPosting','TechArticle'],'@id':DOMAIN+a['route']+'#article','headline':a['name'],'description':a['description'],'abstract':' '.join(a['takeaways']),'image':DOMAIN+quote(a['image'],safe='/.-'),'articleSection':a['category'],'isAccessibleForFree':True,'dateModified':modified,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
+  schema=[{'@type':['BlogPosting','TechArticle'],'@id':DOMAIN+a['route']+'#article','headline':a['name'],'description':a['description'],'abstract':' '.join(a['takeaways']),'image':DOMAIN+quote(a['image'],safe='/.-'),'articleSection':a['category'],'isAccessibleForFree':True,'datePublished':published,'dateModified':modified,'url':DOMAIN+a['route'],'mainEntityOfPage':{'@id':DOMAIN+a['route']+'#webpage'},'author':{'@id':DOMAIN+'/#organization'},'publisher':{'@id':DOMAIN+'/#organization'},'inLanguage':'tr-TR'}]
   layout(a['route'],a['title'],a['description'],body,'article',[('/blog/','Bilgi merkezi')],schema,a['image'])
  layout('/404.html','Sayfa Bulunamadı | Beta Makine','Aradığınız sayfa bulunamadı. Beta Makine ürün kataloğuna veya iletişim sayfasına geçebilirsiniz.',intro('404 / Sayfa bulunamadı','Burada bir sayfa yok.','Bağlantı değişmiş veya adres yanlış yazılmış olabilir. Aradığınız pervaneye ürün kataloğundan ulaşabilirsiniz.')+'<div class="actions">'+button('/urunler/','Ürün kataloğuna git')+button('/contact/','Bize ulaşın',True)+'</div>')
  for old,target in [('oto-yikama-pervanesi-boom-tekli',PRODUCTS[0]),('oto-yikama-pervanesi-boom-ciftli',PRODUCTS[1])]:
