@@ -5,12 +5,14 @@ from collections import Counter
 import copy, json, subprocess, hashlib, re, xml.etree.ElementTree as ET
 from urllib.robotparser import RobotFileParser
 from bs4 import BeautifulSoup
+from publication_dates import verify_publication_dates, verify_source_evidence
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=json.loads((ROOT/'_site_src/content.json').read_text())
 routes=json.loads((ROOT/'_site_src/routes.json').read_text())
 DOMAIN='https://www.betamakine.com'
 errors=[]; titles=[]; descriptions=[]; checked=0; schemas=0
+errors.extend(verify_source_evidence(ROOT))
 def check(ok,message):
  if not ok:errors.append(message)
 def path_for(route):
@@ -108,12 +110,7 @@ for route in guide_routes:
   check(article['image']==s.select_one('meta[property="og:image"]')['content'],route+': social image mismatch')
   check(article['abstract']==' '.join(n.get_text(' ',strip=True) for n in s.select('.answer-box li')),route+': abstract not visible')
   check(article['headline']==s.h1.get_text(' ',strip=True),route+': article headline mismatch')
-  dates=s.select('.article-meta time[datetime]')
-  check(len(dates)==2,route+': visible publish/update dates missing')
-  if len(dates)==2:
-   check(article['datePublished']==dates[0]['datetime'],route+': published date mismatch')
-   check(article['dateModified']==dates[1]['datetime'],route+': modified date mismatch')
-   check(article['datePublished']<=article['dateModified'],route+': published date after modified date')
+  errors.extend(verify_publication_dates(ROOT,route,s,article))
  if '/assets/images/guides/' in s.select_one('.guide-figure img')['src']:
   check('temsili' in s.select_one('.guide-figure figcaption').get_text(),route+': generated illustration disclosure')
 check(len(cache['/blog/'].select('.knowledge-card'))==18,'guide card count')

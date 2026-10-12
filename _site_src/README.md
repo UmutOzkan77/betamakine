@@ -27,3 +27,13 @@ Yerel geliştirme bağımlılığı BeautifulSoup4'tür; canlı sitede Python ve
 ## SEO sınırları
 
 Sıralama garantisi yoktur. JSON-LD sözdizimi testi, Google zengin sonuç uygunluğu değildir. Güncel fiyat ve gerçek değerlendirme verisi olmadan Offer/Review üretilmez. GitHub Pages `.htaccess` okumaz; eski URL'ler anlık HTML yönlendirmesi kullanır, HTTP 301 olarak raporlanmaz. Alan verisi olmayan hız metrikleri veya güncel Search Console sonuçları uydurulmaz.
+
+## Yayın tarihleri
+
+Yedi rehberin hatalı yayın tarihleri, sayfayı içeren ilk başarılı GitHub Pages
+deploy günüyle düzeltilmiştir. Kanıtlar, saat dilimi ve yeniden doğrulama yöntemi:
+[PUBLICATION-DATES.md](PUBLICATION-DATES.md).
+
+`python3 _site_src/publication_dates.py` — 18 rehberin tarih alanları.
+
+`python3 -m unittest discover -s _site_src -p 'test_*.py'` — tarih regresyonları.
