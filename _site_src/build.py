@@ -15,18 +15,25 @@ CONTENT_UPDATES={
  '/urunler/':'2026-09-14',
  '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-09-28',
 }
-# Retained legacy values outside the seven-route review; not independently verified.
-# See PUBLICATION-DATES.md. Missing dates must never fall back to a Git/build date.
+# Dates are the first successful GitHub Pages deployment containing each route,
+# converted to Europe/Istanbul. See PUBLICATION-DATES.md for immutable run links.
 PUBLISHED_DATES={
  '/blog/doner-rekor-arizasi-nasil-anlasilir/':'2026-03-05',
  '/blog/en-iyi-oto-yikama-pervanesi-nasil-secilir/':'2026-02-02',
  '/blog/oto-yikama-boom-pervane-olculeri-yerlesim-plani/':'2026-05-16',
  '/blog/oto-yikama-pervanesi-bakimi/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-balans-ayari/':'2026-03-19',
  '/blog/oto-yikama-pervanesi-basinc-hortum-uyumu/':'2026-03-05',
  '/blog/oto-yikama-pervanesi-boom-nedir/':'2026-02-21',
+ '/blog/oto-yikama-pervanesi-donmuyor/':'2026-03-07',
  '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-02-02',
+ '/blog/oto-yikama-pervanesi-kisin-donma-sorunu/':'2026-03-07',
+ '/blog/oto-yikama-pervanesi-mil-boslugu-olcumu/':'2026-03-19',
  '/blog/oto-yikama-pervanesi-montaj-rehberi/':'2026-03-05',
  '/blog/oto-yikama-pervanesi-nedir/':'2026-01-30',
+ '/blog/oto-yikama-pervanesi-rulman-arizasi/':'2026-03-10',
+ '/blog/oto-yikama-pervanesi-ses-yapiyor/':'2026-03-05',
+ '/blog/oto-yikama-pervanesi-yaglama-noktalari/':'2026-03-10',
  '/blog/self-servis-oto-yikama-istasyonu-ekipman-listesi/':'2026-03-05',
  '/blog/tir-yikama-istasyonu-ekipmanlari/':'2026-02-02',
 }

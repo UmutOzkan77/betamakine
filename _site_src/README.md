@@ -30,8 +30,9 @@ Sıralama garantisi yoktur. JSON-LD sözdizimi testi, Google zengin sonuç uygun
 
 ## Yayın tarihleri
 
-Yedi rehberin desteklenmeyen yayın tarihleri kaldırılmıştır. Kanıtlar, kapsam ve
-yeniden doğrulama yöntemi: [PUBLICATION-DATES.md](PUBLICATION-DATES.md).
+Yedi rehberin hatalı yayın tarihleri, sayfayı içeren ilk başarılı GitHub Pages
+deploy günüyle düzeltilmiştir. Kanıtlar, saat dilimi ve yeniden doğrulama yöntemi:
+[PUBLICATION-DATES.md](PUBLICATION-DATES.md).
 
 `python3 _site_src/publication_dates.py` — 18 rehberin tarih alanları.
 

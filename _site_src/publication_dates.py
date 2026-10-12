@@ -1,8 +1,9 @@
 """Date checks independent of the renderer; also runnable without Git history/assets."""
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 import json
 import subprocess
+from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 
 
@@ -15,7 +16,7 @@ def verify_publication_dates(root, route, soup, article):
     def valid(value):
         try:
             return isinstance(value, str) and date.fromisoformat(value).isoformat() == value
-        except ValueError:
+        except (TypeError, ValueError):
             return False
     published = article.get('datePublished')
     modified = article.get('dateModified')
@@ -25,10 +26,11 @@ def verify_publication_dates(root, route, soup, article):
     check(bool(meta), 'visible article metadata missing')
     record = review.get(route)
     if record:
-        check(record.get('status') == 'unconfirmed' and record.get('publication_date') is None,
-              'reviewed publication status requires renewed source review')
-        check('datePublished' not in article, 'unconfirmed publication date emitted')
-        check(not meta or 'Yayın:' not in meta.get_text(), 'unconfirmed publication label emitted')
+        check(record.get('status') == 'confirmed_successful_pages_deploy',
+              'reviewed publication status is not confirmed')
+        check(valid(record.get('publication_date')), 'reviewed publication date invalid')
+        check(published == record.get('publication_date'), 'reviewed publication date mismatch')
+        check(bool(meta) and 'Yayın:' in meta.get_text(), 'confirmed publication label missing')
     else:
         check(valid(published), 'legacy publication date missing or invalid')
     expected = ([published] if published else []) + [modified]
@@ -75,11 +77,22 @@ def verify_source_evidence(root):
                         collect(child)
             for node in original.select('script[type="application/ld+json"]'):
                 collect(json.loads(node.string))
+            deploy_sha = record['first_successful_deploy_commit']
+            deploy_timestamp = datetime.fromisoformat(
+                record['first_successful_deploy_started_at'].replace('Z', '+00:00'))
+            local_deploy_day = deploy_timestamp.astimezone(ZoneInfo('Europe/Istanbul')).date().isoformat()
+            deploy_has_path = subprocess.run(
+                ['git', 'cat-file', '-e', deploy_sha + ':' + path], cwd=root,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+            run_id = record['first_successful_deploy_run_id']
+            expected_source = 'https://github.com/UmutOzkan77/betamakine/actions/runs/' + str(run_id)
             # %aI may use +00:00 where the API uses Z.
-            from datetime import datetime
             if (not additions or additions[-1] != sha
                     or datetime.fromisoformat(timestamp) != datetime.fromisoformat(record['first_added_author_timestamp'])
-                    or values != [record['original_schema_date_published']]):
+                    or values != [record['original_schema_date_published']]
+                    or not deploy_has_path
+                    or local_deploy_day != record['publication_date']
+                    or record['source'] != expected_source):
                 errors.append(route + ': publication review evidence differs from Git source')
         except (subprocess.CalledProcessError, ValueError, KeyError) as exc:
             errors.append(route + ': cannot verify publication source evidence: ' + str(exc))
