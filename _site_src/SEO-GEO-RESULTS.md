@@ -55,6 +55,16 @@ Bu özellikler faydalı kullanıcı deneyimi gözlemleridir; hangi rakibin hangi
 
 SEO Optimizer'daki eski FID ölçütü ve sabit kelime/anahtar kelime yoğunluğu reçeteleri hedef yapılmadı. Güncel INP/CLS/LCP yaklaşımı ve okunabilir, konuya özgü içerik esas alındı. Ölçülmemiş Core Web Vitals veya “100/100 GEO” skoru yazılmadı.
 
+## 19 Ekim 2026 haftalık uygulama kaydı
+
+Canlı arama incelemesinde Beta Makine'nin “Tekli ve çiftli boom pervane arasındaki fark” rehberi ilgili sorgularda organik sonuç olarak görüldü. Rehberin eski gövdesinde kaynakla doğrulanamayan dayanıklılık, yatırım getirisi, kullanım yoğunluğu, basınç ve emniyet ifadeleri ile güncelliği doğrulanamayan fiyat aralıkları vardı. Aynı metin, tekli/çiftli seçimini bir bölümde hortum hattına, başka bir bölümde ise yoğunluk ve bütçeye bağlıyordu.
+
+Bu nedenle rehber yalnızca mevcut katalogda doğrulanmış ürün özellikleriyle yeniden yazıldı: tekli Z için bir hortum, 154 cm kol ve 360° dönüş; çiftli boom için iki hortum, 4 keçeli sistem ve 360° dönüş; ağır vasıta seçeneği için 1,5–3 metre teleskopik kol. Model seçimi hat sayısı, kabin ölçüsü, montaj noktası ve bağlantı bilgilerinden oluşan teklif kontrol listesine bağlandı. Fiyat, stok, garanti, teslim süresi veya doğrulanmamış uyumluluk vaadi eklenmedi.
+
+İncelenen organik kaynaklar: [Beta Makine boom rehberi](https://www.betamakine.com/blog/oto-yikama-pervanesi-boom-nedir/), [Bakaş tekli Z](https://bakas.com.tr/self-servis-oto-yikama-pervanesi-boom-z-tekli), [Naturel/Mixer çiftli](https://www.naturelmakina.com/self-servis-oto-yikama-pervanesi-boom-ciftli-pervane-krom-nt416010), [Rotowash çiftli](https://www.rotowash.com.tr/urun/170152-oto-yikama-pervanesi-boom-ciftli-170152/) ve [GND tekli](https://www.gndyikamasistemleri.com/oto-yikama-pervanesi-boom-tekli-pergel_101_u.html). Rakip metinleri, fiyatları, fotoğrafları ve teknik iddiaları kopyalanmadı.
+
+Bağlı Search Console aracındaki istekler bu incelemede `INVALID_ARGUMENT` hatası verdi. Bu nedenle güncel sorgu, sayfa, cihaz, ülke ve arama görünümü ölçümleri alınamadı; trafik veya sıralama etkisi hakkında sonuç çıkarılmadı. Ham Search Console verisi depoya eklenmedi.
+
 ## Yayın öncesi doğrulama
 
 - Statik testler geçti: 35 HTML, 32 indekslenebilir URL, 1.928 yerel referans ve 33 JSON-LD bloğu. 6 ürün açıklaması, 16 ürün görseli ve blog dışındaki ana içerikler önceki onaylanmış sürümle aynı.
