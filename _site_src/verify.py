@@ -114,6 +114,18 @@ for route in guide_routes:
  if '/assets/images/guides/' in s.select_one('.guide-figure img')['src']:
   check('temsili' in s.select_one('.guide-figure figcaption').get_text(),route+': generated illustration disclosure')
 check(len(cache['/blog/'].select('.knowledge-card'))==18,'guide card count')
+boom_route='/blog/oto-yikama-pervanesi-boom-nedir/'
+boom=cache[boom_route]
+boom_text=boom.main.get_text(' ',strip=True)
+for claim in ['8.500','11.000','13.000','15+ yıl','yatırım getirisini','yüksek müşteri kapasiteli','Tam emniyetli','Düşük ilk yatırım']:
+ check(claim not in boom_text,boom_route+': unsupported claim '+claim)
+for expected in ['Tekli Z pervane','Çiftli boom pervane','Hortum hattı','Montajdan önce paylaşılacak bilgiler']:
+ check(expected in boom_text,boom_route+': missing comparison guidance '+expected)
+for destination in ['/urunler/tekli-z-oto-yikama-pervanesi/','/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/','/urunler/tir-yikama-pervanesi/','/blog/oto-yikama-pervanesi-fiyatlari/']:
+ check(bool(boom.select_one(f'a[href="{destination}"]')),boom_route+': missing decision link '+destination)
+boom_graph=json.loads(boom.select_one('script[type="application/ld+json"]').string)['@graph']
+boom_article=next(x for x in boom_graph if 'BlogPosting' in x.get('@type',[]))
+check(boom_article['dateModified']=='2026-10-19',boom_route+': modified date')
 for node in sitemap.findall('./{*}url'):
  route=node.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text.removeprefix(DOMAIN)
  actual={n.text for n in node.findall('./{http://www.google.com/schemas/sitemap-image/1.1}image/{http://www.google.com/schemas/sitemap-image/1.1}loc')}
@@ -133,10 +145,10 @@ robots=RobotFileParser();robots.parse((ROOT/'robots.txt').read_text().splitlines
 for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot']:
  for route in routes+['/llms.txt','/llms-full.txt']:
   check(robots.can_fetch(bot,DOMAIN+route),bot+': blocked '+route)
-# Approved main-content changes: the five commercial pages plus the price guide
-# and its listing card. Guide bodies stay exact; publication metadata is checked
-# separately above and excluded from the body regression comparison.
-content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/'}
+# Approved main-content changes: the five commercial pages plus the price and
+# boom comparison guides and their listing cards. Other guide bodies stay exact;
+# publication metadata is checked separately above.
+content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/','/blog/oto-yikama-pervanesi-boom-nedir/'}
 for route in routes:
  if route in content_routes:continue
  path='index.html' if route=='/' else route.lstrip('/')+'index.html'

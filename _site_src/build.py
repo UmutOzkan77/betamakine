@@ -14,6 +14,7 @@ DATE='2026-09-08'
 CONTENT_UPDATES={
  '/urunler/':'2026-09-14',
  '/blog/oto-yikama-pervanesi-fiyatlari/':'2026-09-28',
+ '/blog/oto-yikama-pervanesi-boom-nedir/':'2026-10-19',
 }
 # Dates are the first successful GitHub Pages deployment containing each route,
 # converted to Europe/Istanbul. See PUBLICATION-DATES.md for immutable run links.
