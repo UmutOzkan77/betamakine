@@ -70,12 +70,14 @@ for route,s in cache.items():
     for f in entity['mainEntity']:
      check(f['name'] in s.get_text(' ',strip=True),route+': FAQ not visible')
      check(f['acceptedAnswer']['text'] in s.get_text(' ',strip=True),route+': FAQ answer mismatch')
+approved_product_copy_routes={'/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/'}
 for p in DATA['products']:
  s=cache[p['route']]
  original_html=subprocess.check_output(['git','show',DATA['baseline']+':'+p['route'].lstrip('/')+'index.html'],cwd=ROOT,text=True)
  old=BeautifulSoup(original_html,'html.parser').select_one('.product-description').get_text(' ',strip=True)
  new=s.select_one('.product-description').get_text(' ',strip=True)
- check(old==new,p['route']+': product description changed')
+ if p['route'] not in approved_product_copy_routes:
+  check(old==new,p['route']+': product description changed')
  gallery=[unquote(n['data-gallery-src']) for n in s.select('[data-gallery-src]')]
  check(gallery==p['images'],p['route']+': product gallery changed')
  for file in p['images']:
@@ -126,6 +128,18 @@ for destination in ['/urunler/tekli-z-oto-yikama-pervanesi/','/urunler/ciftli-je
 boom_graph=json.loads(boom.select_one('script[type="application/ld+json"]').string)['@graph']
 boom_article=next(x for x in boom_graph if 'BlogPosting' in x.get('@type',[]))
 check(boom_article['dateModified']=='2026-10-19',boom_route+': modified date')
+double_route='/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/'
+double=cache[double_route]
+double_text=double.main.get_text(' ',strip=True)
+for claim in ['en çok tercih','yatırım getirisini','yoğun kullanıma uygundur','uzun ömürlü','her istasyon tipine uyar','daha verimli sonuç','tam emniyetli']:
+ check(claim not in double_text.lower(),double_route+': unsupported claim '+claim)
+for expected in ['Jet köpük ve normal yıkama','4 keçeli sistem','360°','Kullanım yoğunluğu tek başına','Kabin ölçüleri']:
+ check(expected in double_text,double_route+': missing verified guidance '+expected)
+for destination in ['/blog/oto-yikama-pervanesi-boom-nedir/','/contact/']:
+ check(bool(double.select_one(f'a[href="{destination}"]')),double_route+': missing decision link '+destination)
+double_graph=json.loads(double.select_one('script[type="application/ld+json"]').string)['@graph']
+double_product=next(x for x in double_graph if x.get('@type')=='Product')
+check(double_product['description']==double.select_one('meta[name="description"]')['content'],double_route+': Product description mismatch')
 for node in sitemap.findall('./{*}url'):
  route=node.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text.removeprefix(DOMAIN)
  actual={n.text for n in node.findall('./{http://www.google.com/schemas/sitemap-image/1.1}image/{http://www.google.com/schemas/sitemap-image/1.1}loc')}
@@ -148,7 +162,7 @@ for bot in ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot'
 # Approved main-content changes: the five commercial pages plus the price and
 # boom comparison guides and their listing cards. Other guide bodies stay exact;
 # publication metadata is checked separately above.
-content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/','/blog/oto-yikama-pervanesi-boom-nedir/'}
+content_routes={'/','/urunler/','/oto-yikama-pervanesi/','/boom-pervane/','/self-servis-oto-yikama-pervanesi/','/blog/','/blog/oto-yikama-pervanesi-fiyatlari/','/blog/oto-yikama-pervanesi-boom-nedir/','/urunler/ciftli-jel-kopuk-veya-normal-arac-yikama-pervanesi/'}
 for route in routes:
  if route in content_routes:continue
  path='index.html' if route=='/' else route.lstrip('/')+'index.html'
